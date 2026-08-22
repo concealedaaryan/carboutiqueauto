@@ -1,0 +1,23 @@
+<button class="back-to-top" type="button" aria-label="Back to top" data-back-to-top><span>↑</span><small>Top</small></button>
+<style>
+  .back-to-top { position: fixed; z-index: 55; right: 22px; bottom: 88px; display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid rgba(59,130,246,.5); border-radius: 50%; color: var(--gold-soft); background: linear-gradient(145deg, rgba(59,130,246,.16), rgba(19,19,21,.95)); box-shadow: 0 12px 30px rgba(0,0,0,.25); opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity .25s ease, transform .25s var(--ease), background .25s ease, color .25s ease; }
+  .back-to-top.is-visible { opacity: 1; pointer-events: auto; transform: none; }
+  .back-to-top:hover { color: var(--ink); background: var(--gold-soft); transform: translateY(-4px); }
+  .back-to-top span { font-size: 18px; line-height: 1; }
+  .back-to-top small { margin-top: -4px; font-size: 7px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  @media (max-width: 620px) { .back-to-top { right: 14px; bottom: 76px; width: 43px; height: 43px; } }
+  @media (prefers-reduced-motion: reduce) { .back-to-top { transition-duration: .01ms; } }
+</style>
+<script is:inline data-astro-rerun>
+  // @ts-nocheck
+  (() => {
+    window.__crestBackToTopCleanup?.();
+    const controller = new AbortController();
+    const backToTop = document.querySelector('[data-back-to-top]');
+    const syncBackToTop = () => backToTop?.classList.toggle('is-visible', window.scrollY > 560);
+    syncBackToTop();
+    window.addEventListener('scroll', syncBackToTop, { passive: true, signal: controller.signal });
+    backToTop?.addEventListener('click', () => { const root = document.documentElement; const previousBehavior = root.style.scrollBehavior; root.style.scrollBehavior = 'auto'; window.scrollTo(0, 0); root.scrollTop = 0; document.body.scrollTop = 0; root.style.scrollBehavior = previousBehavior; syncBackToTop(); }, { signal: controller.signal });
+    window.__crestBackToTopCleanup = () => controller.abort();
+  })();
+</script>

@@ -1,0 +1,29 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+---
+<LegalLayout title="Cookie policy" eyebrow="Legal / 03" currentPage="/cookie-policy" intro="A clear explanation of the cookies, local storage, analytics, embeds and preference technologies that may support the website.">
+  <h2>1. What cookies are</h2>
+  <p>Cookies are small files or similar browser technologies stored on your device. They can help a website remember preferences, maintain security, understand usage, or deliver relevant content. Similar technologies may include local storage, pixels and embedded scripts.</p>
+
+  <h2>2. Crest’s current website status</h2>
+  <p>This Astro site is currently a frontend-only experience. The booking calculator runs in the browser and does not require a cookie. The contact form is a demo until connected to a production endpoint. Before launch, Crest should review the deployed host, analytics configuration, consent manager and third-party embeds, then update this policy with the exact vendor names and retention periods.</p>
+
+  <h2>3. Technology categories</h2>
+  <h3>Strictly necessary</h3>
+  <p>These technologies may support basic navigation, security, accessibility preferences, responsive menus, calculator state and fraud prevention. They are generally required for the website to work as requested.</p>
+  <h3>Preferences</h3>
+  <p>These remember choices such as a community, display preference or consent decision. If they are not needed for the requested function, they should be offered as optional.</p>
+  <h3>Analytics</h3>
+  <p>Analytics technologies measure visits, page performance, interaction patterns and errors. Identify the provider, data collected, retention and international processing before enabling them. Analytics should remain disabled until the required consent is obtained where applicable.</p>
+  <h3>Marketing and social media</h3>
+  <p>Marketing pixels and social embeds may measure campaigns or personalise content. The current social links open external pages rather than embedding their scripts. If embedded widgets are added, explain their providers and consent behaviour here.</p>
+
+  <h2>4. Google Maps and external services</h2>
+  <p>The main site includes a Google Maps embed to help visitors find the service location. Google may process technical information when the map loads. Review Google’s current terms and privacy information, and use an appropriate consent or click-to-load pattern if required for your audience or deployment.</p>
+
+  <h2>5. Managing cookies</h2>
+  <p>You can usually manage or delete cookies through your browser settings. Blocking necessary technologies may affect navigation or functionality. If Crest adds a consent banner, it should provide a genuine choice, avoid pre-ticked optional categories, record the consent decision, and make withdrawal as easy as acceptance.</p>
+
+  <h2>6. Updates and contact</h2>
+  <p>We may update this policy when vendors, technologies or legal requirements change. For questions about cookies, contact <strong>[insert privacy email]</strong>. This policy should be reviewed against the final production configuration before publication.</p>
+</LegalLayout>

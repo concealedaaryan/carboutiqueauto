@@ -1,0 +1,262 @@
+---
+import Chatbot from '../components/Chatbot.astro';
+import BackToTop from '../components/BackToTop.astro';
+import PageTransition from '../components/PageTransition.astro';
+import StickyBookingBar from '../components/StickyBookingBar.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { ClientRouter } from 'astro:transitions';
+const { title, description = 'Premium, waterless automotive care for DLF Gurugram.', currentPath = '/', pageNumber = '', pageLabel = '' } = Astro.props;
+const siteUrl = (import.meta.env.PUBLIC_SITE_URL || '').replace(/\/$/, '');
+const canonicalUrl = siteUrl ? `${siteUrl}${Astro.url.pathname}` : undefined;
+const socialImage = siteUrl ? `${siteUrl}/images/generated/crest-hero-studio.jpg` : '/images/generated/crest-hero-studio.jpg';
+const localBusinessJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Crest Automotive',
+  description,
+  url: canonicalUrl || Astro.url.href,
+  telephone: '+91 98716 10952',
+  areaServed: ['The Camellias, DLF Gurugram', 'The Crest, DLF Gurugram', 'The Magnolias, DLF Gurugram'],
+  serviceType: ['Car detailing', 'Ceramic coating', 'Paint protection film', 'Waterless car wash'],
+  priceRange: '₹₹'
+};
+const webSiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Crest Automotive', url: canonicalUrl || Astro.url.href, description };
+const navLinks = [
+  ['/services', 'Services'],
+  ['/packages', 'Packages'],
+  ['/protection', 'Protection'],
+  ['/estimate', 'Estimate'],
+  ['/locations', 'Locations'],
+  ['/contact', 'Contact'],
+];
+const legalLinks = [
+  ['/terms-of-service', 'Terms'],
+  ['/privacy-policy', 'Privacy'],
+  ['/cookie-policy', 'Cookies'],
+  ['/refund-cancellation', 'Refunds'],
+  ['/grievance-redressal', 'Grievance'],
+  ['/accessibility', 'Accessibility'],
+  ['/disclaimer', 'Disclaimer'],
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#131315" />
+    <meta name="description" content={description} />
+    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Crest Automotive" />
+    <meta property="og:title" content={`${title} | Crest Automotive`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | Crest Automotive`} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{title} | Crest Automotive</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)}></script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(webSiteJsonLd)}></script>
+    <ClientRouter />
+  </head>
+  <body>
+    <PageTransition />
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <header class="site-header" id="top">
+      <a class="brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE</small></span></a>
+      <nav class="desktop-nav" aria-label="Primary navigation">{navLinks.map(([href, label]) => <a class={currentPath === href ? 'is-current' : ''} href={href}>{label}</a>)}</nav>
+      <a class="header-call" href="tel:+919871610952"><span class="phone-dot"></span> +91 98716 10952</a>
+      <a class="button button-small button-gold" href="/contact">Book a treatment <span>↗</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation"><span></span><span></span></button>
+      <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>{navLinks.map(([href, label]) => <a class={currentPath === href ? 'is-current' : ''} href={href}>{label}</a>)}<a class="button button-gold" href="/contact">Book a treatment <span>↗</span></a></div>
+    </header>
+    {pageNumber && <div class="page-title-bar"><span>{pageNumber}</span><span>{pageLabel}</span><span class="page-title-line"></span></div>}
+    {pageNumber && <Breadcrumbs items={[{ label: pageLabel || title }]} />}
+    <main transition:animate="none"><slot /></main>
+    <Chatbot />
+    <BackToTop />
+    <StickyBookingBar />
+    <footer class="site-footer"><div class="footer-main"><a class="brand footer-brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE</small></span></a><p>Exclusive in-house luxury automotive care for the DLF community.</p><div class="footer-links"><div><small>Explore</small>{navLinks.slice(0, 4).map(([href, label]) => <a href={href}>{label}</a>)}<a href="/why-crest">Why Crest</a><a href="/faq">FAQ</a></div><div><small>Find us</small><a href="/locations">The Camellias</a><a href="/locations">The Crest</a><a href="/locations">The Magnolias</a></div><div><small>Connect</small><a href="tel:+919871610952">+91 98716 10952</a><a href="https://wa.me/919871610952" target="_blank" rel="noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook ↗</a></div></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Crest Automotive. All rights reserved.</span><span class="footer-legal">{legalLinks.map(([href, label]) => <a href={href}>{label}</a>)}</span><a href="#top">Back to top ↑</a></div></footer>
+  </body>
+</html>
+
+<style is="global">
+  :root { --surface:#131315; --surface-lowest:#0e0e10; --surface-low:#1b1b1d; --surface-container:#1f1f21; --surface-high:#2a2a2b; --surface-highest:#353436; --silver:#c6c6cd; --outline:#909097; --outline-variant:#45464d; --electric:#3b82f6; --electric-bright:#60a5fa; }
+  body { background:var(--surface); color:#e4e2e4; }
+  h1,h2,h3,h4,h5,h6 { font-family:'Inter',sans-serif; font-weight:600; }
+  main h1,main h2,main h3 { letter-spacing:-.035em; }
+  main h1 em,main h2 em,main h3 em { font-family:'Inter',sans-serif; color:var(--silver); font-style:normal; }
+  .site-header { background:rgba(19,19,21,.78); }
+  .site-header.is-scrolled { background:rgba(19,19,21,.94); border-color:rgba(198,198,205,.18); }
+  .brand-mark { border-radius:.25rem; color:var(--electric); border-color:var(--electric); transform:none; }
+  .phone-dot { background:var(--electric); box-shadow:0 0 0 4px rgba(59,130,246,.14); }
+  .button,.header-call,.menu-toggle { border-radius:.375rem; }
+  .button-gold { color:#fff; background:var(--electric); }
+  .button-gold:hover { color:#fff; background:var(--electric-bright); }
+  .button-ghost { border-color:var(--outline); background:rgba(255,255,255,.04); }
+  .button-ghost:hover { border-color:var(--electric); background:rgba(255,255,255,.10); }
+  main p,main li { color:#c6c6cd !important; }
+  main .eyebrow { color:var(--electric) !important; }
+  main a:not(.button) { color:#bec6e0; }
+  main a:not(.button):hover { color:#fff; }
+  main input,main select,main textarea { border-radius:.25rem !important; border-color:rgba(198,198,205,.28) !important; background:#1e293b !important; color:#e4e2e4 !important; }
+  main input:focus,main select:focus,main textarea:focus { border-color:var(--electric) !important; box-shadow:0 0 0 3px rgba(59,130,246,.16) !important; }
+  main .service-row,main .package-card,main .coating-card,main .addon-card,main .choice-card,main .image-card,main .hero-image,main .page-hero-image,main .package-hero-card,main .why-image,main .faq-visual,main .contact-card,main .map-wrap,main .calculator-summary,main .calculator-form { border-radius:.5rem; border-color:rgba(198,198,205,.16); background-color:rgba(255,255,255,.045); backdrop-filter:blur(20px); }
+  main .service-row:hover,main .package-card:hover,main .coating-card:hover,main .addon-card:hover,main .choice-card:hover { border-color:rgba(59,130,246,.72); background-color:rgba(59,130,246,.08); }
+  main .service-row,main .package-card,main .coating-card,main .addon-card,main .choice-card { box-shadow:inset 1px 1px rgba(255,255,255,.08); }
+  main th { background:#1f1f21 !important; }
+  main td { background:#1b1b1d; border-color:rgba(198,198,205,.12) !important; }
+  main th:first-child,main td:first-child { background:#1f1f21 !important; }
+  .site-footer { background:linear-gradient(150deg,#1b1b1d,#0e0e10); }
+  .footer-links a,.footer-bottom,.footer-main>p { color:#c6c6cd !important; }
+  .mobile-menu { background:rgba(14,14,16,.98) !important; }
+  @media (max-width:620px) { main h1 { font-size:32px !important; line-height:1.2; } main h2 { font-size:32px !important; line-height:1.2; } }
+</style>
+<style>
+  :root { --ink: #131315; --ink-2: #0f172a; --panel: #1b1b1d; --gold: #3b82f6; --gold-soft: #bec6e0; --white: #e4e2e4; --muted: #c6c6cd; --line: rgba(198,198,205,.16); --max: 1440px; --ease: cubic-bezier(.23,1,.32,1); }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--ink); }
+  body { margin: 0; color: var(--white); background: var(--ink); font-family: 'Inter', sans-serif; letter-spacing: 0;  line-height: 1.6; overflow-x: hidden; }
+  body.menu-open { overflow: hidden; }
+  a { color: inherit; text-decoration: none; }
+  button, input, select, textarea { font: inherit; }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 4px; }
+  ::selection { color: var(--ink); background: var(--gold-soft); }
+  .cursor-glow { position: fixed; z-index: 0; width: 280px; height: 280px; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); background: radial-gradient(circle, rgba(59,130,246,.12), transparent 68%); filter: blur(10px); opacity: .72; }
+  .site-header { position: fixed; z-index: 50; top: 0; left: 0; right: 0; height: 84px; display: flex; align-items: center; gap: 22px; padding: 0 max(24px, calc((100vw - var(--max)) / 2)); border-bottom: 1px solid transparent; transition: background .3s var(--ease), border .3s var(--ease), backdrop-filter .3s var(--ease); }
+  .site-header.is-scrolled { background: rgba(19,19,21,.94); border-color: var(--line); backdrop-filter: blur(20px); }
+  .brand { display: inline-flex; align-items: center; gap: 10px; min-width: max-content; }
+  .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; color: var(--gold); border: 1px solid var(--gold); font-size: 15px; font-weight: 700; transform: skew(-12deg); }
+  .brand strong, .brand small { display: block; letter-spacing: .16em; line-height: 1; }
+  .brand strong { color: var(--white); font-size: 14px; font-weight: 800; }
+  .brand small { margin-top: 5px; color: var(--muted); font-size: 7px; }
+  .desktop-nav { display: flex; align-items: center; gap: clamp(12px, 1.5vw, 24px); margin-left: auto; }
+  .desktop-nav a, .header-call { position: relative; color: var(--white) !important; opacity: 1; font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; transition: color .2s ease; }
+  .desktop-nav a::after { content: ''; position: absolute; right: 0; bottom: -9px; left: 0; height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: right; transition: transform .25s var(--ease); }
+  .desktop-nav a:hover, .desktop-nav a.is-current, .header-call:hover { color: var(--gold-soft); }
+  .desktop-nav a:hover::after, .desktop-nav a.is-current::after { transform: scaleX(1); transform-origin: left; }
+  .header-call { padding-left: 16px; border-left: 1px solid var(--line); white-space: nowrap; }
+  .phone-dot { display: inline-block; width: 6px; height: 6px; margin-right: 6px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(59,130,246,.12); }
+  .button { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 54px; padding: 0 24px; border: 1px solid transparent; border-radius: .375rem; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: transform .18s var(--ease), background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease; }
+  .button:hover { transform: translateY(-3px); }
+  .button:active { transform: scale(.97); }
+  .button-gold { color: var(--ink); background: #3b82f6; box-shadow: inset 0 1px rgba(255,255,255,.22); }
+  .button-gold:hover { background: #60a5fa; box-shadow: 0 12px 28px rgba(59,130,246,.22); }
+  .button-ghost { border-color: #909097; color: var(--white); background: rgba(255,255,255,.04); }
+  .button-ghost:hover { border-color: var(--gold); background: rgba(255,255,255,.10); }
+  .button-small { min-height: 42px; padding: 0 15px; font-size: 9px; }
+  .menu-toggle, .mobile-menu { display: none; }
+  .page-title-bar { position: relative; z-index: 1; display: flex; gap: 12px; align-items: center; max-width: var(--max); margin: 0 auto; padding: 124px 24px 0; color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+  .page-title-line { width: 38px; height: 1px; background: var(--gold); }
+  .site-footer { position: relative; z-index: 1; padding: 65px max(24px, calc((100vw - var(--max)) / 2)) 25px; border-top: 1px solid var(--line); background: linear-gradient(150deg, #1b1b1d, #0e0e10); }
+  .footer-main { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 35px; padding-bottom: 45px; }
+  .footer-main > p { max-width: 190px; margin: 0; color: var(--muted); font-size: 12px; }
+  .footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
+  .footer-links div { display: flex; flex-direction: column; gap: 8px; }
+  .footer-links small { margin-bottom: 5px; color: var(--gold); font-size: 9px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+  .footer-links a { color: #aab7c8; font-size: 11px; transition: color .2s ease, transform .2s var(--ease); }
+  .footer-links a:hover { color: var(--gold-soft); transform: translateX(3px); }
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-top: 22px; border-top: 1px solid var(--line); color: #7789a2; font-size: 10px; }
+  .footer-legal { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: 11px; }
+  .footer-legal a:hover { color: var(--gold-soft); }
+  @media (max-width: 1120px) { .header-call { display: none; } .desktop-nav { gap: 12px; } }
+  @media (max-width: 960px) { .desktop-nav { display: none; } .site-header { justify-content: space-between; } .button-small { display: none; } .menu-toggle { display: flex; width: 39px; height: 39px; flex-direction: column; justify-content: center; gap: 6px; border: 1px solid var(--line); background: transparent; } .menu-toggle span { display: block; width: 17px; height: 1px; margin: auto; background: var(--white); transition: transform .25s ease; } .menu-toggle[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); } .menu-toggle[aria-expanded="true"] span:last-child { transform: translateY(-3.5px) rotate(-45deg); } .mobile-menu { position: fixed; inset: 84px 0 0; display: flex; visibility: hidden; flex-direction: column; gap: 21px; padding: 35px 24px; background: rgba(19,19,21,.98); opacity: 0; transform: translateY(-10px); transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s; } .mobile-menu.is-open { visibility: visible; opacity: 1; transform: translateY(0); } .mobile-menu > a:not(.button) { padding-bottom: 15px; border-bottom: 1px solid var(--line); color: var(--white); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; } .mobile-menu > a.is-current { color: var(--gold-soft); } .mobile-menu .button { margin-top: 10px; } }
+  @media (max-width: 620px) { .site-header { height: 72px; padding: 0 20px; } .mobile-menu { inset: 72px 0 0; } .page-title-bar { padding: 104px 20px 0; } .site-footer { padding: 55px 20px 92px; } .footer-main { grid-template-columns: 1fr; gap: 32px; } .footer-main > p { max-width: none; } .footer-links { grid-template-columns: 1fr 1fr; gap: 28px 16px; } .footer-links div:last-child { grid-column: 1 / -1; } .footer-bottom { display: block; } .footer-legal { justify-content: flex-start; margin: 16px 0; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
+</style>
+<style is:global>
+  :root { --ink:#131315; --ink-2:#0f172a; --panel:#1b1b1d; --gold:#3b82f6; --gold-soft:#bec6e0; --white:#e4e2e4; --muted:#c6c6cd; --line:rgba(198,198,205,.16); --max:1440px; --ease:cubic-bezier(.23,1,.32,1); }
+  a { color:inherit; text-decoration:none; }
+  button,input,select,textarea { box-sizing:border-box; font:inherit; }
+  select option { color:var(--ink); background:var(--white); }
+  select option:checked { color:var(--white); background:var(--ink-2); }
+  .button { display:inline-flex; box-sizing:border-box; align-items:center; justify-content:center; gap:18px; min-height:54px; padding:0 24px; border:1px solid transparent; border-radius:999px; font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; transition:transform .18s var(--ease),background .25s ease,border-color .25s ease,color .25s ease,box-shadow .25s ease; }
+  .button:hover { transform:translateY(-3px); }
+  .button:active { transform:scale(.97); }
+  .button-gold { color:var(--ink); background:linear-gradient(135deg,#3b82f6,#bec6e0); box-shadow:inset 0 1px rgba(255,255,255,.45); }
+  .button-gold:hover { color:var(--ink); background:var(--gold-soft); box-shadow:0 14px 32px rgba(59,130,246,.18); }
+  .button-ghost { border-color:#718198; color:var(--white); background:linear-gradient(135deg,rgba(59,130,246,.06),rgba(11,32,56,.72)); }
+  .button-ghost:hover { color:var(--white); border-color:var(--gold); background:rgba(59,130,246,.10); }
+  .button-small { min-height:42px; padding:0 15px; font-size:9px; }
+  main p,main li { color:var(--white) !important; font-size:clamp(14px,1vw,16px); }
+  main small,main label,main .matrix-note,main .matrix-heading>span,main .form-note,main .form-required-note,main .calc-source-note,main .map-label small,main .faq-visual small,main .not-found-mark span,main .not-found-mark small { color:var(--white) !important; }
+  main .eyebrow { color:var(--gold) !important; }
+  main .calculator-controls>label,main .calc-dependent-fields>label,main .calc-check span small,main .calc-summary-lines span,main .calc-total span,main .calc-breakdown,main .calc-source-note,main .estimate-note small,main .matrix-note,main .matrix-heading>span,main th,main td,main .service-price small,main .from-price small,main .coating-card em,main .addon-card>strong small,main .addon-card>div span,main .contact-details small,main .chat-footnote { color:var(--white) !important; }
+  .chatbot .chat-message,.chatbot .chat-footnote,.chatbot-launcher-copy small { color:var(--white) !important; }
+  main h1 { font-size:clamp(44px,5.5vw,72px) !important; }
+  main h2 { font-size:clamp(34px,4vw,52px) !important; }
+  main h3 { font-size:clamp(18px,1.6vw,24px) !important; }
+  main h1 em,main h2 em,main h3 em { font-family:'DM Serif Display',Georgia,serif; font-weight:400; letter-spacing:-.035em; }
+  main a:not(.button) { color:var(--gold-soft); text-decoration:none; }
+  main a:not(.button):hover { color:var(--white); }
+  .site-footer,.site-footer p,.site-footer a,.site-footer span,.site-footer small { color:var(--white); }
+  .site-footer a:hover { color:var(--gold-soft); }
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible { outline:2px solid var(--gold-soft); outline-offset:4px; }
+  @media (max-width:620px) { .cursor-glow { display:none; } }
+</style>
+<script is:inline data-astro-rerun>
+  // @ts-nocheck
+  (() => {
+    window.__crestSiteLayoutCleanup?.();
+    const controller = new AbortController();
+    const header = document.querySelector('.site-header');
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const cursorGlow = document.querySelector('.cursor-glow');
+    const updateHeader = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true, signal: controller.signal });
+    menuToggle?.addEventListener('click', () => { const open = menuToggle.getAttribute('aria-expanded') === 'true'; menuToggle.setAttribute('aria-expanded', String(!open)); mobileMenu?.setAttribute('aria-hidden', String(open)); mobileMenu?.toggleAttribute('inert', open); mobileMenu?.classList.toggle('is-open', !open); document.body.classList.toggle('menu-open', !open); }, { signal: controller.signal });
+    mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { menuToggle?.setAttribute('aria-expanded', 'false'); mobileMenu?.setAttribute('aria-hidden', 'true'); mobileMenu?.toggleAttribute('inert', true); mobileMenu?.classList.remove('is-open'); document.body.classList.remove('menu-open'); }, { signal: controller.signal }));
+    if (window.matchMedia('(pointer: fine)').matches) window.addEventListener('pointermove', (event) => { if (cursorGlow) { cursorGlow.style.left = `${event.clientX}px`; cursorGlow.style.top = `${event.clientY}px`; } }, { passive: true, signal: controller.signal });
+    window.__crestSiteLayoutCleanup = () => controller.abort();
+  })();
+</script>
+
+<style is="global">
+  /* Crest Luxe token bridge for existing route-local section styles. */
+  main { background: #131315; }
+  main > section, main section { border-color: rgba(198,198,205,.14); }
+  .hero-shell::before { background: radial-gradient(circle at 78% 34%,rgba(59,130,246,.11),transparent 30%), linear-gradient(115deg,#131315 30%,#0f172a 100%) !important; }
+  .editorial-band, .home-paths, .catalogue-section, .package-grid-section, .faq-section, .locations-section, .calculator-section, .coating-section, .ppf-section, .addon-section, .matrix-section { background: #1b1b1d !important; }
+  .home-paths { background: linear-gradient(135deg,#1b1b1d,#0f172a) !important; }
+  .service-row, .package-card, .coating-card, .addon-card, .choice-card, .image-card, .package-hero-card, .faq-visual, .contact-card, .map-wrap, .calculator-summary, .calculator-form, .estimate-note { background: rgba(255,255,255,.045) !important; border: 1px solid rgba(198,198,205,.16) !important; box-shadow: inset 1px 1px rgba(255,255,255,.06); }
+  .service-row:hover, .package-card:hover, .coating-card:hover, .addon-card:hover, .choice-card:hover { transform: translateY(-4px); border-color: rgba(59,130,246,.72) !important; background: rgba(59,130,246,.08) !important; }
+  .hero-media, .page-hero-image, .hero-image, .why-image { border-color: rgba(198,198,205,.2) !important; border-radius: .5rem; }
+  .matrix-section table, .table-scroll { border-color: rgba(198,198,205,.16) !important; }
+  .matrix-section th, .ppf-section th { background: #2a2a2b !important; color: #bec6e0 !important; }
+  .matrix-section td, .ppf-section td { background: #1b1b1d !important; color: #e4e2e4 !important; }
+  .matrix-section td:first-child, .matrix-section th:first-child { background: #2a2a2b !important; }
+  .button-gold { border-color: rgba(96,165,250,.28); }
+  .section-heading-link, .text-action, .service-copy a, .package-card > a, .location-grid a, .estimate-disclaimer a, .contact-details a { color: #bec6e0 !important; }
+  .section-heading-link:hover, .text-action:hover, .service-copy a:hover, .package-card > a:hover, .location-grid a:hover, .estimate-disclaimer a:hover, .contact-details a:hover { color: #fff !important; }
+  .eyebrow, .proof-index, .service-number, .package-top, .card-top { color: #3b82f6 !important; }
+  .page-title-bar, .breadcrumbs { color: #3b82f6 !important; }
+  .page-title-line, .eyebrow i { background: #3b82f6 !important; }
+  .proof-strip { background: linear-gradient(90deg,#0e0e10,#1f1f21 50%,#0e0e10) !important; border-color: rgba(198,198,205,.14) !important; }
+  .proof-item { border-color: rgba(198,198,205,.14) !important; }
+  .hero-note-mark { color: #3b82f6 !important; border-color: #3b82f6 !important; transform:none; }
+  .calculator-section input, .calculator-section select, .calculator-section textarea, .contact-card input, .contact-card select, .contact-card textarea { background: #1e293b !important; border-color: rgba(198,198,205,.3) !important; color: #e4e2e4 !important; border-radius: .25rem !important; }
+  .calculator-section input:focus, .calculator-section select:focus, .calculator-section textarea:focus, .contact-card input:focus, .contact-card select:focus, .contact-card textarea:focus { border-color: #3b82f6 !important; box-shadow: 0 0 0 3px rgba(59,130,246,.16) !important; }
+  .chatbot, .chatbot-panel, .chatbot-launcher { --chat-accent: #3b82f6; }
+  @media (max-width: 620px) { .site-header { height:72px; } .hero-shell,.page-hero,.package-hero,.protection-hero,.why-hero,.location-hero,.faq-hero,.estimate-hero,.contact-hero { padding-top: 108px !important; } }
+</style>
+
+<style is="global">
+  .reason-section, .addons-section { background:#1b1b1d !important; }
+  .location-grid article, .reason-grid article, .faq-item, .contact-card, .map-label, .not-found-mark { border-color:rgba(198,198,205,.16) !important; background:rgba(255,255,255,.045) !important; border-radius:.5rem; box-shadow:inset 1px 1px rgba(255,255,255,.06); }
+  .location-grid article:hover, .reason-grid article:hover { border-color:rgba(59,130,246,.72) !important; background:rgba(59,130,246,.08) !important; }
+  .faq-item summary b, .faq-item summary>span, .reason-grid article>span, .location-grid article>span { color:#3b82f6 !important; }
+  .map-label { background:rgba(19,19,21,.92) !important; }
+  .map-label span { color:#3b82f6 !important; border-color:#3b82f6 !important; }
+  .not-found-mark { background:radial-gradient(circle at 50% 40%,rgba(59,130,246,.16),transparent 55%),#1b1b1d !important; }
+  .coating-card.featured, .package-card.featured { background:linear-gradient(145deg,rgba(59,130,246,.14),rgba(255,255,255,.045)) !important; }
+</style>

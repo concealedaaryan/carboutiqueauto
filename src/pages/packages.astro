@@ -1,0 +1,58 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { monthlyPackages, vehicleCategories } from '../data/catalog';
+---
+<SiteLayout title="Monthly Packages" description="Crest Automotive monthly car-care packages and full resident pricing." currentPath="/packages" pageNumber="02" pageLabel="Monthly memberships">
+  <section class="package-hero"><div><span class="eyebrow">02 / Memberships</span><h1>Your car’s best habit<br /><em>is a considered one.</em></h1><p>Choose a repeat-care plan and make a consistently clean, protected car part of your everyday routine. We keep the choice simple and the care consistent.</p><a class="button button-gold" href="/contact">Ask about a package <span>↗</span></a></div><div class="package-hero-card"><span>30 visits</span><strong>Daily waterless care</strong><small>Built around your vehicle category</small></div></section>
+  <section class="package-grid-section"><div class="section-intro"><span class="eyebrow">Choose your rhythm</span><h2>Four ways to keep<br /><em>the gloss going.</em></h2><p>Each plan is priced by category. The team will confirm fit, availability and final taxes before booking.</p></div><div class="package-grid">{monthlyPackages.map((pkg, index) => <article class={`package-card ${index === 2 ? 'featured' : ''}`}><div class="package-top"><span>0{index + 1}</span>{index === 2 && <b>Most requested</b>}</div><h3>{pkg.name}</h3><p>{pkg.detail}</p><strong class="from-price">{pkg.prices[0]}<small>from / month</small></strong><a href={`/contact?package=${encodeURIComponent(pkg.name)}`}>Enquire about this plan <span>↗</span></a></article>)}</div></section>
+  <section class="matrix-section"><div class="matrix-heading"><div><span class="eyebrow">Resident pricing guide</span><h2>Full monthly matrix</h2></div><span>30 visits · GST 18% extra</span></div><span class="table-scroll-hint">Swipe sideways to compare vehicle categories <span aria-hidden="true">→</span></span><div class="table-scroll" role="region" aria-label="Full monthly package pricing matrix" tabindex="0"><table><thead><tr><th>Package</th>{vehicleCategories.map((category) => <th>{category}</th>)}</tr></thead><tbody>{monthlyPackages.map((pkg) => <tr><td><strong>{pkg.name}</strong><small>{pkg.detail}</small></td>{pkg.prices.map((price) => <td>{price}</td>)}</tr>)}</tbody></table></div><p class="matrix-note">Monthly pricing is reproduced from the supplied catalogue. Contact Crest to confirm the right plan for your model and availability.</p></section>
+</SiteLayout>
+<style>
+  .package-hero, .package-grid-section, .matrix-section { max-width: var(--max); margin: 0 auto; padding: 110px 24px; }
+  .package-hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(280px,.65fr); gap: 80px; align-items: center; min-height: 570px; }
+  .eyebrow { color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+  h1, h2, h3 { color: var(--white); letter-spacing: -.06em; line-height: 1.05; }
+  h1 { margin: 18px 0 24px; font-size: clamp(50px,6vw,82px); }
+  em { color: var(--gold-soft); font-style: normal; }
+  .package-hero p { max-width: 500px; margin-bottom: 31px; color: var(--muted); font-size: 16px; }
+  .package-hero-card { display: flex; min-height: 355px; flex-direction: column; justify-content: end; padding: 28px; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(59,130,246,.06), rgba(19,19,21,.45)), url('/images/generated/crest-ceramic-beading.jpg') center / cover; }
+  .package-hero-card span { color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .package-hero-card strong { margin-top: 11px; color: var(--white); font-size: 27px; letter-spacing: -.04em; }
+  .package-hero-card small { margin-top: 6px; color: #c0cad7; font-size: 11px; }
+  .package-grid-section { max-width: none; background: #1b1b1d; }
+  .section-intro, .package-grid { max-width: var(--max); margin-left: auto; margin-right: auto; }
+  .section-intro { display: flex; align-items: end; justify-content: space-between; gap: 55px; margin-bottom: 50px; }
+  .section-intro h2 { margin: 12px 0 0; font-size: clamp(40px,5vw,63px); }
+  .section-intro p { max-width: 330px; margin: 0; color: var(--muted); font-size: 14px; }
+  .package-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+  .package-card { display: flex; min-height: 300px; flex-direction: column; padding: 23px; border: 1px solid var(--line); background: #0d2440; transition: transform .3s var(--ease), border-color .25s ease, box-shadow .25s ease; }
+  .package-card:hover, .package-card.featured { border-color: rgba(59,130,246,.7); }
+  .package-card:hover { transform: translateY(-7px); box-shadow: 0 18px 45px rgba(0,0,0,.2); }
+  .package-card.featured { background: linear-gradient(160deg, rgba(59,130,246,.15), #0d2440 60%); }
+  .package-top { display: flex; justify-content: space-between; color: var(--gold); font-size: 10px; font-weight: 700; }
+  .package-top b { padding: 5px 8px; color: var(--ink); background: var(--gold); font-size: 8px; letter-spacing: .04em; text-transform: uppercase; }
+  .package-card h3 { margin: 42px 0 11px; font-size: 20px; }
+  .package-card p { margin: 0 auto 20px; color: var(--muted); font-size: 12px; }
+  .from-price { display: flex; align-items: baseline; gap: 7px; margin-top: auto; color: var(--white); font-size: 24px; letter-spacing: -.06em; }
+  .from-price small { color: #8998ad; font-size: 9px; font-weight: 500; letter-spacing: .02em; text-transform: uppercase; }
+  .package-card > a { margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--line); color: var(--gold-soft); font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+  .matrix-section { max-width: none; }
+  .matrix-heading { max-width: var(--max); margin: 0 auto 27px; display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+  .matrix-heading h2 { margin: 10px 0 0; font-size: 38px; }
+  .matrix-heading > span { color: #94a3b8; font-size: 10px; text-transform: uppercase; }
+  .table-scroll-hint { display: none; max-width: var(--max); margin: 0 auto 10px; color: var(--gold-soft); font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .table-scroll { max-width: var(--max); margin: 0 auto; overflow-x: auto; border: 1px solid var(--line); -webkit-overflow-scrolling: touch; scrollbar-color: var(--gold) #0d2440; }
+  th:first-child, td:first-child { position: sticky; left: 0; z-index: 1; background: #0d2440; box-shadow: 8px 0 14px rgba(19,19,21,.22); }
+  thead th:first-child { z-index: 2; }
+  table { width: 100%; min-width: 920px; border-collapse: collapse; }
+  th, td { padding: 17px 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: left; font-size: 12px; white-space: nowrap; }
+  th { color: var(--gold); background: #0d2440; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+  td:first-child { min-width: 300px; white-space: normal; }
+  td:first-child strong, td:first-child small { display: block; }
+  td:first-child strong { color: var(--white); }
+  td:first-child small { margin-top: 4px; color: #8998ad; font-size: 10px; }
+  td:not(:first-child) { color: var(--gold-soft); font-weight: 600; }
+  .matrix-note { max-width: var(--max); margin: 16px auto 0; color: #8998ad; font-size: 10px; }
+  @media (max-width: 900px) { .package-hero { grid-template-columns: 1fr; gap: 40px; } .section-intro { display: block; } .section-intro p { margin-top: 20px; } .package-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 620px) { .table-scroll-hint { display: block; } .package-hero, .package-grid-section, .matrix-section { padding: 80px 20px; } .package-hero { min-height: auto; padding-top: 88px; } .package-hero-card { min-height: 280px; } .package-grid { grid-template-columns: 1fr; } .matrix-heading { display: block; } .matrix-heading > span { display: block; margin-top: 14px; } }
+</style>

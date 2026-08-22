@@ -1,0 +1,9 @@
+# Legal and accessibility research notes
+
+The website legal pages are working drafts for attorney review, not formal legal advice. The privacy-page structure is informed by the official Digital Personal Data Protection Act, 2023 source published by the Ministry of Electronics and Information Technology: https://www.meity.gov.in/static/uploads/2024/06/2bf1f0e9f04e6fb4f8fef35e82c42aa5.pdf. The page should explain notice, purposes, consent or other lawful processing grounds as applicable, retention, security, data-principal requests, grievance handling, processors, and contact details once the business supplies the final legal identity and designated contact.
+
+The accessibility page references W3C Web Content Accessibility Guidelines (WCAG) 2.2: https://www.w3.org/TR/WCAG22/. WCAG 2.2 organizes guidance under perceivable, operable, understandable, and robust principles and uses testable success criteria with A, AA, and AAA conformance levels. The draft statement should avoid claiming a conformance level that has not been independently audited.
+
+Current missing business details that remain placeholders in legal pages include the registered legal entity name, registered office address, privacy or grievance contact email, effective date, retention periods, payment/refund policy, governing-law choice, and the exact analytics/cookie vendors used in production.
+
+The Department of Consumer Affairs states that the Consumer Protection Act, 2019 provides a three-tier Consumer Commission system and a framework for consumer grievances and redressal: https://consumeraffairs.gov.in/pages/consumer-protection-unit. The National Consumer Helpline is available at https://consumerhelpline.gov.in/. The website draft links to those official sources rather than hard-coding a copied process or promise.

@@ -1,0 +1,17 @@
+---
+interface Stat { value: string; label: string; detail?: string; }
+const { stats = [] } = Astro.props as { stats: Stat[] };
+---
+<section class="proof-strip" aria-label="Crest Automotive proof points">
+  {stats.map((stat, index) => <div class="proof-item"><span class="proof-index">0{index + 1}</span><strong>{stat.value}</strong><span>{stat.label}</span>{stat.detail && <small>{stat.detail}</small>}</div>)}
+</section>
+<style>
+  .proof-strip { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:linear-gradient(90deg,#091a2d,#0d2845 50%,#091a2d); }
+  .proof-item { position:relative; display:flex; min-height:126px; flex-direction:column; justify-content:center; gap:4px; padding:22px max(20px,calc((100vw - var(--max)) / 2)); border-right:1px solid var(--line); }
+  .proof-item + .proof-item { padding-left:28px; }
+  .proof-index { color:var(--gold); font-size:9px; font-weight:700; letter-spacing:.12em; }
+  strong { color:var(--white); font-size:19px; letter-spacing:-.04em; }
+  .proof-item > span:not(.proof-index) { color:var(--white); font-size:10px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; }
+  small { color:var(--white); font-size:10px; line-height:1.4; }
+  @media (max-width:760px) { .proof-strip { grid-template-columns:repeat(2,1fr); } .proof-item, .proof-item + .proof-item { min-height:112px; padding:18px 20px; } .proof-item:nth-child(2) { border-right:0; } .proof-item:nth-child(3), .proof-item:nth-child(4) { border-top:1px solid var(--line); } }
+</style>

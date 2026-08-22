@@ -1,0 +1,17 @@
+---
+interface Props { label?: string; href?: string; note?: string; }
+const { label = 'Build your care plan', href = '/estimate', note = 'Indicative pricing in under a minute' } = Astro.props;
+---
+<div class="sticky-booking" data-sticky-booking>
+  <div><strong>{label}</strong><small>{note}</small></div>
+  <a class="button button-gold button-small" href={href}>Start <span aria-hidden="true">↗</span></a>
+</div>
+<style>
+  .sticky-booking { position:fixed; z-index:42; right:14px; bottom:14px; left:14px; display:none; align-items:center; justify-content:space-between; gap:14px; padding:12px 13px 12px 16px; border:1px solid rgba(59,130,246,.4); border-radius:16px; background:rgba(19,19,21,.94); box-shadow:0 16px 45px rgba(0,0,0,.35); backdrop-filter:blur(18px); }
+  strong, small { display:block; }
+  strong { color:var(--white); font-size:12px; }
+  small { margin-top:2px; color:var(--white); font-size:10px; }
+  @media (max-width:820px) { .sticky-booking { display:flex; } }
+  @media (max-width:420px) { .sticky-booking { right:10px; bottom:10px; left:10px; } .sticky-booking .button { min-height:38px; padding:0 13px; } }
+  @media (prefers-reduced-motion:reduce) { .sticky-booking { transition:none; } }
+</style>

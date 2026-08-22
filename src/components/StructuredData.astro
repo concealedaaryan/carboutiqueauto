@@ -1,0 +1,16 @@
+---
+interface BreadcrumbItem { name: string; item?: string; }
+interface ServiceItem { name: string; description?: string; url?: string; }
+const { type = 'breadcrumbs', items = [], services = [], faqs = [] } = Astro.props as { type?: 'breadcrumbs' | 'services' | 'faq'; items?: BreadcrumbItem[]; services?: ServiceItem[]; faqs?: { question: string; answer: string }[] };
+const siteUrl = (import.meta.env.PUBLIC_SITE_URL || '').replace(/\/$/, '');
+const origin = siteUrl || Astro.url.origin;
+let jsonLd: Record<string, unknown>;
+if (type === 'faq') {
+  jsonLd = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map((faq) => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } })) };
+} else if (type === 'services') {
+  jsonLd = { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: services.map((service, index) => ({ '@type': 'ListItem', position: index + 1, item: { '@type': 'Service', name: service.name, description: service.description, provider: { '@type': 'LocalBusiness', name: 'Crest Automotive' }, url: service.url ? `${origin}${service.url}` : undefined } })) };
+} else {
+  jsonLd = { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map((item, index) => ({ '@type': 'ListItem', position: index + 1, name: item.name, item: item.item ? `${origin}${item.item}` : undefined })) };
+}
+---
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
