@@ -1,0 +1,31 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import BookingCalculator from '../components/BookingCalculator.astro';
+---
+<SiteLayout title="Estimate" description="Build a live Crest Automotive treatment estimate by vehicle category, service and optional protection add-ons." currentPath="/estimate" pageNumber="08" pageLabel="Instant estimate">
+  <section class="estimate-hero"><div><span class="eyebrow">08 / Instant estimate</span><h1>Build your<br /><em>care plan.</em></h1><p>Choose your vehicle category, select a treatment and add protection upgrades. Your estimate updates instantly using the resident pricing catalogue.</p></div><div class="estimate-note"><span>01</span><strong>Choose.</strong><small>Select your vehicle category and core service.</small><span>02</span><strong>Upgrade.</strong><small>Add PPF, leather or ceramic protection.</small><span>03</span><strong>Enquire.</strong><small>Send the estimate to the Crest team.</small></div></section>
+  <section class="calculator-section"><BookingCalculator /></section>
+  <section class="estimate-disclaimer"><span class="eyebrow">Before you book</span><h2>Estimate first.<br /><em>Confirm together.</em></h2><p>The calculator provides an indicative resident estimate. Crest confirms the final vehicle category, condition, treatment scope, availability, tax and booking terms before work begins.</p><a href="/services">Review all services <span>→</span></a></section>
+</SiteLayout>
+<style>
+  .estimate-hero, .calculator-section, .estimate-disclaimer { max-width: var(--max); margin: 0 auto; padding: 110px 24px; }
+  .estimate-hero { display: grid; grid-template-columns: 1fr .75fr; gap: 80px; align-items: center; min-height: 550px; }
+  .eyebrow { color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+  h1, h2 { color: var(--white); line-height: 1.05; letter-spacing: -.06em; }
+  h1 { margin: 18px 0 24px; font-size: clamp(54px,7vw,90px); }
+  h2 { margin: 13px 0 0; font-size: clamp(42px,5vw,64px); }
+  em { color: var(--gold-soft); font-style: normal; }
+  .estimate-hero p { max-width: 500px; margin: 0; color: var(--muted); font-size: 16px; }
+  .estimate-note { display: grid; grid-template-columns: 36px 1fr; gap: 9px 15px; padding: 27px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(226,185,104,.14), rgba(255,255,255,.02)); }
+  .estimate-note span { color: var(--gold); font-size: 10px; font-weight: 700; }
+  .estimate-note strong { color: var(--white); font-size: 18px; }
+  .estimate-note small { grid-column: 2; margin-top: -5px; padding-bottom: 13px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+  .calculator-section { max-width: none; background: #0a1d35; }
+  .calculator-section > .calculator-shell { max-width: var(--max); margin: 0 auto; }
+  .estimate-disclaimer { display: grid; grid-template-columns: 1fr 1fr; column-gap: 80px; align-items: end; }
+  .estimate-disclaimer h2 { grid-column: 1; }
+  .estimate-disclaimer p { grid-column: 2; margin: 0; color: var(--muted); font-size: 14px; }
+  .estimate-disclaimer a { grid-column: 2; margin-top: 25px; color: var(--gold-soft); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  @media (max-width: 850px) { .estimate-hero { grid-template-columns: 1fr; gap: 42px; } .estimate-disclaimer { display: block; } .estimate-disclaimer p { margin-top: 25px; } .estimate-disclaimer a { display: inline-block; margin-top: 20px; } }
+  @media (max-width: 620px) { .estimate-hero, .calculator-section, .estimate-disclaimer { padding: 80px 20px; } .estimate-hero { min-height: auto; padding-top: 88px; } }
+</style>

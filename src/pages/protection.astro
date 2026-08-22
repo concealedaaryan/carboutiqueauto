@@ -1,0 +1,64 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { coatingPackages, ppfOptions, protectionAddOns } from '../data/catalog';
+---
+<SiteLayout title="Protection" description="Crest Automotive ceramic, graphene, PPF and surface-protection options." currentPath="/protection" pageNumber="03" pageLabel="Surface protection">
+  <section class="protection-hero"><div><span class="eyebrow">03 / Surface protection</span><h1>More gloss.<br /><em>More time.</em></h1><p>Protect the finish you invested in with ceramic, graphene and paint-protection-film systems designed for daily roads, weather and use.</p><a class="button button-gold" href="/estimate">Build a protection estimate <span>↗</span></a></div><div class="hero-image" style="background-image: linear-gradient(180deg, rgba(7,21,40,.05), rgba(7,21,40,.75)), url('/images/crest-beading.jpg');"><span>HYDROPHOBIC FINISH</span><small>Water beading / coated paint detail</small></div></section>
+  <section class="coating-section" id="ceramic"><div class="intro"><span class="eyebrow">Ceramic & graphene</span><h2>Surface confidence,<br /><em>layer by layer.</em></h2><p>Choose from nano ceramic, premium ceramic or premium graphene treatments. The exact process depends on paint condition, prior repairs, model and agreed scope.</p></div><div class="coating-grid">{coatingPackages.map((pkg, index) => <article class={`coating-card ${index === 2 ? 'featured' : ''}`}><span>0{index + 1}</span><h3>{pkg.name}</h3><p>{index === 0 ? 'Entry protection for a cleaner, glossier daily finish.' : index === 1 ? 'Correction-led premium ceramic with glass, trim and interior care.' : 'Graphene protection with correction, glass and alloy protection.'}</p><strong>{pkg.prices[0]}<small>from</small></strong><em>{pkg.warranty}</em><a href={`/estimate?service=${index === 0 ? '11' : index === 1 ? '12' : '13'}`}>Estimate this coating <span>↗</span></a></article>)}</div></section>
+  <section class="ppf-section"><div class="ppf-heading"><div><span class="eyebrow">Paint protection film</span><h2>Choose your shield.</h2></div><p>Thermoplastic protection against scratches, swirl marks, road debris and environmental wear. Options include anti-yellowing, self-healing and high-gloss films.</p></div><span class="table-scroll-hint">Swipe sideways to compare PPF films and sizes <span aria-hidden="true">→</span></span><div class="table-scroll" role="region" aria-label="Paint protection film pricing matrix" tabindex="0"><table><thead><tr><th>Film</th><th>Warranty</th><th>Small</th><th>Medium</th><th>Large</th><th>Coverage</th></tr></thead><tbody>{ppfOptions.map((film) => <tr><td><strong>{film.name}</strong></td><td>{film.warranty}</td><td>{film.small}</td><td>{film.medium}</td><td>{film.large}</td><td>{film.coverage}</td></tr>)}</tbody></table></div></section>
+  <section class="addons-section"><div class="intro"><span class="eyebrow">Protection add-ons</span><h2>Complete the<br /><em>system.</em></h2><p>Add ceramic coverage to the surfaces that need it most, from PPF and glass to alloys, lights, grills, interiors and leather panels.</p></div><div class="addons-grid">{protectionAddOns.map((addon) => <article class="addon-card"><span>Protection add-on</span><h3>{addon.name}</h3><strong>{addon.total}<small>incl. GST</small></strong><div><span>Application</span><b>{addon.application}</b><span>GST</span><b>{addon.gst}</b><span>Warranty</span><b>{addon.warranty}</b></div><a href="/contact">Talk to Crest <span>↗</span></a></article>)}</div></section>
+</SiteLayout>
+<style>
+  .protection-hero, .coating-section, .ppf-section, .addons-section { max-width: var(--max); margin: 0 auto; padding: 110px 24px; }
+  .protection-hero { display: grid; grid-template-columns: 1fr .9fr; gap: 80px; align-items: center; min-height: 600px; }
+  .eyebrow { color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+  h1, h2, h3 { color: var(--white); letter-spacing: -.06em; line-height: 1.05; }
+  h1 { margin: 17px 0 24px; font-size: clamp(53px,7vw,88px); }
+  h2 { margin: 13px 0 0; font-size: clamp(41px,5vw,64px); }
+  em { color: var(--gold-soft); font-style: normal; }
+  .protection-hero p { max-width: 500px; margin-bottom: 31px; color: var(--muted); font-size: 16px; }
+  .hero-image { min-height: 450px; display: flex; flex-direction: column; justify-content: end; padding: 24px; border: 1px solid var(--line); background-size: cover; background-position: center; }
+  .hero-image span, .hero-image small { color: var(--white); font-size: 10px; font-weight: 700; letter-spacing: .13em; }
+  .hero-image small { margin-top: 7px; color: #c1ccdb; font-size: 9px; letter-spacing: .02em; }
+  .coating-section, .addons-section { max-width: none; background: #0a1d35; }
+  .intro, .coating-grid, .addons-grid { max-width: var(--max); margin-left: auto; margin-right: auto; }
+  .intro { display: flex; align-items: end; justify-content: space-between; gap: 60px; margin-bottom: 45px; }
+  .intro p { max-width: 345px; margin: 0; color: var(--muted); font-size: 14px; }
+  .coating-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 13px; }
+  .coating-card { display: flex; min-height: 350px; flex-direction: column; padding: 25px; border: 1px solid var(--line); background: #0d2440; transition: transform .3s var(--ease), border-color .25s ease, box-shadow .25s ease; }
+  .coating-card:hover, .coating-card.featured { border-color: rgba(226,185,104,.72); }
+  .coating-card:hover { transform: translateY(-7px); box-shadow: 0 18px 45px rgba(0,0,0,.2); }
+  .coating-card > span { color: var(--gold); font-size: 10px; font-weight: 700; }
+  .coating-card h3 { margin: 43px 0 10px; font-size: 22px; }
+  .coating-card p { color: var(--muted); font-size: 12px; }
+  .coating-card strong { display: flex; align-items: baseline; gap: 7px; margin-top: auto; color: var(--white); font-size: 27px; }
+  .coating-card strong small { color: #94a3b8; font-size: 9px; font-weight: 500; text-transform: uppercase; }
+  .coating-card em { margin-top: 6px; color: #adbacc; font-size: 10px; font-style: normal; }
+  .coating-card a, .addon-card a { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--gold-soft); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .ppf-section { max-width: none; }
+  .ppf-heading { max-width: var(--max); display: flex; justify-content: space-between; align-items: end; gap: 60px; margin: 0 auto 30px; }
+  .ppf-heading p { max-width: 360px; margin: 0; color: var(--muted); font-size: 14px; }
+  .table-scroll-hint { display: none; max-width: var(--max); margin: 0 auto 10px; color: var(--gold-soft); font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .table-scroll { max-width: var(--max); margin: 0 auto; overflow-x: auto; border: 1px solid var(--line); -webkit-overflow-scrolling: touch; scrollbar-color: var(--gold) #0d2440; }
+  th:first-child, td:first-child { position: sticky; left: 0; z-index: 1; background: #0d2440; box-shadow: 8px 0 14px rgba(7,21,40,.22); }
+  thead th:first-child { z-index: 2; }
+  table { width: 100%; min-width: 950px; border-collapse: collapse; text-align: left; }
+  th, td { padding: 17px 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #d6deea; font-size: 12px; white-space: nowrap; }
+  th { color: var(--gold); background: #0d2440; font-size: 9px; letter-spacing: .08em; text-transform: uppercase; }
+  td:first-child { min-width: 290px; white-space: normal; }
+  td:first-child strong { color: var(--white); }
+  td:not(:first-child) { color: var(--gold-soft); font-weight: 600; }
+  .addons-section { padding-bottom: 125px; }
+  .addons-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 13px; }
+  .addon-card { padding: 25px; border: 1px solid var(--line); background: #0d2440; transition: transform .3s var(--ease), border-color .25s ease; }
+  .addon-card:hover { transform: translateY(-6px); border-color: rgba(226,185,104,.72); }
+  .addon-card > span { color: var(--gold); font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .addon-card h3 { min-height: 58px; margin: 27px 0 10px; font-size: 20px; letter-spacing: -.04em; }
+  .addon-card > strong { display: block; color: var(--white); font-size: 30px; letter-spacing: -.06em; }
+  .addon-card > strong small { display: block; color: #94a3b8; font-size: 9px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; }
+  .addon-card > div { display: grid; grid-template-columns: 1fr auto; gap: 8px 20px; margin-top: 22px; padding-top: 17px; border-top: 1px solid var(--line); }
+  .addon-card > div span { color: #94a3b8; font-size: 10px; text-transform: uppercase; }
+  .addon-card > div b { color: var(--gold-soft); font-size: 11px; }
+  @media (max-width: 880px) { .protection-hero { grid-template-columns: 1fr; gap: 42px; } .intro, .ppf-heading { display: block; } .intro p, .ppf-heading p { margin-top: 20px; } .coating-grid { grid-template-columns: 1fr; } .coating-card { min-height: 270px; } }
+  @media (max-width: 620px) { .table-scroll-hint { display: block; } .protection-hero, .coating-section, .ppf-section, .addons-section { padding: 80px 20px; } .protection-hero { min-height: auto; padding-top: 88px; } .hero-image { min-height: 330px; } .addons-grid { grid-template-columns: 1fr; } }
+</style>

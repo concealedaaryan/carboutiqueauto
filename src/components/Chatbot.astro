@@ -1,0 +1,50 @@
+<aside class="chatbot" data-chatbot>
+  <button class="chatbot-launcher" type="button" aria-expanded="false" aria-controls="crest-chat-panel"><span class="chatbot-spark">✦</span><span class="chatbot-launcher-copy"><strong>Crest AI</strong><small>Ask about your car</small></span><span class="chatbot-ping"></span></button>
+  <section class="chat-panel" id="crest-chat-panel" aria-label="Crest Automotive AI concierge" aria-hidden="true">
+    <header class="chat-header"><div><span class="eyebrow">Crest concierge</span><strong>How can we help?</strong></div><button type="button" class="chat-close" aria-label="Close Crest AI">×</button></header>
+    <div class="chat-messages" aria-live="polite"><div class="chat-message assistant">Hi — I’m Crest AI. Ask me about services, packages, PPF, coatings, pricing categories, locations or booking an estimate.</div></div>
+    <form class="chat-form"><label class="sr-only" for="chat-input">Message Crest AI</label><textarea id="chat-input" rows="2" maxlength="1200" placeholder="Ask about your car…" required></textarea><button class="button button-gold" type="submit"><span>Send</span><span>↗</span></button></form>
+    <small class="chat-footnote">AI answers are informational. Crest confirms final scope, availability and pricing.</small>
+  </section>
+</aside>
+<style>
+  .chatbot { position: fixed; z-index: 60; right: 22px; bottom: 22px; font-family: 'Poppins', sans-serif; }
+  .chatbot-launcher { display: flex; align-items: center; gap: 10px; padding: 9px 13px 9px 9px; border: 1px solid rgba(226,185,104,.56); border-radius: 999px; color: var(--white); background: linear-gradient(135deg, rgba(226,185,104,.23), rgba(11,32,56,.96)); box-shadow: 0 16px 40px rgba(0,0,0,.3); transition: transform .25s var(--ease), border-color .25s ease, box-shadow .25s ease; }
+  .chatbot-launcher:hover { transform: translateY(-4px); border-color: var(--gold-soft); box-shadow: 0 20px 44px rgba(0,0,0,.36); }
+  .chatbot-spark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: var(--ink); background: var(--gold); font-size: 14px; }
+  .chatbot-launcher-copy { display: grid; gap: 0; text-align: left; }
+  .chatbot-launcher-copy strong { font-size: 11px; }
+  .chatbot-launcher-copy small { color: #b6c2d2; font-size: 9px; }
+  .chatbot-ping { width: 7px; height: 7px; border-radius: 50%; background: #80d58b; box-shadow: 0 0 0 4px rgba(128,213,139,.12); }
+  .chat-panel { position: absolute; right: 0; bottom: 66px; display: flex; width: min(370px, calc(100vw - 32px)); max-height: min(610px, calc(100vh - 115px)); flex-direction: column; overflow: hidden; border: 1px solid rgba(226,185,104,.35); border-radius: 22px; background: linear-gradient(155deg, #102743, #071528 74%); box-shadow: 0 24px 70px rgba(0,0,0,.42); opacity: 0; pointer-events: none; transform: translateY(15px) scale(.98); transform-origin: bottom right; transition: opacity .25s var(--ease), transform .25s var(--ease); }
+  .chatbot.is-open .chat-panel { opacity: 1; pointer-events: auto; transform: none; }
+  .chat-header { display: flex; justify-content: space-between; align-items: center; padding: 18px 18px 15px; border-bottom: 1px solid var(--line); }
+  .chat-header > div { display: grid; gap: 3px; }
+  .chat-header .eyebrow { color: var(--gold); font-size: 8px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+  .chat-header strong { color: var(--white); font-size: 17px; }
+  .chat-close { width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 50%; color: var(--gold-soft); background: transparent; font-size: 20px; line-height: 1; transition: background .2s ease, transform .2s ease; }
+  .chat-close:hover { background: rgba(226,185,104,.12); transform: rotate(90deg); }
+  .chat-messages { display: flex; min-height: 175px; max-height: 355px; flex-direction: column; gap: 10px; overflow: auto; padding: 17px; }
+  .chat-message { max-width: 86%; padding: 11px 13px; border: 1px solid var(--line); border-radius: 14px 14px 14px 4px; color: #d8e0eb; background: rgba(255,255,255,.045); font-size: 12px; line-height: 1.55; }
+  .chat-message.user { align-self: end; border-color: rgba(226,185,104,.35); border-radius: 14px 14px 4px 14px; color: var(--ink); background: var(--gold-soft); }
+  .chat-message.loading { color: #aab8ca; font-style: italic; }
+  .chat-form { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 9px; padding: 14px 17px 8px; border-top: 1px solid var(--line); }
+  .chat-form textarea { min-height: 50px; margin: 0; padding: 10px; resize: none; border: 1px solid rgba(222,181,92,.28); border-radius: 12px; color: var(--white); background: rgba(0,0,0,.14); font-size: 12px; }
+  .chat-form textarea:focus { border-color: var(--gold); outline: none; }
+  .chat-form .button { width: auto; min-height: 42px; height: 42px; align-self: start; gap: 6px; padding: 0 10px; border-radius: 10px; font-size: 9px; }
+  .chat-footnote { padding: 0 17px 15px; color: #8191a6; font-size: 9px; line-height: 1.45; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  @media (max-width: 620px) { .chatbot { right: 14px; bottom: 14px; } .chatbot-launcher-copy small { display: none; } .chatbot-launcher { padding-right: 10px; } }
+  @media (prefers-reduced-motion: reduce) { .chat-panel, .chatbot-launcher, .chat-close { transition-duration: .01ms; } }
+</style>
+<script is:inline data-astro-rerun>
+  // @ts-nocheck
+  if (!window.__crestChatbotBound) {
+    window.__crestChatbotBound = true;
+    const messageState = new WeakMap();
+    const addMessage = (chatbot, role, content, extra = '') => { const node = document.createElement('div'); node.className = `chat-message ${role} ${extra}`.trim(); node.textContent = content; chatbot?.querySelector('.chat-messages')?.appendChild(node); chatbot?.querySelector('.chat-messages')?.scrollTo({ top: chatbot.querySelector('.chat-messages').scrollHeight, behavior: 'smooth' }); return node; };
+    const setOpen = (chatbot, open) => { const launcher = chatbot?.querySelector('.chatbot-launcher'); const panel = chatbot?.querySelector('.chat-panel'); chatbot?.classList.toggle('is-open', open); launcher?.setAttribute('aria-expanded', String(open)); panel?.setAttribute('aria-hidden', String(!open)); if (open) window.setTimeout(() => chatbot?.querySelector('#chat-input')?.focus(), 120); };
+    document.addEventListener('click', (event) => { const target = event.target; const launcher = target?.closest?.('.chatbot-launcher'); const closeButton = target?.closest?.('.chat-close'); if (launcher) { const chatbot = launcher.closest('[data-chatbot]'); setOpen(chatbot, !chatbot?.classList.contains('is-open')); } else if (closeButton) { setOpen(closeButton.closest('[data-chatbot]'), false); } });
+    document.addEventListener('submit', async (event) => { const form = event.target?.closest?.('.chat-form'); if (!form) return; event.preventDefault(); const chatbot = form.closest('[data-chatbot]'); const input = form.querySelector('#chat-input'); const content = input?.value.trim(); if (!content || !chatbot) return; input.value = ''; const messages = messageState.get(chatbot) || []; addMessage(chatbot, 'user', content); messages.push({ role: 'user', content }); const loading = addMessage(chatbot, 'assistant', 'Thinking…', 'loading'); const submit = form.querySelector('button[type="submit"]'); submit.disabled = true; try { const response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages }) }); const data = await response.json().catch(() => ({})); loading.remove(); if (!response.ok) throw new Error(data.error || 'The chat service is temporarily unavailable.'); addMessage(chatbot, 'assistant', data.reply || 'Please call the Crest team for help.'); messages.push({ role: 'assistant', content: data.reply || '' }); } catch (error) { loading.remove(); addMessage(chatbot, 'assistant', error.message || 'Please call +91 98716 10952 and the Crest team will help.'); } finally { messageState.set(chatbot, messages.slice(-12)); submit.disabled = false; input.focus(); } });
+  }
+</script>

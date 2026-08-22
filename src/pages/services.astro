@@ -1,0 +1,56 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { allTreatments, vehicleCategories } from '../data/catalog';
+---
+<SiteLayout title="Services" description="Crest Automotive’s complete premium car-care treatment catalogue and resident pricing." currentPath="/services" pageNumber="01" pageLabel="The treatment menu">
+  <section class="page-hero"><div><span class="eyebrow">01 / The treatment menu</span><h1>Detailing that respects<br /><em>the machine.</em></h1><p>From a daily waterless refresh to multi-year surface protection, explore every treatment in the Crest Automotive catalogue.</p><a class="button button-gold" href="/estimate">Build your estimate <span>↗</span></a></div><div class="page-hero-image" style="background-image: linear-gradient(180deg, rgba(7,21,40,.08), rgba(7,21,40,.78)), url('/images/crest-detailing.jpg');"><span>IN-HOUSE PROCESS</span><small>Trained hands · considered finish</small></div></section>
+  <section class="catalogue-section"><div class="catalogue-intro"><span class="eyebrow">Complete catalogue</span><h2>Choose the ritual<br /><em>that fits the drive.</em></h2><p>Prices are shown by vehicle category. GST at 18% is extra. Final scope and price are confirmed after vehicle-model and condition checks.</p></div><div class="service-list">{allTreatments.map((item) => <article class="service-row" id={`treatment-${item.number}`}><div class="service-number">{item.number}</div><div class="service-copy"><span class="eyebrow">{item.eyebrow}</span><h3>{item.title}</h3><p>{item.copy}</p><a href={`/estimate?service=${item.number}`}>Build this into an estimate <span>↗</span></a></div><div class="service-price"><strong>{item.price}</strong><small>{item.tag}</small></div></article>)}</div></section>
+  <section class="matrix-section"><div class="matrix-heading"><div><span class="eyebrow">Resident pricing guide</span><h2>Full treatment matrix</h2></div><span>GST 18% extra · prices in INR</span></div><span class="table-scroll-hint">Swipe sideways to compare vehicle categories <span aria-hidden="true">→</span></span><div class="table-scroll" role="region" aria-label="Full treatment pricing matrix" tabindex="0"><table><thead><tr><th># / Service</th>{vehicleCategories.map((category) => <th>{category}</th>)}</tr></thead><tbody>{allTreatments.map((item) => <tr><td><span>{item.number}</span><strong>{item.title}</strong><small>{item.tag}</small></td>{item.prices.map((price) => <td>{price}</td>)}</tr>)}</tbody></table></div><p class="matrix-note">The Premium-tier sun-film price is reproduced as supplied in the PDF (₹1,500) and should be confirmed with the Crest team before booking.</p></section>
+</SiteLayout>
+<style>
+  .page-hero, .catalogue-section, .matrix-section { max-width: var(--max); margin: 0 auto; padding: 110px 24px; }
+  .page-hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(390px,.95fr); gap: 70px; align-items: center; min-height: 600px; }
+  .page-hero h1 { max-width: 700px; margin: 18px 0 24px; color: var(--white); font-size: clamp(49px,6vw,82px); line-height: 1.04; letter-spacing: -.065em; }
+  em { color: var(--gold-soft); font-style: normal; }
+  .eyebrow { color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+  .page-hero p { max-width: 510px; margin-bottom: 31px; color: var(--muted); font-size: 16px; }
+  .page-hero-image { min-height: 455px; display: flex; flex-direction: column; justify-content: end; padding: 23px; border: 1px solid var(--line); background-size: cover; background-position: center; }
+  .page-hero-image span, .page-hero-image small { color: var(--white); font-size: 10px; font-weight: 700; letter-spacing: .12em; }
+  .page-hero-image small { margin-top: 7px; color: #bbc6d6; font-size: 9px; letter-spacing: .02em; }
+  .catalogue-section { max-width: none; background: #0a1d35; }
+  .catalogue-intro, .service-list { max-width: var(--max); margin-left: auto; margin-right: auto; }
+  .catalogue-intro { display: flex; justify-content: space-between; align-items: end; gap: 60px; margin-bottom: 50px; }
+  .catalogue-intro h2 { margin: 12px 0 0; color: var(--white); font-size: clamp(38px,5vw,62px); line-height: 1.05; letter-spacing: -.06em; }
+  .catalogue-intro p { max-width: 340px; margin: 0; color: var(--muted); font-size: 14px; }
+  .service-list { display: grid; gap: 10px; }
+  .service-row { display: grid; grid-template-columns: 60px 1fr 190px; gap: 20px; align-items: center; padding: 27px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(226,185,104,.08), rgba(255,255,255,.02)); transition: transform .25s var(--ease), border-color .25s ease, background .25s ease; }
+  .service-row:hover { transform: translateX(7px); border-color: rgba(226,185,104,.68); background: linear-gradient(145deg, rgba(226,185,104,.14), rgba(255,255,255,.025)); }
+  .service-number { align-self: start; color: var(--gold); font-size: 11px; font-weight: 700; }
+  .service-copy .eyebrow { color: #a9b6c8; font-size: 9px; }
+  .service-copy h3 { margin: 7px 0 9px; color: var(--white); font-size: 23px; letter-spacing: -.04em; }
+  .service-copy p { max-width: 650px; margin: 0 0 12px; color: var(--muted); font-size: 13px; }
+  .service-copy a { color: var(--gold-soft); font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .service-price { align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; align-items: end; text-align: right; }
+  .service-price strong { color: var(--white); font-size: 17px; }
+  .service-price small { color: #a9b6c8; font-size: 9px; text-transform: uppercase; letter-spacing: .08em; }
+  .matrix-section { max-width: none; }
+  .matrix-heading { max-width: var(--max); margin: 0 auto 27px; display: flex; align-items: end; justify-content: space-between; gap: 30px; }
+  .matrix-heading h2 { margin: 10px 0 0; color: var(--white); font-size: 38px; letter-spacing: -.05em; }
+  .matrix-heading > span { color: #94a3b8; font-size: 10px; text-transform: uppercase; }
+  .table-scroll-hint { display: none; max-width: var(--max); margin: 0 auto 10px; color: var(--gold-soft); font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .table-scroll { max-width: var(--max); margin: 0 auto; overflow-x: auto; border: 1px solid var(--line); -webkit-overflow-scrolling: touch; scrollbar-color: var(--gold) #0d2440; }
+  th:first-child, td:first-child { position: sticky; left: 0; z-index: 1; background: #0d2440; box-shadow: 8px 0 14px rgba(7,21,40,.22); }
+  thead th:first-child { z-index: 2; }
+  table { width: 100%; min-width: 960px; border-collapse: collapse; text-align: left; }
+  th, td { padding: 17px 18px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #d6deea; font-size: 12px; white-space: nowrap; }
+  th { color: var(--gold); background: #0d2440; font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+  td:first-child { min-width: 285px; white-space: normal; }
+  td:first-child span, td:first-child strong, td:first-child small { display: inline-block; }
+  td:first-child span { min-width: 24px; color: var(--gold); font-size: 9px; font-weight: 700; vertical-align: top; }
+  td:first-child strong { color: var(--white); font-size: 12px; }
+  td:first-child small { display: block; margin-left: 29px; color: #8998ad; font-size: 10px; }
+  td:not(:first-child) { color: var(--gold-soft); font-weight: 600; }
+  .matrix-note { max-width: var(--max); margin: 17px auto 0; color: #8998ad; font-size: 10px; }
+  @media (max-width: 880px) { .page-hero { grid-template-columns: 1fr; gap: 40px; } .catalogue-intro { display: block; } .catalogue-intro p { margin-top: 22px; } }
+  @media (max-width: 620px) { .table-scroll-hint { display: block; } .page-hero, .catalogue-section, .matrix-section { padding: 80px 20px; } .page-hero { min-height: auto; padding-top: 88px; } .page-hero-image { min-height: 330px; } .service-row { grid-template-columns: 35px 1fr; padding: 22px; } .service-price { grid-column: 2; display: block; text-align: left; } .service-price strong { display: block; margin-bottom: 5px; } .matrix-heading { display: block; } .matrix-heading > span { display: block; margin-top: 14px; } .matrix-heading h2 { font-size: 31px; } }
+</style>

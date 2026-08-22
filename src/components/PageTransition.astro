@@ -1,0 +1,38 @@
+<div class="page-loader" data-page-loader role="status" aria-live="polite" aria-label="Loading Crest Automotive page">
+  <div class="page-loader-inner">
+    <div class="loader-brand"><span class="loader-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE</small></span></div>
+    <div class="loader-copy"><span>PREPARING YOUR FINISH</span><i></i></div>
+  </div>
+</div>
+<style>
+  .page-loader { position: fixed; z-index: 120; inset: 0; display: grid; place-items: center; color: var(--white, #fffdf7); background: #071528; opacity: 1; visibility: visible; pointer-events: auto; transition: opacity .28s var(--ease, cubic-bezier(.23,1,.32,1)), visibility .28s linear; animation: page-loader-dismiss .72s var(--ease, cubic-bezier(.23,1,.32,1)) .18s forwards; }
+  .page-loader.is-ready { opacity: 0; visibility: hidden; pointer-events: none; animation: none; }
+  @keyframes page-loader-dismiss { 0%, 72% { opacity: 1; visibility: visible; } 100% { opacity: 0; visibility: hidden; pointer-events: none; } }
+  .page-loader-inner { width: min(260px, calc(100vw - 48px)); }
+  .loader-brand { display: inline-flex; align-items: center; gap: 10px; }
+  .loader-mark { display: grid; place-items: center; width: 31px; height: 31px; color: var(--gold, #e2b968); border: 1px solid var(--gold, #e2b968); font-size: 15px; font-weight: 700; transform: skew(-12deg); }
+  .loader-brand strong, .loader-brand small { display: block; line-height: 1; letter-spacing: .16em; }
+  .loader-brand strong { color: var(--white, #fffdf7); font-size: 14px; font-weight: 800; }
+  .loader-brand small { margin-top: 5px; color: var(--muted, #a9b6c8); font-size: 7px; }
+  .loader-copy { display: flex; align-items: center; gap: 12px; margin-top: 29px; color: var(--gold, #e2b968); font-size: 9px; font-weight: 700; letter-spacing: .14em; }
+  .loader-copy i { flex: 1; height: 1px; overflow: hidden; background: rgba(226,185,104,.23); }
+  .loader-copy i::after { content: ''; display: block; width: 34%; height: 100%; background: var(--gold-soft, #f2d18a); transform: translateX(-120%); animation: loader-scan 1s var(--ease, cubic-bezier(.23,1,.32,1)) infinite; }
+  @keyframes loader-scan { to { transform: translateX(360%); } }
+  @media (prefers-reduced-motion: reduce) { .page-loader { transition-duration: .01ms; animation-duration: .01ms; animation-delay: 0s; } .loader-copy i::after { animation: none; transform: translateX(0); } }
+</style>
+<script is:inline data-astro-rerun>
+  // @ts-nocheck
+  (() => {
+    window.__crestPageTransitionCleanup?.();
+    const controller = new AbortController();
+    const loader = document.querySelector('[data-page-loader]');
+    const showLoader = () => loader?.classList.remove('is-ready');
+    const hideLoader = () => loader?.classList.add('is-ready');
+    const hideAfter = (delay) => window.setTimeout(hideLoader, delay);
+    document.addEventListener('astro:before-preparation', showLoader, { signal: controller.signal });
+    document.addEventListener('astro:page-load', () => hideAfter(120), { signal: controller.signal });
+    window.addEventListener('load', () => hideAfter(240), { once: true, signal: controller.signal });
+    window.requestAnimationFrame(() => hideAfter(260));
+    window.__crestPageTransitionCleanup = () => controller.abort();
+  })();
+</script>

@@ -1,0 +1,127 @@
+---
+import Chatbot from '../components/Chatbot.astro';
+import BackToTop from '../components/BackToTop.astro';
+import PageTransition from '../components/PageTransition.astro';
+import { ClientRouter } from 'astro:transitions';
+const { title, eyebrow = 'Legal & policies', intro = '', updated = '22 August 2026', currentPage = '' } = Astro.props;
+const legalLinks = [
+  ['/terms-of-service', 'Terms of service'],
+  ['/privacy-policy', 'Privacy policy'],
+  ['/cookie-policy', 'Cookie policy'],
+  ['/refund-cancellation', 'Refund & cancellation'],
+  ['/grievance-redressal', 'Grievance redressal'],
+  ['/accessibility', 'Accessibility'],
+  ['/disclaimer', 'Disclaimer'],
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="theme-color" content="#071528" />
+    <meta name="description" content={`${title} | Crest Automotive`} />
+    <title>{title} | Crest Automotive</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <ClientRouter />
+  </head>
+  <body>
+    <PageTransition />
+    <header class="legal-header">
+      <a class="brand" href="/" aria-label="Crest Automotive home"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE</small></span></a>
+      <nav aria-label="Legal navigation"><a href="/">Home</a><a href="/#services">Services</a><a href="/#contact">Contact</a></nav>
+      <a class="header-cta" href="/#contact">Book a treatment <span>↗</span></a>
+    </header>
+    <main class="legal-main" transition:animate="none">
+      <div class="legal-hero"><div><span class="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{intro}</p></div><div class="legal-meta"><span>Effective / reviewed</span><strong>{updated}</strong><small>Working draft — review with qualified counsel before publishing.</small></div></div>
+      <div class="legal-layout">
+        <aside class="legal-sidebar" aria-label="Legal pages"><span>On this site</span>{legalLinks.map(([href, label]) => <a class={currentPage === href ? 'is-current' : ''} href={href}>{label}</a>)}</aside>
+        <article class="legal-content"><div class="legal-notice"><strong>Important</strong><p>This page is a practical website-policy draft for Crest Automotive. It is not formal legal advice. Replace bracketed business details and have a qualified attorney review it before relying on it.</p></div><slot /></article>
+      </div>
+    </main>
+    <Chatbot />
+    <BackToTop />
+    <footer class="legal-footer"><div class="footer-brand-row"><a class="brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE</small></span></a><p>Premium, waterless automotive care for DLF Gurugram.</p><div class="social-links"><a href="https://wa.me/919871610952" target="_blank" rel="noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a></div></div><div class="footer-legal-row">{legalLinks.map(([href, label]) => <a href={href}>{label}</a>)}<a href="/#contact">Contact Crest</a></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Crest Automotive. All rights reserved.</span><a href="/">Back to main site ↑</a></div></footer>
+  </body>
+</html>
+<style>
+  :root { --navy: #071528; --navy-2: #0b2038; --panel: #102743; --gold: #e2b968; --gold-soft: #f2d18a; --white: #fffdf7; --muted: var(--white); --line: rgba(222,181,92,.22); --ease: cubic-bezier(.23,1,.32,1); }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--navy); }
+  body { margin: 0; color: var(--white); background: var(--navy); font-family: 'Poppins', sans-serif; line-height: 1.75; }
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 4px; }
+  .legal-header { position: sticky; z-index: 10; top: 0; display: flex; align-items: center; gap: 32px; min-height: 84px; padding: 0 max(24px, calc((100vw - 1180px) / 2)); background: rgba(7,21,40,.9); border-bottom: 1px solid var(--line); backdrop-filter: blur(18px); }
+  .brand { display: inline-flex; align-items: center; gap: 10px; min-width: max-content; }
+  .brand-mark { display: grid; place-items: center; width: 30px; height: 30px; color: var(--gold); border: 1px solid var(--gold); font-size: 15px; font-weight: 700; transform: skew(-12deg); }
+  .brand strong, .brand small { display: block; line-height: 1; letter-spacing: .16em; }
+  .brand strong { color: var(--white); font-size: 14px; font-weight: 800; }
+  .brand small { margin-top: 5px; color: var(--muted); font-size: 7px; }
+  .legal-header nav { display: flex; gap: 25px; margin-left: auto; color: var(--muted); font-size: 12px; }
+  .legal-header nav a, .header-cta, .footer-legal-row a, .social-links a { transition: color .2s ease, transform .2s var(--ease); }
+  .legal-header nav a:hover, .header-cta:hover, .footer-legal-row a:hover, .social-links a:hover { color: var(--gold-soft); transform: translateY(-2px); }
+  .header-cta { padding: 11px 16px; border-radius: 999px; color: var(--navy); background: linear-gradient(135deg, var(--gold), var(--gold-soft)); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; transition: transform .2s var(--ease), box-shadow .25s ease, color .2s ease; } .header-cta:hover { color: var(--navy); box-shadow: 0 12px 28px rgba(226,185,104,.18); }
+  .legal-main { max-width: 1180px; margin: 0 auto; padding: 86px 24px 120px; }
+  .legal-hero { display: flex; align-items: end; justify-content: space-between; gap: 55px; padding-bottom: 60px; border-bottom: 1px solid var(--line); }
+  .eyebrow, .legal-sidebar > span, .legal-meta span { color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
+  .legal-hero h1 { max-width: 760px; margin: 15px 0 16px; color: var(--white); font-size: clamp(42px, 7vw, 82px); letter-spacing: -.06em; line-height: 1.03; }
+  .legal-hero p { max-width: 680px; margin: 0; color: var(--muted); font-size: 16px; }
+  .legal-meta { flex: 0 0 195px; padding-left: 20px; border-left: 1px solid var(--line); }
+  .legal-meta strong, .legal-meta small { display: block; }
+  .legal-meta strong { margin-top: 8px; color: var(--white); font-size: 15px; }
+  .legal-meta small { margin-top: 22px; color: #718198; font-size: 11px; line-height: 1.5; }
+  .legal-layout { display: grid; grid-template-columns: 215px 1fr; gap: 70px; padding-top: 55px; }
+  .legal-sidebar { display: flex; flex-direction: column; align-self: start; gap: 10px; position: sticky; top: 116px; }
+  .legal-sidebar > span { margin-bottom: 9px; }
+  .legal-sidebar a { padding: 8px 0; border-bottom: 1px solid transparent; color: #8e9db2; font-size: 12px; transition: color .2s ease, border-color .2s ease, padding-left .2s var(--ease); }
+  .legal-sidebar a:hover, .legal-sidebar a.is-current { padding-left: 8px; border-color: var(--gold); color: var(--gold-soft); }
+  .legal-content { max-width: 790px; }
+  .legal-notice { display: grid; grid-template-columns: 90px 1fr; gap: 22px; margin-bottom: 42px; padding: 20px; border: 1px solid rgba(226,185,104,.35); background: rgba(226,185,104,.08); }
+  .legal-notice strong { color: var(--gold-soft); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
+  .legal-notice p { margin: 0; color: #cbd4e1; font-size: 12px; line-height: 1.7; }
+  .legal-content h2 { margin: 44px 0 12px; color: var(--white); font-size: 25px; letter-spacing: -.035em; line-height: 1.25; }
+  .legal-content h3 { margin: 28px 0 8px; color: var(--gold-soft); font-size: 16px; }
+  .legal-content p, .legal-content li { color: #aebacd; font-size: 14px; }
+  .legal-content ul, .legal-content ol { padding-left: 22px; }
+  .legal-content li { margin-bottom: 8px; }
+  .legal-content strong { color: var(--white); }
+  .legal-content a { color: var(--gold-soft); text-decoration: none; }
+  .legal-content blockquote { margin: 24px 0; padding: 18px 22px; border-left: 2px solid var(--gold); color: #d8dfeb; background: rgba(255,255,255,.03); }
+  .legal-footer { padding: 40px max(24px, calc((100vw - 1180px) / 2)) 25px; border-top: 1px solid var(--line); background: linear-gradient(150deg, var(--navy-2), var(--navy)); }
+  .footer-brand-row { display: flex; align-items: center; gap: 35px; padding-bottom: 30px; }
+  .footer-brand-row p { margin: 0; color: var(--muted); font-size: 12px; }
+  .social-links { display: flex; gap: 18px; margin-left: auto; color: var(--muted); font-size: 12px; }
+  .footer-legal-row { display: flex; flex-wrap: wrap; gap: 17px; padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: #93a2b6; font-size: 11px; }
+  .footer-bottom { display: flex; justify-content: space-between; gap: 20px; padding-top: 22px; color: #75869d; font-size: 10px; }
+  @media (max-width: 820px) { .legal-header { gap: 17px; } .legal-header nav { display: none; } .header-cta { margin-left: auto; } .legal-hero { display: block; } .legal-meta { margin-top: 30px; } .legal-layout { grid-template-columns: 1fr; gap: 35px; } .legal-sidebar { position: static; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 15px; } .legal-sidebar > span { grid-column: 1 / -1; } .legal-sidebar a { border-bottom-color: var(--line); } .footer-brand-row { display: block; } .footer-brand-row p { margin: 22px 0; } .social-links { margin-left: 0; } }
+  @media (max-width: 520px) { .legal-header { min-height: 72px; padding: 0 20px; } .header-cta { padding: 9px 10px; font-size: 9px; } .legal-main { padding: 58px 20px 80px; } .legal-hero h1 { font-size: 47px; } .legal-hero p { font-size: 14px; } .legal-notice { display: block; } .legal-notice p { margin-top: 9px; } .footer-legal-row { display: grid; grid-template-columns: 1fr 1fr; } .footer-bottom { display: block; } .footer-bottom a { display: inline-block; margin-top: 10px; } }
+</style>
+<script is:inline data-astro-rerun>
+  // @ts-nocheck
+  (() => {
+    window.__crestLegalLayoutCleanup?.();
+    const controller = new AbortController();
+    const nav = document.querySelector('.legal-header');
+    const syncHeader = () => nav?.classList.toggle('is-scrolled', window.scrollY > 10);
+    syncHeader();
+    window.addEventListener('scroll', syncHeader, { passive: true, signal: controller.signal });
+    window.__crestLegalLayoutCleanup = () => controller.abort();
+  })();
+</script>
+
+<style is:global>
+  .legal-content a { color: var(--gold-soft); text-decoration: none; }
+  .legal-content a:hover { color: var(--white); text-decoration: none; }
+  .legal-content h2 { font-size: clamp(24px, 3vw, 38px); }
+  .legal-content p, .legal-content li { color: var(--white); font-size: clamp(14px, 1vw, 16px); }
+  .legal-content strong { color: var(--white); }
+  .legal-header nav a, .legal-sidebar a, .footer-legal-row a, .social-links a, .footer-bottom a { color: var(--gold-soft); text-decoration: none; }
+  .legal-header nav a:hover, .legal-sidebar a:hover, .footer-legal-row a:hover, .social-links a:hover, .footer-bottom a:hover { color: var(--white); }
+  .legal-meta small, .legal-notice p, .legal-content blockquote, .legal-footer, .legal-footer p, .legal-footer span { color: var(--white) !important; }
+  .legal-footer a { color: var(--gold-soft); }
+  .legal-footer a:hover { color: var(--white); }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+</style>
+

@@ -1,0 +1,30 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  accent?: string;
+  copy?: string;
+  actionHref?: string;
+  actionLabel?: string;
+}
+const { eyebrow, title, accent = '', copy = '', actionHref = '', actionLabel = '' } = Astro.props;
+---
+<div class="section-heading">
+  <div>
+    <span class="eyebrow"><i></i>{eyebrow}</span>
+    <h2>{title}{accent && <><br /><em>{accent}</em></>}</h2>
+  </div>
+  {copy && <div class="section-heading-side"><p>{copy}</p>{actionHref && actionLabel && <a class="section-heading-link" href={actionHref}>{actionLabel}<span>→</span></a>}</div>}
+</div>
+<style>
+  .section-heading { display:flex; align-items:end; justify-content:space-between; gap:64px; margin-bottom:44px; }
+  .eyebrow { display:flex; align-items:center; gap:10px; color:var(--gold); font-size:10px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; }
+  .eyebrow i { display:inline-block; width:32px; height:1px; background:var(--gold); }
+  h2 { margin:14px 0 0; color:var(--white); font-size:clamp(32px,4vw,52px); line-height:1.06; letter-spacing:-.055em; }
+  em { color:var(--gold-soft); font-style:normal; }
+  .section-heading-side { max-width:390px; }
+  p { margin:0; color:var(--white); font-size:14px; line-height:1.65; }
+  .section-heading-link { display:inline-flex; gap:10px; align-items:center; margin-top:18px; color:var(--gold-soft); font-size:10px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+  .section-heading-link:hover { color:var(--white); }
+  @media (max-width:700px) { .section-heading { display:block; margin-bottom:32px; } .section-heading-side { margin-top:18px; } }
+</style>
