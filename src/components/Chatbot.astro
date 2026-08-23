@@ -2,7 +2,8 @@
   <button class="chatbot-launcher" type="button" aria-expanded="false" aria-controls="crest-chat-panel"><span class="chatbot-spark">✦</span><span class="chatbot-launcher-copy"><strong>Crest AI</strong><small>Ask about your car</small></span><span class="chatbot-ping"></span></button>
   <section class="chat-panel" id="crest-chat-panel" aria-label="Crest Automotive AI concierge" aria-hidden="true" inert>
     <header class="chat-header"><div><span class="eyebrow">Crest concierge</span><strong>How can we help?</strong></div><button type="button" class="chat-close" aria-label="Close Crest AI">×</button></header>
-    <div class="chat-messages" aria-live="polite"><div class="chat-message assistant">Hi — I’m Crest AI. Ask me about services, packages, PPF, coatings, pricing categories, locations or booking an estimate.</div></div>
+    <div class="chat-messages" aria-live="polite"><div class="chat-message assistant">Hi — I’m Crest AI. Ask me about services, packages, Rodim PPF, coatings, pricing categories, locations or booking an estimate.</div></div>
+    <div class="chat-suggestions" data-chat-suggestions aria-label="Suggested follow-up questions"></div>
     <form class="chat-form"><label class="sr-only" for="chat-input">Message Crest AI</label><textarea id="chat-input" rows="2" maxlength="1200" placeholder="Ask about your car…" required></textarea><button class="button button-gold" type="submit"><span>Send</span><span>↗</span></button></form>
     <small class="chat-footnote">AI answers are informational. Crest confirms final scope, availability and pricing.</small>
   </section>
@@ -25,9 +26,13 @@
   .chat-close { width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 50%; color: var(--gold-soft); background: transparent; font-size: 20px; line-height: 1; transition: background .2s ease, transform .2s ease; }
   .chat-close:hover { background: rgba(59,130,246,.12); transform: rotate(90deg); }
   .chat-messages { display: flex; min-height: 175px; max-height: 355px; flex-direction: column; gap: 10px; overflow: auto; padding: 17px; }
-  .chat-message { max-width: 86%; padding: 11px 13px; border: 1px solid var(--line); border-radius: 14px 14px 14px 4px; color: #d8e0eb; background: rgba(255,255,255,.045); font-size: 12px; line-height: 1.55; }
+  .chat-message { max-width: 86%; padding: 11px 13px; border: 1px solid var(--line); border-radius: 14px 14px 14px 4px; color: #d8e0eb; background: rgba(255,255,255,.045); font-size: 12px; line-height: 1.55; white-space: pre-line; }
   .chat-message.user { align-self: end; border-color: rgba(59,130,246,.35); border-radius: 14px 14px 4px 14px; color: var(--ink); background: var(--gold-soft); }
   .chat-message.loading { color: #aab8ca; font-style: italic; }
+  .chat-suggestions { display: flex; flex-wrap: wrap; gap: 7px; padding: 0 17px 12px; }
+  .chat-suggestions:empty { display: none; }
+  .chat-suggestion { padding: 7px 9px; border: 1px solid rgba(59,130,246,.35); border-radius: 999px; color: var(--gold-soft); background: rgba(59,130,246,.08); font-size: 10px; line-height: 1.25; text-align: left; cursor: pointer; transition: border-color .2s ease, background .2s ease, color .2s ease, transform .2s ease; }
+  .chat-suggestion:hover { border-color: var(--gold-soft); color: var(--white); background: rgba(59,130,246,.18); transform: translateY(-1px); }
   .chat-form { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 9px; padding: 14px 17px 8px; border-top: 1px solid var(--line); }
   .chat-form textarea { min-height: 50px; margin: 0; padding: 10px; resize: none; border: 1px solid rgba(222,181,92,.28); border-radius: 12px; color: var(--white); background: rgba(0,0,0,.14); font-size: 12px; }
   .chat-form textarea:focus { border-color: var(--gold); outline: none; }
@@ -35,16 +40,44 @@
   .chat-footnote { padding: 0 17px 15px; color: #8191a6; font-size: 9px; line-height: 1.45; }
   .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
   @media (max-width: 620px) { .chatbot { right: 14px; bottom: 14px; } .chatbot-launcher-copy small { display: none; } .chatbot-launcher { padding-right: 10px; } }
-  @media (prefers-reduced-motion: reduce) { .chat-panel, .chatbot-launcher, .chat-close { transition-duration: .01ms; } }
+  @media (prefers-reduced-motion: reduce) { .chat-panel, .chatbot-launcher, .chat-close, .chat-suggestion { transition-duration: .01ms; } }
 </style>
 <script is:inline data-astro-rerun>
   // @ts-nocheck
-  if (!window.__crestChatbotBound) {
-    window.__crestChatbotBound = true;
-    const messageState = new WeakMap();
-    const addMessage = (chatbot, role, content, extra = '') => { const node = document.createElement('div'); node.className = `chat-message ${role} ${extra}`.trim(); node.textContent = content; chatbot?.querySelector('.chat-messages')?.appendChild(node); chatbot?.querySelector('.chat-messages')?.scrollTo({ top: chatbot.querySelector('.chat-messages').scrollHeight, behavior: 'smooth' }); return node; };
-    const setOpen = (chatbot, open) => { const launcher = chatbot?.querySelector('.chatbot-launcher'); const panel = chatbot?.querySelector('.chat-panel'); chatbot?.classList.toggle('is-open', open); launcher?.setAttribute('aria-expanded', String(open)); panel?.setAttribute('aria-hidden', String(!open)); panel?.toggleAttribute('inert', !open); if (open) window.setTimeout(() => chatbot?.querySelector('#chat-input')?.focus(), 120); };
-    document.addEventListener('click', (event) => { const target = event.target; const launcher = target?.closest?.('.chatbot-launcher'); const closeButton = target?.closest?.('.chat-close'); if (launcher) { const chatbot = launcher.closest('[data-chatbot]'); setOpen(chatbot, !chatbot?.classList.contains('is-open')); } else if (closeButton) { setOpen(closeButton.closest('[data-chatbot]'), false); } });
-    document.addEventListener('submit', async (event) => { const form = event.target?.closest?.('.chat-form'); if (!form) return; event.preventDefault(); const chatbot = form.closest('[data-chatbot]'); const input = form.querySelector('#chat-input'); const content = input?.value.trim(); if (!content || !chatbot) return; input.value = ''; const messages = messageState.get(chatbot) || []; addMessage(chatbot, 'user', content); messages.push({ role: 'user', content }); const loading = addMessage(chatbot, 'assistant', 'Thinking…', 'loading'); const submit = form.querySelector('button[type="submit"]'); submit.disabled = true; try { const response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages }) }); const data = await response.json().catch(() => ({})); loading.remove(); if (!response.ok) throw new Error(data.error || 'The chat service is temporarily unavailable.'); addMessage(chatbot, 'assistant', data.reply || 'Please call the Crest team for help.'); messages.push({ role: 'assistant', content: data.reply || '' }); } catch (error) { loading.remove(); addMessage(chatbot, 'assistant', error.message || 'Please call +91 98716 10952 and the Crest team will help.'); } finally { messageState.set(chatbot, messages.slice(-12)); submit.disabled = false; input.focus(); } });
-  }
+  (() => {
+    const STORAGE_KEY = 'crestChatHistory';
+    const MAX_HISTORY = 12;
+    const state = window.__crestChatbotState || (window.__crestChatbotState = { messageState: new WeakMap(), bound: false });
+    const cleanChatText = (value) => String(value || '')
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<\/(p|div|li|h[1-6]|tr|table|blockquote)>/gi, '\n')
+      .replace(/<[^>]*>/g, '')
+      .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+      .replace(/^\s{0,3}#{1,6}\s*/gm, '')
+      .replace(/^\s*[-*+]\s+/gm, '• ')
+      .replace(/^\s*>\s?/gm, '')
+      .replace(/```[a-zA-Z0-9_-]*\n?/g, '')
+      .replace(/```/g, '')
+      .replace(/\*\*([^*]+)\*\*/g, '$1')
+      .replace(/__([^_]+)__/g, '$1')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/[ \t]+\n/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .trim();
+    const readHistory = () => { try { const parsed = JSON.parse(sessionStorage.getItem(STORAGE_KEY) || '[]'); return Array.isArray(parsed) ? parsed.filter((item) => ['user', 'assistant'].includes(item?.role) && item?.content).slice(-MAX_HISTORY) : []; } catch { return []; } };
+    const writeHistory = (messages) => { try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages.slice(-MAX_HISTORY))); } catch {} };
+    const getHistory = (chatbot) => { let messages = state.messageState.get(chatbot); if (!messages) { messages = readHistory(); state.messageState.set(chatbot, messages); } return messages; };
+    const addMessage = (chatbot, role, content, extra = '') => { const node = document.createElement('div'); node.className = `chat-message ${role} ${extra}`.trim(); node.textContent = cleanChatText(content); chatbot?.querySelector('.chat-messages')?.appendChild(node); const stream = chatbot?.querySelector('.chat-messages'); stream?.scrollTo({ top: stream.scrollHeight, behavior: 'smooth' }); return node; };
+    const getSuggestions = (messages) => { const context = messages.map((item) => item.content).join(' ').toLowerCase(); if (!context) return ['What service suits my car?', 'How much does Rodim PPF cost?', 'Where do you provide service?']; if (/rodim|ppf|paint protection|film/.test(context)) return ['Which Rodim film suits my car?', 'What PPF coverage size do I need?', 'Can PPF be combined with ceramic?']; if (/monthly|package|visits|recurring/.test(context)) return ['Which package fits a premium sedan?', 'What does the monthly plan include?', 'How is GST calculated?']; if (/ceramic|graphene|coating/.test(context)) return ['What is the difference between ceramic and graphene?', 'How long does the coating process take?', 'Which coating suits a daily driver?']; if (/interior|leather|cabin/.test(context)) return ['What does interior enrichment include?', 'Can I add leather conditioning?', 'How long does interior care take?']; if (/price|cost|estimate|gst|₹/.test(context)) return ['Can you calculate an indicative estimate?', 'Which vehicle category should I use?', 'What add-ons are available?']; if (/location|community|camellias|crest|magnolias|gurugram/.test(context)) return ['What are the service hours?', 'How do I contact the team?', 'Can I book from my community?']; return ['What is the best service for my car?', 'Can you help me choose a vehicle category?', 'How do I send an enquiry?']; };
+    const renderSuggestions = (chatbot, messages = getHistory(chatbot), visible = true) => { const container = chatbot?.querySelector('[data-chat-suggestions]'); if (!container) return; container.replaceChildren(); if (!visible) return; getSuggestions(messages).forEach((suggestion) => { const button = document.createElement('button'); button.type = 'button'; button.className = 'chat-suggestion'; button.textContent = suggestion; button.addEventListener('click', () => { const input = chatbot.querySelector('#chat-input'); if (!input) return; input.value = suggestion; chatbot.querySelector('.chat-form')?.requestSubmit(); }); container.appendChild(button); }); };
+    const hydrate = (chatbot) => { const messages = getHistory(chatbot); const stream = chatbot?.querySelector('.chat-messages'); if (messages.length && stream) { stream.replaceChildren(); messages.forEach((message) => addMessage(chatbot, message.role, message.content)); } renderSuggestions(chatbot, messages); };
+    const setOpen = (chatbot, open) => { const launcher = chatbot?.querySelector('.chatbot-launcher'); const panel = chatbot?.querySelector('.chat-panel'); chatbot?.classList.toggle('is-open', open); launcher?.setAttribute('aria-expanded', String(open)); panel?.setAttribute('aria-hidden', String(!open)); panel?.toggleAttribute('inert', !open); if (open) { hydrate(chatbot); window.setTimeout(() => chatbot?.querySelector('#chat-input')?.focus(), 120); } };
+    if (!state.bound) {
+      state.bound = true;
+      document.addEventListener('click', (event) => { const target = event.target; const launcher = target?.closest?.('.chatbot-launcher'); const closeButton = target?.closest?.('.chat-close'); if (launcher) { const chatbot = launcher.closest('[data-chatbot]'); setOpen(chatbot, !chatbot?.classList.contains('is-open')); } else if (closeButton) { setOpen(closeButton.closest('[data-chatbot]'), false); } });
+      document.addEventListener('submit', async (event) => { const form = event.target?.closest?.('.chat-form'); if (!form) return; event.preventDefault(); const chatbot = form.closest('[data-chatbot]'); const input = form.querySelector('#chat-input'); const content = input?.value.trim(); if (!content || !chatbot) return; input.value = ''; const messages = getHistory(chatbot); addMessage(chatbot, 'user', content); messages.push({ role: 'user', content }); writeHistory(messages); renderSuggestions(chatbot, messages, false); const loading = addMessage(chatbot, 'assistant', 'Thinking…', 'loading'); const submit = form.querySelector('button[type="submit"]'); submit.disabled = true; try { const response = await fetch('/api/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ messages: messages.slice(-MAX_HISTORY) }) }); const data = await response.json().catch(() => ({})); loading.remove(); if (!response.ok) throw new Error(data.error || 'The chat service is temporarily unavailable.'); const reply = cleanChatText(data.reply || 'Please call the Crest team for help.'); addMessage(chatbot, 'assistant', reply); messages.push({ role: 'assistant', content: reply }); state.messageState.set(chatbot, messages.slice(-MAX_HISTORY)); writeHistory(messages); renderSuggestions(chatbot, messages); } catch (error) { loading.remove(); const fallback = error.message || 'Please call +91 98716 10952 and the Crest team will help.'; addMessage(chatbot, 'assistant', fallback); messages.push({ role: 'assistant', content: fallback }); state.messageState.set(chatbot, messages.slice(-MAX_HISTORY)); writeHistory(messages); renderSuggestions(chatbot, messages); } finally { submit.disabled = false; input.focus(); } });
+    }
+    document.querySelectorAll('[data-chatbot]').forEach(hydrate);
+  })();
 </script>

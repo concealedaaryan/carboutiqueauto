@@ -1,0 +1,105 @@
+
+<style is:global>
+  /* Editorial experience pass: move the site away from list-like rows without changing data or routes. */
+  main .service-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  main .service-row {
+    display: flex;
+    min-height: 360px;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    gap: 0;
+    padding: 30px;
+  }
+  main .service-row .service-number {
+    position: absolute;
+    top: 27px;
+    left: 30px;
+  }
+  main .service-row .service-copy { max-width: 100%; }
+  main .service-row .service-copy h3 { max-width: 430px; margin-top: 12px; font-size: clamp(22px, 2.1vw, 31px); }
+  main .service-row .service-copy p { max-width: 510px; font-size: 14px; }
+  main .service-row .service-price {
+    position: absolute;
+    top: 27px;
+    right: 30px;
+    align-items: flex-end;
+  }
+  main .service-row .service-price strong { font-size: 18px; }
+  main .package-grid-section { padding-top: 130px; padding-bottom: 135px; }
+  main .package-grid { gap: 16px; }
+  main .package-card { min-height: 380px; padding: 28px; }
+  main .package-card h3 { max-width: 240px; margin-top: auto; font-size: clamp(23px, 2vw, 30px); }
+  main .package-card p { max-width: 250px; font-size: 14px; }
+  main .package-card .from-price { font-size: 28px; }
+  main .package-card > a { font-size: 11px; }
+  main .popular-card,
+  main .coating-card,
+  main .addon-card,
+  main .location-grid article {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+  }
+  main .popular-card::before,
+  main .coating-card::before,
+  main .addon-card::before,
+  main .location-grid article::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(14,14,16,.38), rgba(14,14,16,.94) 82%);
+  }
+  main .popular-card > *,
+  main .coating-card > *,
+  main .addon-card > *,
+  main .location-grid article > * { position: relative; z-index: 1; }
+  main .popular-card:nth-child(1), main .coating-card:nth-child(1), main .location-grid article:nth-child(1) { background-image: url('/images/generated/crest-detailing-process.jpg'); }
+  main .popular-card:nth-child(2), main .coating-card:nth-child(2), main .location-grid article:nth-child(2) { background-image: url('/images/generated/crest-hero-studio.jpg'); }
+  main .popular-card:nth-child(3), main .coating-card:nth-child(3), main .location-grid article:nth-child(3) { background-image: url('/images/generated/crest-ceramic-beading.jpg'); }
+  main .coating-card:nth-child(4), main .location-grid article:nth-child(4) { background-image: url('/images/generated/crest-ppf-precision.jpg'); }
+  main .addon-card:nth-child(1) { background-image: url('/images/generated/crest-ppf-precision.jpg'); }
+  main .addon-card:nth-child(2) { background-image: url('/images/generated/crest-ceramic-beading.jpg'); }
+  main .popular-card:hover::before,
+  main .coating-card:hover::before,
+  main .addon-card:hover::before,
+  main .location-grid article:hover::before { background: linear-gradient(180deg, rgba(14,14,16,.24), rgba(14,14,16,.92) 80%), linear-gradient(90deg, rgba(59,130,246,.12), transparent); }
+  main .faq-section { display: grid; grid-template-columns: minmax(220px, .55fr) minmax(0, 1.45fr); gap: 72px; align-items: start; }
+  main .faq-intro { position: sticky; top: 112px; margin: 0; }
+  main .faq-list { width: 100%; }
+  main .faq-item { padding: 0 24px; border: 1px solid rgba(198,198,205,.14); border-bottom: 0; background: rgba(255,255,255,.045); }
+  main .faq-item:first-child { border-radius: .5rem .5rem 0 0; }
+  main .faq-item:last-child { border-bottom: 1px solid rgba(198,198,205,.14); border-radius: 0 0 .5rem .5rem; }
+  main .reason-grid { align-items: stretch; }
+  main .reason-grid article { min-height: 280px; display: flex; flex-direction: column; justify-content: flex-end; }
+  main .stats-section { border-top: 1px solid rgba(198,198,205,.14); border-bottom: 1px solid rgba(198,198,205,.14); }
+  main .stats-section div { min-height: 126px; justify-content: center; }
+  main .locations-section .location-grid { gap: 16px; }
+  main .location-grid article { min-height: 290px; display: flex; flex-direction: column; justify-content: flex-end; }
+  main .estimate-step { background: rgba(255,255,255,.035); }
+  main .estimate-step:first-child { background: linear-gradient(135deg, rgba(59,130,246,.16), rgba(255,255,255,.035)); }
+  main .contact-card { box-shadow: 0 20px 80px rgba(0,0,0,.24); }
+  @media (max-width: 900px) {
+    main .service-list { grid-template-columns: 1fr; }
+    main .service-row { min-height: 330px; }
+    main .faq-section { grid-template-columns: 1fr; gap: 35px; }
+    main .faq-intro { position: static; }
+  }
+  @media (max-width: 620px) {
+    main .service-row { min-height: 310px; padding: 24px; }
+    main .service-row .service-number { top: 22px; left: 24px; }
+    main .service-row .service-price { top: 22px; right: 24px; }
+    main .service-row .service-copy h3 { font-size: 24px; }
+    main .service-row .service-copy p { font-size: 13px; }
+    main .package-card { min-height: 330px; padding: 24px; }
+    main .faq-item { padding: 0 15px; }
+  }
+</style>

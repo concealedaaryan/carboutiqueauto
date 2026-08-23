@@ -21,6 +21,27 @@ function cleanMessages(input) {
   })).filter((message) => message.content);
 }
 
+function cleanReply(input) {
+  return String(input || '')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div|li|h[1-6]|tr|table|blockquote)>/gi, '\n')
+    .replace(/<[^>]*>/g, '')
+    .replace(/!\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    .replace(/^\s{0,3}#{1,6}\s*/gm, '')
+    .replace(/^\s*[-*+]\s+/gm, '• ')
+    .replace(/^\s*>\s?/gm, '')
+    .replace(/```[a-zA-Z0-9_-]*\n?/g, '')
+    .replace(/```/g, '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/__([^_]+)__/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+    .slice(0, 4000);
+}
+
 export default async function handler(req, res) {
   if (req.method === 'OPTIONS') {
     res.statusCode = 204;
@@ -45,7 +66,7 @@ export default async function handler(req, res) {
     });
     const data = await upstream.json().catch(() => ({}));
     if (!upstream.ok) return json(res, upstream.status >= 500 ? 502 : upstream.status, { error: data?.error?.message || 'The AI service could not answer right now.' });
-    const reply = data?.choices?.[0]?.message?.content?.trim();
+    const reply = cleanReply(data?.choices?.[0]?.message?.content);
     if (!reply) return json(res, 502, { error: 'The AI service returned an empty response.' });
     return json(res, 200, { reply, model: MODEL });
   } catch (error) {

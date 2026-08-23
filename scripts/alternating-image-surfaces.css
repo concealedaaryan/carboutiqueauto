@@ -1,0 +1,73 @@
+
+<style is="global">
+  /* Alternating image surfaces: every major route section keeps depth without sacrificing readable text. */
+  main .home-paths,
+  main .image-proof-band,
+  main .catalogue-section,
+  main .matrix-section,
+  main .package-grid-section,
+  main .coating-section,
+  main .ppf-section,
+  main .addons-section,
+  main .reason-section,
+  main .stats-section,
+  main .locations-section,
+  main .location-studio,
+  main .faq-section,
+  main .faq-cta,
+  main .calculator-section,
+  main .estimate-disclaimer,
+  main .contact-bottom,
+  main .why-cta,
+  main .location-cta {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  main .home-paths {
+    background-image: linear-gradient(90deg, rgba(14,14,16,.96), rgba(14,14,16,.76)), url('/images/generated/crest-studio-wide.jpg') !important;
+  }
+  main .image-proof-band {
+    background-image: linear-gradient(90deg, rgba(14,14,16,.90), rgba(14,14,16,.72)), url('/images/generated/crest-ceramic-beading.jpg') !important;
+  }
+  main .catalogue-section,
+  main .reason-section,
+  main .faq-section {
+    background-image: linear-gradient(90deg, rgba(14,14,16,.96), rgba(27,27,29,.80)), url('/images/generated/crest-detailing-process.jpg') !important;
+  }
+  main .matrix-section,
+  main .stats-section,
+  main .contact-bottom,
+  main .location-studio,
+  main .why-cta {
+    background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.78)), url('/images/generated/crest-studio-wide.jpg') !important;
+  }
+  main .package-grid-section,
+  main .locations-section {
+    background-image: linear-gradient(90deg, rgba(14,14,16,.95), rgba(27,27,29,.80)), url('/images/generated/crest-studio-wide.jpg') !important;
+  }
+  main .coating-section,
+  main .estimate-disclaimer,
+  main .location-cta {
+    background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.78)), url('/images/generated/crest-ceramic-beading.jpg') !important;
+  }
+  main .ppf-section,
+  main .calculator-section {
+    background-image: linear-gradient(90deg, rgba(14,14,16,.95), rgba(27,27,29,.76)), url('/images/generated/crest-ppf-precision.jpg') !important;
+  }
+  main .addons-section,
+  main .faq-cta {
+    background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.80)), url('/images/generated/crest-ceramic-beading.jpg') !important;
+  }
+  main .home-paths .choice-card,
+  main .coating-card,
+  main .addon-card,
+  main .faq-item,
+  main .service-row,
+  main .location-grid article,
+  main .package-card,
+  main .calculator-shell,
+  main .contact-card {
+    background-color: rgba(14,14,16,.52);
+  }
+</style>

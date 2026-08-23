@@ -1,0 +1,53 @@
+
+<style is="global">
+  /* Every catalogue card receives a photographic surface plus a text-safe dark gradient. */
+  main .service-row,
+  main .package-card {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-color: rgba(190,198,224,.28);
+  }
+  main .service-row::before,
+  main .package-card::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(90deg, rgba(14,14,16,.96) 0%, rgba(14,14,16,.82) 54%, rgba(14,14,16,.58) 100%), linear-gradient(180deg, rgba(14,14,16,.12), rgba(14,14,16,.82));
+  }
+  main .service-row > *,
+  main .package-card > * { position: relative; z-index: 1; }
+  main .service-row:nth-child(5n + 1),
+  main .package-card:nth-child(5n + 1) { background-image: url('/images/generated/crest-detailing-process.jpg'); }
+  main .service-row:nth-child(5n + 2),
+  main .package-card:nth-child(5n + 2) { background-image: url('/images/generated/crest-hero-studio.jpg'); }
+  main .service-row:nth-child(5n + 3),
+  main .package-card:nth-child(5n + 3) { background-image: url('/images/generated/crest-ppf-precision.jpg'); }
+  main .service-row:nth-child(5n + 4),
+  main .package-card:nth-child(5n + 4) { background-image: url('/images/generated/crest-ceramic-beading.jpg'); }
+  main .service-row:nth-child(5n),
+  main .package-card:nth-child(5n) { background-image: url('/images/generated/crest-studio-wide.jpg'); }
+  main .service-row:hover,
+  main .package-card:hover,
+  main .package-card.featured {
+    border-color: rgba(96,165,250,.82);
+    box-shadow: 0 18px 45px rgba(0,0,0,.28);
+  }
+  main .service-row:hover::before,
+  main .package-card:hover::before,
+  main .package-card.featured::before {
+    background: linear-gradient(90deg, rgba(14,14,16,.93) 0%, rgba(14,14,16,.72) 54%, rgba(27,63,105,.60) 100%), linear-gradient(180deg, rgba(14,14,16,.08), rgba(14,14,16,.78));
+  }
+  main .service-row .service-copy p,
+  main .package-card p,
+  main .package-card .from-price small { color: #d8dfeb; }
+  @media (max-width: 620px) {
+    main .service-row::before,
+    main .package-card::before { background: linear-gradient(180deg, rgba(14,14,16,.82), rgba(14,14,16,.96)); }
+  }
+</style>

@@ -45,7 +45,7 @@ const legalLinks = [
       <nav aria-label="Legal navigation"><a href="/">Home</a><a href="/#services">Services</a><a href="/#contact">Contact</a></nav>
       <a class="header-cta" href="/#contact">Book a treatment <span>↗</span></a>
     </header>
-    <main class="legal-main" transition:animate="none">
+    <main class="legal-main">
       <div class="legal-hero"><div><span class="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{intro}</p></div><div class="legal-meta"><span>Effective / reviewed</span><strong>{updated}</strong><small>Working draft — review with qualified counsel before publishing.</small></div></div>
       <div class="legal-layout">
         <aside class="legal-sidebar" aria-label="Legal pages"><span>On this site</span>{legalLinks.map(([href, label]) => <a class={currentPage === href ? 'is-current' : ''} href={href}>{label}</a>)}</aside>
@@ -93,7 +93,7 @@ const legalLinks = [
   .legal-notice strong { color: var(--gold-soft); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; }
   .legal-notice p { margin: 0; color: #cbd4e1; font-size: 12px; line-height: 1.7; }
   .legal-content h2 { margin: 44px 0 12px; color: var(--white); font-size: 25px; letter-spacing: -.035em; line-height: 1.25; }
-  .legal-content h3 { margin: 28px 0 8px; color: var(--gold-soft); font-size: 16px; }
+  .legal-content h3 { margin: 28px 0 8px; color: var(--white); font-size: 16px; }
   .legal-content p, .legal-content li { color: #aebacd; font-size: 14px; }
   .legal-content ul, .legal-content ol { padding-left: 22px; }
   .legal-content li { margin-bottom: 8px; }

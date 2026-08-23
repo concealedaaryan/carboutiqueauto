@@ -26,7 +26,7 @@ If the local environment blocks package-manager lifecycle scripts, run `./node_m
 
 ## Site architecture
 
-The homepage is intentionally concise. It includes the brand introduction, proof metrics, three popular-service highlights, a brief Crest-difference section, exploration cards, and a contact CTA. Detailed content now lives on dedicated routes: `/services` contains all 16 treatments and the full treatment matrix; `/packages` contains all monthly plans and their vehicle-category prices; `/protection` contains ceramic, graphene, PPF, warranties, coverage and add-ons; `/estimate` contains the live calculator; `/why-crest` contains the full reasons-to-choose-us content; `/locations` contains the three DLF communities and Google Maps; `/faq` contains the complete FAQ; and `/contact` contains the enquiry form and contact details.
+The homepage is intentionally concise. It includes the brand introduction, proof metrics, three popular-service highlights, a brief Crest-difference section, exploration cards, and a contact CTA. Detailed content now lives on dedicated routes: `/services` contains all 16 treatments and the full treatment matrix; `/packages` contains all monthly plans and their vehicle-category prices; `/protection` contains ceramic, graphene, Rodim PPF, warranties, coverage and add-ons; `/estimate` contains the live calculator; `/why-crest` contains the full reasons-to-choose-us content; `/locations` contains the three DLF communities and Google Maps; `/faq` contains the complete FAQ; and `/contact` contains the enquiry form and contact details.
 
 ## Images and shared layouts
 
@@ -38,10 +38,10 @@ The contact form is intentionally client-side only. It validates required fields
 
 ## Content notes
 
-The page uses the services, add-ons, monthly packages, PPF catalogue and prices supplied in the PDF. GST at 18% is called out as extra. The Premium-tier sun-film price is reproduced exactly as it appears in the PDF (₹1,500) and is flagged in the UI for confirmation before booking.
+The page uses the services, add-ons, monthly packages, Rodim PPF catalogue and prices supplied in the PDF. GST at 18% is called out as extra. The Premium-tier sun-film price is reproduced exactly as it appears in the PDF (₹1,500) and is flagged in the UI for confirmation before booking.
 ## Booking calculator
 
-The calculator is fully client-side and lives on the dedicated `/estimate` route. It uses the shared PDF-backed data module at `src/data/catalog.ts`. It supports all 16 treatments, five vehicle categories, leather conditioning, PPF film and size selection, both ceramic add-ons, 18% GST, live subtotal and total updates, source-note handling for the PDF's Premium sun-film price, and a CTA that transfers the estimate into the contact form.
+The calculator is fully client-side and lives on the dedicated `/estimate` route. It uses the shared PDF-backed data module at `src/data/catalog.ts`. It supports all 16 treatments, five vehicle categories, leather conditioning, Rodim PPF film and size selection, both ceramic add-ons, 18% GST, live subtotal and total updates, source-note handling for the PDF's Premium sun-film price, and a CTA that transfers the estimate into the contact form.
 
 ## Visual system and assets
 
@@ -57,7 +57,7 @@ The privacy and accessibility drafts were informed by the official [Digital Pers
 
 The public layouts mount `src/components/Chatbot.astro`, which calls the server-side `api/chat.js` Vercel function. The function calls Groq’s `openai/gpt-oss-20b` model and keeps the API key out of browser code. In Vercel project settings, add `GROQ_API_KEY` as an environment variable for Preview and Production. The chatbot gracefully explains that it is unavailable until the key is configured. Do not commit the key or place it in a `PUBLIC_` environment variable.
 
-The Groq model and API notes are recorded in `groq-integration-notes.md`. The full custom system prompt is maintained in `groq-system-prompt.md` and mirrored into `api/crest-system-prompt.js`, which is imported by `api/chat.js`. The prompt covers the booking workflow, all vehicle-category treatment prices, monthly packages, PPF options, protection add-ons, GST rules, calculation examples, lead handoff, and safety boundaries. The endpoint intentionally constrains message length/history and tells the assistant not to invent final pricing, availability, guarantees, legal conclusions or sensitive-data requests.
+The Groq model and API notes are recorded in `groq-integration-notes.md`. The full custom system prompt is maintained in `groq-system-prompt.md` and mirrored into `api/crest-system-prompt.js`, which is imported by `api/chat.js`. The prompt covers the booking workflow, all vehicle-category treatment prices, monthly packages, Rodim PPF options, protection add-ons, GST rules, calculation examples, lead handoff, and safety boundaries. The endpoint intentionally constrains message length/history and tells the assistant not to invent final pricing, availability, guarantees, legal conclusions or sensitive-data requests.
 
 ## Interaction polish
 
@@ -65,7 +65,7 @@ The shared public and legal layouts include a rounded back-to-top button, rounde
 
 ## End-to-end tests
 
-Playwright tests live in `e2e/site.spec.ts` and are configured by `playwright.config.ts`. They cover the concise homepage, every primary public route, shared navigation, mobile navigation, the 16-treatment Services page, monthly packages, Protection page, calculator preselection, exact GST totals, PPF/leather/ceramic add-ons, estimate-to-contact handoff, FAQ accordion, contact confirmation, and back-to-top behavior.
+Playwright tests live in `e2e/site.spec.ts` and are configured by `playwright.config.ts`. They cover the concise homepage, every primary public route, shared navigation, mobile navigation, the 16-treatment Services page, monthly packages, Protection page, calculator preselection, exact GST totals, Rodim PPF/leather/ceramic add-ons, estimate-to-contact handoff, FAQ accordion, contact confirmation, and back-to-top behavior.
 
 Run them before pushing to Vercel:
 

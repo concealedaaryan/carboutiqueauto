@@ -7,7 +7,10 @@ test.describe('Crest Automotive multi-page navigation', () => {
   test('homepage is concise and links to dedicated detail pages', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveTitle(/Premium Car Detailing in DLF Gurugram \| Crest Automotive/);
-    await expect(page.getByRole('heading', { name: /Choose the right level of care/i })).toBeVisible();
+    await expect(page.getByRole('heading', { name: /Care for the car\s+you already love/i })).toBeVisible();
+    await expect(page.getByText(/Crest Automotive · Rodim PPF/i).first()).toBeVisible();
+    await expect(page.locator('[data-hero-carousel]')).toBeVisible();
+    await expect(page.locator('[data-carousel-slide]')).toHaveCount(3);
     await expect(page.getByRole('link', { name: /See every service/i })).toBeVisible();
     await expect(page.locator('table')).toHaveCount(0);
     for (const label of navLabels) await expect(page.locator('.desktop-nav').getByRole('link', { name: label, exact: true })).toBeVisible();
@@ -71,13 +74,15 @@ test.describe('Crest Automotive booking calculator', () => {
     await expect(page.locator('#calc-breakdown')).toContainText('PPF · large');
   });
 
-  test('transfers the estimate into the contact form', async ({ page }) => {
+  test('transfers the estimate into the Google Form contact handoff', async ({ page }) => {
     await page.goto('/estimate?service=12');
     await page.locator('#calc-category').selectOption({ label: 'Premium (Ioniq)' });
     await page.locator('#calc-cta').click();
     await expect(page).toHaveURL(/\/contact\/?$/);
-    await expect(page.locator('textarea[name="message"]')).toHaveValue(/Premium ceramic coating/);
-    await expect(page.locator('textarea[name="message"]')).toHaveValue(/Premium \(Ioniq\)/);
+    await expect(page.locator('#estimate-context')).toBeVisible();
+    await expect(page.locator('#estimate-context-service')).toContainText('Premium ceramic coating');
+    await expect(page.locator('#estimate-context-category')).toContainText('Premium (Ioniq)');
+    await expect(page.locator('iframe[title="Crest Automotive contact form"]')).toBeVisible();
   });
 });
 
@@ -92,13 +97,10 @@ test.describe('Crest Automotive interactions', () => {
     await expect(item).toHaveAttribute('open', '');
   });
 
-  test('contact form shows frontend confirmation without navigation', async ({ page }) => {
+  test('contact route exposes the Google Form and fallback link', async ({ page }) => {
     await page.goto('/contact');
-    await page.locator('input[name="name"]').fill('Test Visitor');
-    await page.locator('input[name="phone"]').fill('+919999999999');
-    await page.locator('input[name="vehicle"]').fill('Test vehicle');
-    await page.locator('#contact-form button[type="submit"]').click();
-    await expect(page.locator('#form-status')).toContainText('Thanks');
+    await expect(page.locator('iframe[title="Crest Automotive contact form"]')).toHaveAttribute('src', /docs\.google\.com\/forms/);
+    await expect(page.getByRole('link', { name: /Open the form in a new tab/i })).toBeVisible();
     await expect(page).toHaveURL(/\/contact\/?$/);
   });
 

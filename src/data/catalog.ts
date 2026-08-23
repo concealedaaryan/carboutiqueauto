@@ -34,20 +34,12 @@ export const coatingPackages = [
 
 export const ppfOptions = [
   { name: 'BASF Rodim TPU (German) R4 Pro', warranty: '15 years', small: '₹2,90,000', medium: '₹3,15,000', large: '₹3,30,000', coverage: 'Cracking & yellowing' },
-  { name: 'Llumar Valor', warranty: '12 years', small: '₹2,55,000', medium: '₹2,75,000', large: '₹3,00,000', coverage: 'Cracking & yellowing' },
-  { name: 'Llumar Platinum', warranty: '10 years', small: '₹2,15,000', medium: '₹2,30,000', large: '₹2,65,000', coverage: 'Cracking & yellowing' },
   { name: 'BASF Rodim TPU (German) R3 Pro', warranty: '10 years', small: '₹1,60,000', medium: '₹1,80,000', large: '₹2,00,000', coverage: 'Cracking & yellowing' },
-  { name: 'BASF TPU PPF (German) R + Black Shield', warranty: '7 years', small: '₹1,50,000', medium: '₹1,65,000', large: '₹1,85,000', coverage: 'Cracking & yellowing' },
+  { name: 'BASF Rodim TPU PPF (German) R + Black Shield', warranty: '7 years', small: '₹1,50,000', medium: '₹1,65,000', large: '₹1,85,000', coverage: 'Cracking & yellowing' },
   { name: 'BASF Rodim TPU PPF (German) R2 Matt', warranty: '8 years', small: '₹1,45,000', medium: '₹1,60,000', large: '₹1,75,000', coverage: 'Cracking & yellowing' },
   { name: 'BASF Rodim TPU PPF (German) R2', warranty: '8 years', small: '₹1,35,000', medium: '₹1,45,000', large: '₹1,60,000', coverage: 'Cracking & yellowing' },
   { name: 'BASF Rodim TPU PPF (German) R1', warranty: '7 years', small: '₹1,10,000', medium: '₹1,25,000', large: '₹1,30,000', coverage: 'Cracking & yellowing' },
-  { name: 'BASF Rodim TPU PPF (German) R Star', warranty: '5 years', small: '₹85,000', medium: '₹1,00,000', large: '₹1,20,000', coverage: 'Cracking & yellowing' },
-  { name: 'Proteq 3 Series', warranty: '7 years', small: '₹95,000', medium: '₹1,10,000', large: '₹1,20,000', coverage: 'Cracking & yellowing' },
-  { name: 'Garware Plus', warranty: '5 years', small: '₹85,000', medium: '₹1,00,000', large: '₹1,10,000', coverage: 'Cracking & yellowing' },
-  { name: 'Proteq Elite', warranty: '5 years', small: '₹80,000', medium: '₹90,000', large: '₹1,00,000', coverage: 'Only cracking' },
-  { name: 'Garware Protect', warranty: '3 years', small: '₹75,000', medium: '₹90,000', large: '₹1,00,000', coverage: 'Only cracking' },
-  { name: 'Carbins S-Series', warranty: '3 years', small: '₹73,000', medium: '₹83,000', large: '₹93,000', coverage: 'Only cracking' },
-  { name: 'Carbins E-Series', warranty: '2 years', small: '₹55,000', medium: '₹65,000', large: '₹75,000', coverage: 'Only cracking' },
+  { name: 'BASF Rodim TPU (German) R Star', warranty: '5 years', small: '₹85,000', medium: '₹1,00,000', large: '₹1,20,000', coverage: 'Cracking & yellowing' },
 ];
 
 export const protectionAddOns = [
@@ -61,7 +53,7 @@ export const faqs = [
   { question: 'Which car categories do you cover?', answer: 'We work across hatchbacks and small cars, sedans and compact SUVs, premium cars such as the Ioniq, luxury vehicles and super-luxury cars such as the GLE. Share your model in the enquiry form and we will confirm the right tier.' },
   { question: 'Do the prices include GST?', answer: 'The treatment and package prices shown are the special resident prices supplied by Crest Automotive. GST at 18% is extra where applicable; our team will confirm the final amount before booking.' },
   { question: 'Can I book a monthly package?', answer: 'Yes. Monthly plans include up to 30 visits and are built around waterless wash, wax, glass cleaning, tyre polish, interior cleaning and weekly foam-wash combinations. Contact us to choose the best plan for your vehicle.' },
-  { question: 'Do you also offer PPF and insurance assistance?', answer: 'Yes. Crest also supports paint protection film installation, ceramic add-ons for PPF, insurance renewal, pre-owned car sale and purchase assistance, breakdown support and repair tie-ups.' },
+  { question: 'Do you also offer Rodim PPF and insurance assistance?', answer: 'Yes. Crest also supports Rodim paint protection film installation, ceramic add-ons for Rodim PPF, insurance renewal, pre-owned car sale and purchase assistance, breakdown support and repair tie-ups.' },
 ];
 
 export const parsePrice = (value: string) => Number(String(value).replace(/[^0-9]/g, '')) || 0;
