@@ -49,9 +49,9 @@ export const protectionAddOns = [
 
 export const faqs = [
   { question: 'What makes the waterless wash safe for my paint?', answer: 'Our emulsion uses avocado and organo-modified oils to surround dust particles, reduce surface tension and create a microscopic wax layer between dirt and paint. That is designed to lift contamination without the abrasive bucket-water cycle that causes swirls.' },
-  { question: 'Where do you provide the service?', answer: 'Crest Automotive is an in-house, DLF-approved provider serving residents of The Camellias, The Crest and The Magnolias. Your car stays in the community while our trained team takes care of it.' },
+  { question: 'Where do you provide the service?', answer: 'Crest Automotive Care has a studio located within DLF The Camellias and directly serves residents of DLF The Camellias, DLF Crest and DLF The Magnolias. Your car stays in the community while our trained team takes care of it. Crest is not an official DLF partner, service or endorsement.' },
   { question: 'Which car categories do you cover?', answer: 'We work across hatchbacks and small cars, sedans and compact SUVs, premium cars such as the Ioniq, luxury vehicles and super-luxury cars such as the GLE. Share your model in the enquiry form and we will confirm the right tier.' },
-  { question: 'Do the prices include GST?', answer: 'The treatment and package prices shown are the special resident prices supplied by Crest Automotive. GST at 18% is extra where applicable; our team will confirm the final amount before booking.' },
+  { question: 'Do the prices include GST?', answer: 'The treatment and package prices shown are the special resident prices supplied by Crest Automotive Care. GST at 18% is extra where applicable; our team will confirm the final amount before booking.' },
   { question: 'Can I book a monthly package?', answer: 'Yes. Monthly plans include up to 30 visits and are built around waterless wash, wax, glass cleaning, tyre polish, interior cleaning and weekly foam-wash combinations. Contact us to choose the best plan for your vehicle.' },
   { question: 'Do you also offer Rodim PPF and insurance assistance?', answer: 'Yes. Crest also supports Rodim paint protection film installation, ceramic add-ons for Rodim PPF, insurance renewal, pre-owned car sale and purchase assistance, breakdown support and repair tie-ups.' },
 ];

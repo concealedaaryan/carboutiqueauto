@@ -3,10 +3,14 @@ import Chatbot from '../components/Chatbot.astro';
 import BackToTop from '../components/BackToTop.astro';
 import PageTransition from '../components/PageTransition.astro';
 import { ClientRouter } from 'astro:transitions';
-const { title, eyebrow = 'Legal & policies', intro = '', updated = '22 August 2026', currentPage = '' } = Astro.props;
-const siteUrl = (import.meta.env.PUBLIC_SITE_URL || '').replace(/\/$/, '');
-const canonicalUrl = siteUrl ? `${siteUrl}${Astro.url.pathname}` : undefined;
-const policyJsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', name: title, description: intro || `${title} | Crest Automotive`, url: canonicalUrl || Astro.url.href, isPartOf: { '@type': 'WebSite', name: 'Crest Automotive', url: siteUrl || Astro.url.origin } };
+const { title, eyebrow = 'Legal & policies', intro = '', updated = '22 August 2026', currentPage = '', robots = import.meta.env.PUBLIC_INDEX_LEGAL === 'true' ? 'index,follow' : 'noindex,follow' } = Astro.props;
+const siteUrl = (import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || '').replace(/\/$/, '');
+const canonicalPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
+const canonicalUrl = siteUrl ? `${siteUrl}${canonicalPath}` : undefined;
+const socialImage = siteUrl ? `${siteUrl}/images/generated/crest-hero-studio.jpg` : '/images/generated/crest-hero-studio.jpg';
+const pageTitle = title.includes('Crest Automotive Care') ? title : `${title} | Crest Automotive Care`;
+const websiteUrl = siteUrl || Astro.url.origin;
+const policyJsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', '@id': canonicalUrl ? `${canonicalUrl}#webpage` : undefined, name: title, description: intro || `${title} | Crest Automotive Care`, url: canonicalUrl || Astro.url.href, isPartOf: { '@type': 'WebSite', name: 'Crest Automotive Care', url: websiteUrl } };
 const legalLinks = [
   ['/terms-of-service', 'Terms of service'],
   ['/privacy-policy', 'Privacy policy'],
@@ -23,25 +27,33 @@ const legalLinks = [
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#131315" />
-    <meta name="description" content={intro || `${title} | Crest Automotive`} />
+    <meta name="description" content={intro || `${title} | Crest Automotive Care`} />
+    <meta name="author" content="Crest Automotive Care" />
+    <meta property="og:locale" content="en_IN" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content={robots} />
     <meta property="og:type" content="article" />
-    <meta property="og:title" content={`${title} | Crest Automotive`} />
-    <meta property="og:description" content={intro || `${title} | Crest Automotive`} />
-    <meta property="og:image" content="/images/generated/crest-hero-studio.jpg" />
-    <title>{title} | Crest Automotive</title>
+    <meta property="og:site_name" content="Crest Automotive Care" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={intro || `${title} | Crest Automotive Care`} />
+    <meta property="og:image" content={socialImage} />
+    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={intro || `${title} | Crest Automotive Care`} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{pageTitle}</title>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(policyJsonLd)}></script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <ClientRouter />
   </head>
   <body>
     <PageTransition />
     <header class="legal-header">
-      <a class="brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE</small></span></a>
+      <a class="brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE CARE</small></span></a>
       <nav aria-label="Legal navigation"><a href="/">Home</a><a href="/#services">Services</a><a href="/#contact">Contact</a></nav>
       <a class="header-cta" href="/#contact">Book a treatment <span>↗</span></a>
     </header>
@@ -49,12 +61,12 @@ const legalLinks = [
       <div class="legal-hero"><div><span class="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{intro}</p></div><div class="legal-meta"><span>Effective / reviewed</span><strong>{updated}</strong><small>Working draft — review with qualified counsel before publishing.</small></div></div>
       <div class="legal-layout">
         <aside class="legal-sidebar" aria-label="Legal pages"><span>On this site</span>{legalLinks.map(([href, label]) => <a class={currentPage === href ? 'is-current' : ''} href={href}>{label}</a>)}</aside>
-        <article class="legal-content"><div class="legal-notice"><strong>Important</strong><p>This page is a practical website-policy draft for Crest Automotive. It is not formal legal advice. Replace bracketed business details and have a qualified attorney review it before relying on it.</p></div><slot /></article>
+        <article class="legal-content"><div class="legal-notice"><strong>Important</strong><p>This page is a practical website-policy draft for Crest Automotive Care. It is not formal legal advice. Replace bracketed business details and have a qualified attorney review it before relying on it.</p></div><slot /></article>
       </div>
     </main>
     <Chatbot />
     <BackToTop />
-    <footer class="legal-footer"><div class="footer-brand-row"><a class="brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE</small></span></a><p>Premium, waterless automotive care for DLF Gurugram.</p><div class="social-links"><a href="https://wa.me/919871610952" target="_blank" rel="noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a></div></div><div class="footer-legal-row">{legalLinks.map(([href, label]) => <a href={href}>{label}</a>)}<a href="/#contact">Contact Crest</a></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Crest Automotive. All rights reserved.</span><a href="/">Back to main site ↑</a></div></footer>
+    <footer class="legal-footer"><div class="footer-brand-row"><a class="brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE CARE</small></span></a><p>Premium, waterless automotive care for DLF Gurugram.</p><div class="social-links"><a href="https://wa.me/919871610952" target="_blank" rel="noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook</a></div></div><div class="footer-legal-row">{legalLinks.map(([href, label]) => <a href={href}>{label}</a>)}<a href="/#contact">Contact Crest</a></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Crest Automotive Care. All rights reserved.</span><a href="/">Back to main site ↑</a></div></footer>
   </body>
 </html>
 <style>
@@ -136,3 +148,61 @@ const legalLinks = [
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
 </style>
 
+
+
+<style is="global">
+  /* Unified legal typography: use the same Inter family while preserving a quieter policy-page hierarchy. */
+  .legal-hero h1 {
+    font-family: 'Inter', sans-serif !important;
+    font-size: clamp(40px, 5vw, 64px) !important;
+    font-weight: 600 !important;
+    letter-spacing: -.04em !important;
+    line-height: 1.1 !important;
+  }
+
+  .legal-hero p {
+    max-width: 680px;
+    font-family: 'Inter', sans-serif !important;
+    font-size: clamp(17px, 1.25vw, 19px) !important;
+    line-height: 1.6 !important;
+  }
+
+  .legal-content h2,
+  .legal-content h3 {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+  }
+
+  .legal-content h2 {
+    font-size: clamp(25px, 2.6vw, 36px) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -.03em !important;
+  }
+
+  .legal-content h3 {
+    font-size: clamp(17px, 1.4vw, 20px) !important;
+    line-height: 1.3 !important;
+    letter-spacing: -.02em !important;
+  }
+
+  .legal-content p,
+  .legal-content li {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.75 !important;
+  }
+
+  .legal-notice p,
+  .legal-meta small {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+
+  @media (max-width: 520px) {
+    .legal-hero h1 { font-size: 40px !important; }
+    .legal-hero p { font-size: 17px !important; }
+    .legal-content h2 { font-size: 27px !important; }
+    .legal-content h3 { font-size: 18px !important; }
+    .legal-content p, .legal-content li { font-size: 16px !important; }
+  }
+</style>

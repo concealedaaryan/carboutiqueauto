@@ -4,23 +4,30 @@ import BackToTop from '../components/BackToTop.astro';
 import PageTransition from '../components/PageTransition.astro';
 import StickyBookingBar from '../components/StickyBookingBar.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import IntroLoader from '../components/IntroLoader.astro';
 import { ClientRouter } from 'astro:transitions';
-const { title, description = 'Premium, waterless automotive care for DLF Gurugram.', currentPath = '/', pageLabel = '' } = Astro.props;
-const siteUrl = (import.meta.env.PUBLIC_SITE_URL || '').replace(/\/$/, '');
-const canonicalUrl = siteUrl ? `${siteUrl}${Astro.url.pathname}` : undefined;
+const { title, description = 'Premium, waterless automotive care for DLF Gurugram.', currentPath = '/', pageLabel = '', robots = 'index,follow,max-image-preview:large', includeBusinessSchema = true } = Astro.props;
+const siteUrl = (import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || '').replace(/\/$/, '');
+const canonicalPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
+const canonicalUrl = siteUrl ? `${siteUrl}${canonicalPath}` : undefined;
 const socialImage = siteUrl ? `${siteUrl}/images/generated/crest-hero-studio.jpg` : '/images/generated/crest-hero-studio.jpg';
+const pageTitle = title.includes('Crest Automotive Care') ? title : `${title} | Crest Automotive Care`;
+const businessId = siteUrl ? `${siteUrl}/#business` : undefined;
+const websiteId = siteUrl ? `${siteUrl}/#website` : undefined;
 const localBusinessJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'Crest Automotive',
+  '@id': businessId,
+  name: 'Crest Automotive Care',
   description,
   url: canonicalUrl || Astro.url.href,
+  image: socialImage,
   telephone: '+91 98716 10952',
-  areaServed: ['The Camellias, DLF Gurugram', 'The Crest, DLF Gurugram', 'The Magnolias, DLF Gurugram'],
+  areaServed: ['DLF The Camellias, Gurugram', 'DLF Crest, Gurugram', 'DLF The Magnolias, Gurugram'],
   serviceType: ['Car detailing', 'Ceramic coating', 'Paint protection film', 'Waterless car wash'],
   priceRange: '₹₹'
 };
-const webSiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Crest Automotive', url: canonicalUrl || Astro.url.href, description };
+const webSiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': websiteId, name: 'Crest Automotive Care', url: siteUrl || Astro.url.origin, description, publisher: { '@id': businessId } };
 const navLinks = [
   ['/services', 'Services'],
   ['/packages', 'Packages'],
@@ -46,32 +53,35 @@ const legalLinks = [
     <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#131315" />
     <meta name="description" content={description} />
-    {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="author" content="Crest Automotive Care" />
+    <meta property="og:locale" content="en_IN" />
+    {canonicalUrl ? <link rel="canonical" href={canonicalUrl} /> : null}
+    <meta name="robots" content={robots} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Crest Automotive" />
-    <meta property="og:title" content={`${title} | Crest Automotive`} />
+    <meta property="og:site_name" content="Crest Automotive Care" />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImage} />
-    {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
+    {canonicalUrl ? <meta property="og:url" content={canonicalUrl} /> : null}
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} | Crest Automotive`} />
+    <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-    <title>{title} | Crest Automotive</title>
+    <title>{pageTitle}</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)}></script>
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(webSiteJsonLd)}></script>
+    {includeBusinessSchema ? <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessJsonLd)}></script> : null}
+    {includeBusinessSchema ? <script is:inline type="application/ld+json" set:html={JSON.stringify(webSiteJsonLd)}></script> : null}
     <ClientRouter />
   </head>
   <body>
+    {currentPath === '/' && <IntroLoader />}
     <PageTransition />
     <div class="cursor-glow" aria-hidden="true"></div>
     <header class="site-header" id="top">
-      <a class="brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE</small></span></a>
+      <a class="brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE CARE</small></span></a>
       <nav class="desktop-nav" aria-label="Primary navigation">{navLinks.map(([href, label]) => <a class={currentPath === href ? 'is-current' : ''} href={href}>{label}</a>)}</nav>
       <a class="header-call" href="tel:+919871610952"><span class="phone-dot"></span> +91 98716 10952</a>
       <a class="button button-small button-gold" href="/contact">Book a treatment <span>↗</span></a>
@@ -84,7 +94,7 @@ const legalLinks = [
     <Chatbot />
     <BackToTop />
     <StickyBookingBar />
-    <footer class="site-footer"><div class="footer-main"><div class="footer-brand-block"><a class="brand footer-brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE</small></span></a><p>Exclusive in-house luxury automotive care for the DLF community.</p></div><div class="footer-links"><div><small>Explore</small>{navLinks.slice(0, 4).map(([href, label]) => <a href={href}>{label}</a>)}<a href="/why-crest">Why Crest</a><a href="/faq">FAQ</a></div><div><small>Find us</small><a href="/locations">The Camellias</a><a href="/locations">The Crest</a><a href="/locations">The Magnolias</a></div><div><small>Connect</small><a href="tel:+919871610952">+91 98716 10952</a><a href="https://wa.me/919871610952" target="_blank" rel="noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook ↗</a></div></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Crest Automotive. All rights reserved.</span><span class="footer-legal">{legalLinks.map(([href, label]) => <a href={href}>{label}</a>)}</span><a href="#top">Back to top ↑</a></div></footer>
+    <footer class="site-footer"><div class="footer-main"><div class="footer-brand-block"><a class="brand footer-brand" href="/"><span class="brand-mark">C</span><span><strong>CREST</strong><small>AUTOMOTIVE CARE</small></span></a><p>Exclusive in-house luxury automotive care for the DLF community.</p></div><div class="footer-links"><div><small>Explore</small>{navLinks.slice(0, 4).map(([href, label]) => <a href={href}>{label}</a>)}<a href="/why-crest">Why Crest</a><a href="/faq">FAQ</a></div><div><small>Find us</small><a href="/locations">DLF The Camellias</a><a href="/locations">DLF Crest</a><a href="/locations">DLF The Magnolias</a></div><div><small>Connect</small><a href="tel:+919871610952">+91 98716 10952</a><a href="https://wa.me/919871610952" target="_blank" rel="noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook ↗</a></div></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Crest Automotive Care. All rights reserved.</span><span class="footer-legal">{legalLinks.map(([href, label]) => <a href={href}>{label}</a>)}</span><a href="#top">Back to top ↑</a></div></footer>
   </body>
 </html>
 
@@ -1267,5 +1277,74 @@ const legalLinks = [
   main h6 span,
   main .section-heading em {
     color: var(--white) !important;
+  }
+</style>
+
+
+<style is="global">
+  /* Final public typography harmonization: hierarchy comes from scale and weight, not mixed typefaces. */
+  main h1 em,
+  main h2 em,
+  main h3 em,
+  main h4 em,
+  main h5 em,
+  main h6 em,
+  main .section-heading em {
+    color: var(--white) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+  }
+
+  /* Marketing-page hero and intro copy now shares the homepage reading scale. */
+  main .hero-copy > p,
+  main .page-hero p,
+  main .package-hero p,
+  main .protection-hero p,
+  main .services-hero p,
+  main .why-hero p,
+  main .location-hero p,
+  main .faq-hero p,
+  main .estimate-hero p,
+  main .contact-hero p,
+  main .estimate-intro > p,
+  main .calculator-intro > p {
+    max-width: 600px;
+    font-size: clamp(17px, 1.25vw, 19px) !important;
+    line-height: 1.6 !important;
+  }
+</style>
+
+
+<style is:global>
+  /* Global scope is intentional: these selectors target markup supplied by route slots. */
+  main h1 em,
+  main h2 em,
+  main h3 em,
+  main h4 em,
+  main h5 em,
+  main h6 em,
+  main .section-heading em {
+    color: var(--white) !important;
+    font-family: 'Inter', sans-serif !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+  }
+
+  main .hero-copy > p,
+  main .page-hero p,
+  main .package-hero p,
+  main .protection-hero p,
+  main .services-hero p,
+  main .why-hero p,
+  main .location-hero p,
+  main .faq-hero p,
+  main .estimate-hero p,
+  main .contact-hero p,
+  main .estimate-intro > p,
+  main .calculator-intro > p {
+    max-width: 600px;
+    font-size: clamp(17px, 1.25vw, 19px) !important;
+    line-height: 1.6 !important;
   }
 </style>

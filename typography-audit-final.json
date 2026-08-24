@@ -1,0 +1,507 @@
+[
+  {
+    "route": "/",
+    "title": "Rodim PPF and Premium Car Care in DLF Gurugram | Crest Automotive Care",
+    "h1": {
+      "text": "Protect the paintKeep the presence",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "62px",
+      "lineHeight": "66.96px"
+    },
+    "h1Em": {
+      "text": "Keep the presence",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "62px",
+      "lineHeight": "66.96px"
+    },
+    "h2": {
+      "text": "When the most exactingneighbours trust you",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "58px",
+      "lineHeight": "64.96px"
+    },
+    "heroParagraph": {
+      "text": "Rodim paint protection film, installed with precision across Crest Automotive Care studios in DLF Cr",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "19px",
+      "lineHeight": "30.4px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": [
+      "Inter, sans-serif"
+    ]
+  },
+  {
+    "route": "/services",
+    "title": "Premium Car Detailing Services in DLF Gurugram | Crest Automotive Care",
+    "h1": {
+      "text": "Detailing that respectsthe machine.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h1Em": {
+      "text": "the machine.",
+      "fontFamily": "\"DM Serif Display\", Georgia, serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h2": {
+      "text": "Choose the ritualthat fits the drive.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "58px",
+      "lineHeight": "64.96px"
+    },
+    "heroParagraph": {
+      "text": "From a daily waterless refresh to multi-year surface protection, explore every treatment in the Cres",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "15.84px",
+      "lineHeight": "25.6608px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": [
+      "\"DM Serif Display\", Georgia, serif"
+    ]
+  },
+  {
+    "route": "/packages",
+    "title": "Monthly Car Care Packages in DLF Gurugram | Crest Automotive Care",
+    "h1": {
+      "text": "Your car’s best habitis a considered one.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h1Em": {
+      "text": "is a considered one.",
+      "fontFamily": "\"DM Serif Display\", Georgia, serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h2": {
+      "text": "Four ways to keepthe gloss going.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "58px",
+      "lineHeight": "64.96px"
+    },
+    "heroParagraph": {
+      "text": "Choose a repeat-care plan and make a consistently clean, protected car part of your everyday routine",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "15.84px",
+      "lineHeight": "25.6608px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": [
+      "\"DM Serif Display\", Georgia, serif"
+    ]
+  },
+  {
+    "route": "/protection",
+    "title": "Rodim PPF and Ceramic Coatings in DLF Gurugram | Crest Automotive Care",
+    "h1": {
+      "text": "More gloss.More protection.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h1Em": {
+      "text": "More protection.",
+      "fontFamily": "\"DM Serif Display\", Georgia, serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h2": {
+      "text": "Film first.Finish second.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "58px",
+      "lineHeight": "64.96px"
+    },
+    "heroParagraph": {
+      "text": "Rodim paint protection film, described by Crest as manufactured using BASF technology, is installed ",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "15.84px",
+      "lineHeight": "25.6608px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": [
+      "\"DM Serif Display\", Georgia, serif"
+    ]
+  },
+  {
+    "route": "/estimate",
+    "title": "Car Detailing Estimate in DLF Gurugram | Crest Automotive Care",
+    "h1": {
+      "text": "Book withprecision.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h1Em": null,
+    "h2": {
+      "text": "One clear plan.Built for your car.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "58px",
+      "lineHeight": "64.96px"
+    },
+    "heroParagraph": {
+      "text": "Choose your vehicle, select a treatment, and add protection upgrades. Your estimate updates instantl",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "16px",
+      "lineHeight": "26.4px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": []
+  },
+  {
+    "route": "/locations",
+    "title": "Crest Automotive Care Locations in DLF Gurugram",
+    "h1": {
+      "text": "Care that comesto your doorstep.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h1Em": {
+      "text": "to your doorstep.",
+      "fontFamily": "\"DM Serif Display\", Georgia, serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h2": {
+      "text": "Premium car detailingin DLF Gurugram.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "58px",
+      "lineHeight": "64.96px"
+    },
+    "heroParagraph": {
+      "text": "Exclusively serving residents of three DLF communities. Your car stays close while our trained team ",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "15.84px",
+      "lineHeight": "25.6608px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": [
+      "\"DM Serif Display\", Georgia, serif"
+    ]
+  },
+  {
+    "route": "/faq",
+    "title": "Crest Automotive Care Car Care FAQs in DLF Gurugram",
+    "h1": {
+      "text": "Good questions.Clear answers.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h1Em": {
+      "text": "Clear answers.",
+      "fontFamily": "\"DM Serif Display\", Georgia, serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h2": {
+      "text": "Everything beforethe first visit.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "58px",
+      "lineHeight": "64.96px"
+    },
+    "heroParagraph": {
+      "text": "Still have a question about your car, your package or our process? Start here, then call the team di",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "16px",
+      "lineHeight": "26.4px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": [
+      "\"DM Serif Display\", Georgia, serif"
+    ]
+  },
+  {
+    "route": "/contact",
+    "title": "Contact Crest Automotive Care in DLF Gurugram",
+    "h1": {
+      "text": "Ready for abetter finish?",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h1Em": {
+      "text": "better finish?",
+      "fontFamily": "\"DM Serif Display\", Georgia, serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h2": null,
+    "heroParagraph": {
+      "text": "Tell us your car model, preferred service and community. Our team will get back to confirm availabil",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "16px",
+      "lineHeight": "26.4px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": [
+      "\"DM Serif Display\", Georgia, serif"
+    ]
+  },
+  {
+    "route": "/why-crest",
+    "title": "Why Choose Crest Automotive Care in DLF Gurugram",
+    "h1": {
+      "text": "Luxury care with a lighter footprint.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h1Em": {
+      "text": "footprint.",
+      "fontFamily": "\"DM Serif Display\", Georgia, serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h2": {
+      "text": "Careful bydesign.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "58px",
+      "lineHeight": "64.96px"
+    },
+    "heroParagraph": {
+      "text": "We bring 65+ years of combined automotive OEM experience to an in-house service built for DLF reside",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "15.84px",
+      "lineHeight": "25.6608px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": [
+      "\"DM Serif Display\", Georgia, serif"
+    ]
+  },
+  {
+    "route": "/terms-of-service",
+    "title": "Terms of service | Crest Automotive Care",
+    "h1": {
+      "text": "Terms of service",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "64px",
+      "lineHeight": "70.4px"
+    },
+    "h1Em": null,
+    "h2": {
+      "text": "1. About these terms",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "38px",
+      "lineHeight": "66.5px"
+    },
+    "heroParagraph": {
+      "text": "The rules for using the Crest Automotive Care website, requesting services, and making a booking enq",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "18px",
+      "lineHeight": "28.8px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": []
+  },
+  {
+    "route": "/privacy-policy",
+    "title": "Privacy policy | Crest Automotive Care",
+    "h1": {
+      "text": "Privacy policy",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "64px",
+      "lineHeight": "70.4px"
+    },
+    "h1Em": null,
+    "h2": {
+      "text": "1. Who we are",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "38px",
+      "lineHeight": "66.5px"
+    },
+    "heroParagraph": {
+      "text": "How Crest Automotive Care may collect, use, protect and disclose personal information when this webs",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "18px",
+      "lineHeight": "28.8px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": []
+  },
+  {
+    "route": "/cookie-policy",
+    "title": "Cookie policy | Crest Automotive Care",
+    "h1": {
+      "text": "Cookie policy",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "64px",
+      "lineHeight": "70.4px"
+    },
+    "h1Em": null,
+    "h2": {
+      "text": "1. What cookies are",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "38px",
+      "lineHeight": "66.5px"
+    },
+    "heroParagraph": {
+      "text": "A clear explanation of the cookies, local storage, analytics, embeds and preference technologies tha",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "18px",
+      "lineHeight": "28.8px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": []
+  },
+  {
+    "route": "/refund-cancellation",
+    "title": "Refund & cancellation | Crest Automotive Care",
+    "h1": {
+      "text": "Refund & cancellation",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "64px",
+      "lineHeight": "70.4px"
+    },
+    "h1Em": null,
+    "h2": {
+      "text": "1. Important booking note",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "38px",
+      "lineHeight": "66.5px"
+    },
+    "heroParagraph": {
+      "text": "The working policy for changing a booking, cancelling a service, handling deposits, and resolving a ",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "18px",
+      "lineHeight": "28.8px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": []
+  },
+  {
+    "route": "/grievance-redressal",
+    "title": "Grievance redressal | Crest Automotive Care",
+    "h1": {
+      "text": "Grievance redressal",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "64px",
+      "lineHeight": "70.4px"
+    },
+    "h1Em": null,
+    "h2": {
+      "text": "1. First contact",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "38px",
+      "lineHeight": "66.5px"
+    },
+    "heroParagraph": {
+      "text": "How to raise a service, privacy, booking or website concern with Crest Automotive Care and request a",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "18px",
+      "lineHeight": "28.8px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": []
+  },
+  {
+    "route": "/accessibility",
+    "title": "Accessibility statement | Crest Automotive Care",
+    "h1": {
+      "text": "Accessibility statement",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "64px",
+      "lineHeight": "70.4px"
+    },
+    "h1Em": null,
+    "h2": {
+      "text": "1. Our commitment",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "38px",
+      "lineHeight": "66.5px"
+    },
+    "heroParagraph": {
+      "text": "Our commitment to make Crest Automotive Care’s website usable by as many people as possible, across ",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "18px",
+      "lineHeight": "28.8px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": []
+  },
+  {
+    "route": "/disclaimer",
+    "title": "Website disclaimer | Crest Automotive Care",
+    "h1": {
+      "text": "Website disclaimer",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "64px",
+      "lineHeight": "70.4px"
+    },
+    "h1Em": null,
+    "h2": {
+      "text": "1. Informational website",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "38px",
+      "lineHeight": "66.5px"
+    },
+    "heroParagraph": {
+      "text": "Important limits on the pricing, service descriptions, images, estimates and third-party information",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "18px",
+      "lineHeight": "28.8px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": []
+  },
+  {
+    "route": "/404",
+    "title": "Page not found | Crest Automotive Care",
+    "h1": {
+      "text": "Page not found.",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "77.76px",
+      "lineHeight": "83.9808px"
+    },
+    "h1Em": null,
+    "h2": null,
+    "heroParagraph": {
+      "text": "The page you’re looking for has moved, gone off-road, or never existed. Let’s get you back to the fi",
+      "fontFamily": "Inter, sans-serif",
+      "fontSize": "15.84px",
+      "lineHeight": "25.6608px"
+    },
+    "allH1Families": [
+      "Inter, sans-serif"
+    ],
+    "allEmFamilies": []
+  }
+]

@@ -2,7 +2,7 @@
 interface Stat { value: string; label: string; detail?: string; }
 const { stats = [] } = Astro.props as { stats: Stat[] };
 ---
-<section class="proof-strip" aria-label="Crest Automotive proof points">
+<section class="proof-strip" aria-label="Crest Automotive Care proof points">
   <div class="proof-inner">
     {stats.map((stat) => <div class="proof-item"><strong>{stat.value}</strong><span>{stat.label}</span>{stat.detail && <small>{stat.detail}</small>}</div>)}
   </div>

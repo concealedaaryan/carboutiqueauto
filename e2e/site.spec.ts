@@ -6,12 +6,12 @@ const navLabels = ['Services', 'Packages', 'Protection', 'Estimate', 'Locations'
 test.describe('Crest Automotive multi-page navigation', () => {
   test('homepage is concise and links to dedicated detail pages', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/Premium Car Detailing in DLF Gurugram \| Crest Automotive/);
-    await expect(page.getByRole('heading', { name: /Care for the car\s+you already love/i })).toBeVisible();
-    await expect(page.getByText(/Crest Automotive · Rodim PPF/i).first()).toBeVisible();
+    await expect(page).toHaveTitle(/Rodim PPF and Premium Car Care in DLF Gurugram \| Crest Automotive Care/);
+    await expect(page.getByRole('heading', { name: /Protect the paint\s+Keep the presence/i })).toBeVisible();
+    await expect(page.getByText(/Crest Automotive Care · Rodim PPF/i).first()).toBeVisible();
     await expect(page.locator('[data-hero-carousel]')).toBeVisible();
     await expect(page.locator('[data-carousel-slide]')).toHaveCount(3);
-    await expect(page.getByRole('link', { name: /See every service/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Explore the Rodim range/i })).toBeVisible();
     await expect(page.locator('table')).toHaveCount(0);
     for (const label of navLabels) await expect(page.locator('.desktop-nav').getByRole('link', { name: label, exact: true })).toBeVisible();
   });
@@ -62,7 +62,7 @@ test.describe('Crest Automotive booking calculator', () => {
     await page.locator('#calc-category').selectOption({ label: 'Super luxury (GLE)' });
     await page.locator('#calc-ppf').check();
     await page.locator('#calc-ppf-film').selectOption({ label: 'BASF Rodim TPU (German) R4 Pro · 15 years' });
-    await page.locator('#calc-ppf-size').selectOption('large');
+    await page.locator('#calc-ppf-category').selectOption({ label: 'Super luxury (GLE)' });
     await page.locator('#calc-leather').check();
     await page.locator('#calc-exterior-ceramic').check();
     await page.locator('#calc-interior-ceramic').check();
@@ -71,7 +71,22 @@ test.describe('Crest Automotive booking calculator', () => {
     await expect(page.locator('#calc-gst')).toHaveText('₹72,630');
     await expect(page.locator('#calc-total')).toHaveText('₹4,76,130');
     await expect(page.locator('#calc-breakdown')).toContainText('Premium graphene coating');
-    await expect(page.locator('#calc-breakdown')).toContainText('PPF · large');
+    await expect(page.locator('#calc-breakdown')).toContainText('PPF · Super luxury (GLE)');
+  });
+
+  test('requires a core treatment before enabling add-ons', async ({ page }) => {
+    await page.goto('/estimate');
+    await expect(page.locator('#calc-addons')).toHaveAttribute('disabled', '');
+    await expect(page.locator('#calc-addons-notice')).toHaveText('Select a core treatment above before choosing any add-ons.');
+    await expect(page.locator('#calc-exterior-ceramic')).toBeDisabled();
+
+    await page.locator('#calc-category').selectOption({ label: 'Premium (Ioniq)' });
+    await page.locator('#calc-service').selectOption({ label: '01 — Premium waterless wash & wax' });
+    await expect(page.locator('#calc-addons')).not.toHaveAttribute('disabled', '');
+    await expect(page.locator('#calc-addons-notice')).toHaveText('Core treatment selected. You can now add optional protection upgrades.');
+    await page.locator('#calc-exterior-ceramic').check();
+    await expect(page.locator('#calc-breakdown')).toContainText('Premium waterless wash & wax');
+    await expect(page.locator('#calc-breakdown')).toContainText('exterior ceramic add-on');
   });
 
   test('transfers the estimate into the Google Form contact handoff', async ({ page }) => {
@@ -82,7 +97,7 @@ test.describe('Crest Automotive booking calculator', () => {
     await expect(page.locator('#estimate-context')).toBeVisible();
     await expect(page.locator('#estimate-context-service')).toContainText('Premium ceramic coating');
     await expect(page.locator('#estimate-context-category')).toContainText('Premium (Ioniq)');
-    await expect(page.locator('iframe[title="Crest Automotive contact form"]')).toBeVisible();
+    await expect(page.locator('.form-embed iframe')).toBeVisible();
   });
 });
 
@@ -99,14 +114,16 @@ test.describe('Crest Automotive interactions', () => {
 
   test('contact route exposes the Google Form and fallback link', async ({ page }) => {
     await page.goto('/contact');
-    await expect(page.locator('iframe[title="Crest Automotive contact form"]')).toHaveAttribute('src', /docs\.google\.com\/forms/);
+    await expect(page.locator('.form-embed iframe')).toHaveAttribute('title', 'Crest Automotive Care contact form');
+    await expect(page.locator('.form-embed iframe')).toHaveAttribute('src', /docs\.google\.com\/forms/);
     await expect(page.getByRole('link', { name: /Open the form in a new tab/i })).toBeVisible();
     await expect(page).toHaveURL(/\/contact\/?$/);
   });
 
   test('back-to-top appears after scrolling and returns to the top', async ({ page }) => {
     await page.goto('/');
-    await page.evaluate(() => window.scrollTo(0, 1000));
+    await page.waitForFunction(() => !document.documentElement.classList.contains('intro-lock'));
+    await page.evaluate(() => window.scrollTo({ top: 1000, behavior: 'auto' }));
     await expect(page.locator('[data-back-to-top]')).toHaveClass(/is-visible/);
     await page.locator('[data-back-to-top]').click({ force: true });
     await expect.poll(() => page.evaluate(() => window.scrollY), { timeout: 3000 }).toBeLessThan(20);

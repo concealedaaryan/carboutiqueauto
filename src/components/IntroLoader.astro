@@ -1,0 +1,67 @@
+<div class="intro-loader" data-intro-loader aria-label="Crest Automotive Care" role="status">
+  <div class="intro-loader-inner">
+    <div class="intro-loader-mark" aria-hidden="true"><span>C</span></div>
+    <div class="intro-loader-wordmark" aria-hidden="true"><strong>CREST</strong><small>AUTOMOTIVE CARE</small></div>
+  </div>
+</div>
+
+<style>
+  .intro-loader { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; overflow: hidden; color: var(--white); background: var(--ink); opacity: 1; visibility: visible; transition: opacity .45s var(--ease), visibility .45s ease; }
+  .intro-loader::before { content: ''; position: absolute; inset: 0; opacity: .55; background: radial-gradient(circle at 50% 44%, rgba(59,130,246,.12), transparent 31%), linear-gradient(115deg, transparent 25%, rgba(255,255,255,.035) 48%, transparent 70%); transform: translateX(-100%); animation: intro-sweep 1.8s var(--ease) .25s both; }
+  .intro-loader-inner { position: relative; z-index: 1; display: grid; justify-items: center; gap: 24px; }
+  .intro-loader-mark { position: relative; display: grid; place-items: center; width: 76px; height: 76px; color: var(--gold); border: 1px solid transparent; transform: skew(-12deg); animation: intro-mark-in .75s var(--ease) both; }
+  .intro-loader-mark::before { content: ''; position: absolute; inset: -1px; border: 1px solid var(--gold); clip-path: polygon(0 0, 100% 0, 100% 14%, 14% 14%, 14% 100%, 0 100%); animation: intro-border-draw .9s var(--ease) .15s both; }
+  .intro-loader-mark::after { content: ''; position: absolute; inset: -14px; border-radius: 50%; background: radial-gradient(circle, rgba(59,130,246,.18), transparent 67%); opacity: 0; animation: intro-glow .9s ease .55s both; }
+  .intro-loader-mark span { position: relative; z-index: 1; font-size: 42px; font-weight: 700; line-height: 1; transform: skew(12deg); animation: intro-letter-in .65s var(--ease) .28s both; }
+  .intro-loader-wordmark { display: grid; justify-items: center; gap: 7px; opacity: 0; transform: translateY(8px); animation: intro-wordmark-in .55s var(--ease) .72s both; }
+  .intro-loader-wordmark strong, .intro-loader-wordmark small { display: block; letter-spacing: .18em; line-height: 1; }
+  .intro-loader-wordmark strong { font-size: 17px; font-weight: 800; }
+  .intro-loader-wordmark small { color: var(--muted); font-size: 8px; }
+  .intro-loader.is-leaving { opacity: 0; visibility: hidden; pointer-events: none; }
+  .intro-loader.is-suppressed { display: none; }
+  :global(html.intro-lock), :global(html.intro-lock body) { overflow: hidden; }
+  @keyframes intro-border-draw { from { clip-path: polygon(0 0, 0 0, 0 14%, 0 14%, 0 100%, 0 100%); } to { clip-path: polygon(0 0, 100% 0, 100% 14%, 14% 14%, 14% 100%, 0 100%); } }
+  @keyframes intro-mark-in { from { opacity: 0; transform: skew(-12deg) scale(.84); } to { opacity: 1; transform: skew(-12deg) scale(1); } }
+  @keyframes intro-letter-in { from { opacity: 0; transform: skew(12deg) scale(.7); } to { opacity: 1; transform: skew(12deg) scale(1); } }
+  @keyframes intro-wordmark-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes intro-sweep { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+  @keyframes intro-glow { 0% { opacity: 0; transform: scale(.7); } 45% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.12); } }
+  @media (max-width: 620px) { .intro-loader-mark { width: 68px; height: 68px; } .intro-loader-mark span { font-size: 38px; } .intro-loader-wordmark strong { font-size: 15px; } }
+  @media (prefers-reduced-motion: reduce) { .intro-loader::before, .intro-loader-mark, .intro-loader-mark::before, .intro-loader-mark::after, .intro-loader-mark span, .intro-loader-wordmark { animation: none; } .intro-loader-mark, .intro-loader-wordmark { opacity: 1; transform: none; } .intro-loader-mark::before { clip-path: none; } .intro-loader { transition-duration: .25s; } }
+</style>
+
+<script is:inline data-astro-rerun>
+  // @ts-nocheck
+  (() => {
+    const loader = document.querySelector('[data-intro-loader]');
+    if (!loader) return;
+    const key = 'crestIntroSeen';
+    const suppress = () => {
+      loader.classList.add('is-suppressed');
+      loader.setAttribute('aria-hidden', 'true');
+      document.documentElement.classList.remove('intro-lock');
+    };
+    const finish = () => {
+      if (loader.classList.contains('is-leaving') || loader.classList.contains('is-suppressed')) return;
+      loader.classList.add('is-leaving');
+      loader.setAttribute('aria-hidden', 'true');
+      window.setTimeout(() => {
+        loader.classList.add('is-suppressed');
+        document.documentElement.classList.remove('intro-lock');
+      }, 500);
+    };
+    try {
+      if (sessionStorage.getItem(key)) { suppress(); return; }
+      sessionStorage.setItem(key, '1');
+    } catch { /* If storage is blocked, the timed fallback still keeps the loader safe. */ }
+    document.documentElement.classList.add('intro-lock');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fallback = window.setTimeout(finish, reducedMotion ? 700 : 2500);
+    const reveal = () => {
+      window.clearTimeout(fallback);
+      window.setTimeout(finish, reducedMotion ? 220 : 1950);
+    };
+    if (document.readyState === 'complete') reveal();
+    else window.addEventListener('load', reveal, { once: true });
+  })();
+</script>

@@ -165,3 +165,11 @@ Live browser verification confirmed all six primary navigation labels compute to
 Reviewed bejamas/ui, WebcoreUI, Astro Components Kit, Accessible Astro Components, daisyUI, Flowbite, Preline UI, HyperUI, Tailwind Plus UI Blocks, Tailblocks, and Meraki UI. Integrated local pure-Astro patterns rather than adding framework dependencies: reusable SectionHeading, semantic Breadcrumbs, ChoiceCard, and a mobile StickyBookingBar. The homepage now uses the shared heading and choice-card patterns; public inner pages receive breadcrumbs through the shared layout; all public routes receive a mobile-only sticky “Build your care plan” action.
 
 Live preview confirmed the homepage hierarchy and service catalogue render cleanly, the services route shows a breadcrumb under the page marker, and desktop navigation remains uncluttered. No React/Vue dependency was added.
+
+## Homepage hero typography and location QA
+
+The local homepage renders the updated hero copy and visual structure. Both lines of the hero H1 are targeted with `Inter, sans-serif`; the hero description is targeted with an explicit `clamp(17px, 1.35vw, 19px)` size and `line-height: 1.6` so shared layout overrides cannot shrink it. The hero heading is targeted with `clamp(40px, 4.6vw, 62px)` on desktop, while the existing mobile rule remains capped at 52px.
+
+The hero trust line reads: `Studios across DLF Crest · The Magnolias · The Camellias`, and the supporting trust section states that studios are present within DLF The Camellias, DLF Crest, and DLF The Magnolias.
+
+`pnpm check` passed with 0 errors, 0 warnings, and 0 hints. `PUBLIC_SITE_URL=https://crest-automotive.example pnpm build` passed and generated 17 pages. A first browser measurement caught a shared global rule overriding the hero description; the final specificity tuning added explicit `!important` declarations for the hero heading and description sizes.
