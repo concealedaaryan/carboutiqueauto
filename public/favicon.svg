@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title"><title>Crest Automotive Care</title><rect width="64" height="64" rx="12" fill="#071528"/><path d="M17 14h30v8H25v20h22v8H17z" fill="#e2b968"/><path d="M29 22h18v8H29z" fill="#fffdf7"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Crest Automotive Care mark</title>
+  <desc id="desc">A geometric C monogram inside a layered angular crest.</desc>
+  <rect width="160" height="160" rx="20" fill="#131315"/>
+  <path d="M80 14 139 48v64l-59 34-59-34V48Z" fill="none" stroke="#E4E2E4" stroke-width="10" stroke-linejoin="miter"/>
+  <path d="M80 32 122 56v18" fill="none" stroke="#3B82F6" stroke-width="10" stroke-linejoin="miter"/>
+  <path d="M122 88v16l-42 24-42-24V56l42-24" fill="none" stroke="#E4E2E4" stroke-width="10" stroke-linejoin="miter"/>
+  <path d="M122 74v14l-42 24" fill="none" stroke="#3B82F6" stroke-width="10" stroke-linejoin="miter"/>
+</svg>

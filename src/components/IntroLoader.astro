@@ -1,7 +1,11 @@
 <div class="intro-loader" data-intro-loader aria-label="Crest Automotive Care" role="status">
+  <div class="intro-loader-grid" aria-hidden="true"></div>
   <div class="intro-loader-inner">
+    <span class="intro-loader-kicker">IN-HOUSE STUDIO / DLF GURUGRAM</span>
     <div class="intro-loader-mark" aria-hidden="true"><span>C</span></div>
     <div class="intro-loader-wordmark" aria-hidden="true"><strong>CREST</strong><small>AUTOMOTIVE CARE</small></div>
+    <div class="intro-loader-progress" aria-hidden="true"><i></i></div>
+    <span class="intro-loader-status" data-intro-status>CALIBRATING THE STUDIO</span>
   </div>
 </div>
 
@@ -56,6 +60,9 @@
     } catch { /* If storage is blocked, the timed fallback still keeps the loader safe. */ }
     document.documentElement.classList.add('intro-lock');
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const status = loader.querySelector('[data-intro-status]');
+    const statuses = ['CALIBRATING THE STUDIO', 'SETTING THE LIGHT', 'PREPARING YOUR FINISH'];
+    statuses.forEach((label, index) => window.setTimeout(() => { if (status && !loader.classList.contains('is-leaving')) status.textContent = label; }, index * (reducedMotion ? 160 : 520)));
     const fallback = window.setTimeout(finish, reducedMotion ? 700 : 2500);
     const reveal = () => {
       window.clearTimeout(fallback);
@@ -65,3 +72,26 @@
     else window.addEventListener('load', reveal, { once: true });
   })();
 </script>
+
+<style>
+  .intro-loader { color: #fffaf3; background: #0c1c2b; background-image: radial-gradient(circle at 50% 40%, rgba(228,155,87,.13), transparent 23%), linear-gradient(135deg, #07131f 0%, #123d66 62%, #0b2338 100%); }
+  .intro-loader::before { opacity: .68; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,.08) 48%, transparent 53%), radial-gradient(circle at 50% 50%, rgba(142,185,161,.13), transparent 45%); }
+  .intro-loader-grid { position: absolute; inset: 0; opacity: .2; background-image: linear-gradient(rgba(255,255,255,.16) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.16) 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(180deg, transparent, #000 28%, #000 72%, transparent); transform: perspective(500px) rotateX(55deg) scale(1.7) translateY(28%); transform-origin: center bottom; animation: intro-grid-drift 2.8s ease-in-out infinite alternate; }
+  .intro-loader-inner { gap: 18px; width: min(360px, calc(100vw - 48px)); }
+  .intro-loader-kicker { color: rgba(255,255,255,.58); font-size: 9px; font-weight: 600; letter-spacing: .16em; }
+  .intro-loader-mark { width: 86px; height: 86px; color: #f2c18d; }
+  .intro-loader-mark::before { border-color: #e49b57; }
+  .intro-loader-mark::after { background: radial-gradient(circle, rgba(228,155,87,.22), transparent 67%); }
+  .intro-loader-mark span { font-size: 46px; }
+  .intro-loader-wordmark { gap: 6px; }
+  .intro-loader-wordmark strong { color: #fffaf3; font-size: 20px; letter-spacing: .22em; }
+  .intro-loader-wordmark small { color: rgba(255,255,255,.58); }
+  .intro-loader-progress { position: relative; width: 100%; height: 2px; overflow: hidden; margin-top: 18px; background: rgba(255,255,255,.18); }
+  .intro-loader-progress::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.42), transparent); transform: translateX(-100%); animation: intro-progress-sheen 1.4s ease-in-out infinite; }
+  .intro-loader-progress i { display: block; width: 36%; height: 100%; background: linear-gradient(90deg, #e49b57, #f2c18d, #8eb9a1); transform-origin: left; animation: intro-progress-fill 2s cubic-bezier(.22,1,.36,1) both; }
+  .intro-loader-status { color: #f2c18d; font-size: 9px; font-weight: 700; letter-spacing: .14em; }
+  @keyframes intro-grid-drift { from { transform: perspective(500px) rotateX(55deg) scale(1.7) translateY(28%); } to { transform: perspective(500px) rotateX(55deg) scale(1.75) translateY(24%); } }
+  @keyframes intro-progress-sheen { to { transform: translateX(100%); } }
+  @keyframes intro-progress-fill { from { transform: scaleX(0); } to { transform: scaleX(2.8); } }
+  @media (prefers-reduced-motion: reduce) { .intro-loader-grid, .intro-loader-progress::before, .intro-loader-progress i { animation: none; } .intro-loader-progress i { width: 100%; transform: none; } }
+</style>

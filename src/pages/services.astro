@@ -20,7 +20,7 @@ const serviceGroups = [
 <SiteLayout title="Premium Car Detailing Services in DLF Gurugram" description="Explore premium car detailing, waterless wash, paint correction, ceramic coating and protection services from Crest Automotive Care in DLF Gurugram." currentPath="/services" pageNumber="01" pageLabel="The treatment menu">
   <StructuredData type="services" services={allTreatments.map((item) => ({ name: item.title, description: item.copy, url: `/services#treatment-${item.number}` }))} />
   <section class="page-hero"><div><span class="eyebrow">The treatment menu</span><h1>Detailing that respects<br /><em>the machine.</em></h1><p>From a daily waterless refresh to multi-year surface protection, explore every treatment in the Crest Automotive Care catalogue. Start with the service you recognize; we will help you choose the right depth.</p><a class="button button-gold" href="/estimate">Build your estimate <span>↗</span></a></div><div class="page-hero-image" style="background-image: linear-gradient(180deg, rgba(19,19,21,.08), rgba(19,19,21,.78)), url('/images/generated/crest-detailing-process.jpg');"><span>IN-HOUSE PROCESS</span><small>Trained hands · considered finish</small></div></section>
-  <section class="catalogue-section"><div class="catalogue-intro"><span class="eyebrow">Complete catalogue</span><h2>Choose the ritual<br /><em>that fits the drive.</em></h2><p>Prices are shown by vehicle category. GST at 18% is extra. Final scope and price are confirmed after vehicle-model and condition checks.</p></div><div class="service-chapters">{serviceGroups.map((group) => <section class="service-group"><div class="service-group-heading"><span class="eyebrow">{group.label}</span><p>{group.detail}</p></div><div class="service-list">{group.items.map((item) => <article class="service-row" id={`treatment-${item.number}`} style={`--card-image: url('${serviceImages[(Number(item.number) - 1) % serviceImages.length]}')`}><div class="service-copy"><span class="eyebrow">{item.eyebrow}</span><h3>{item.title}</h3><p>{item.copy}</p><a href={`/estimate?service=${item.number}`}>Build this into an estimate <span>↗</span></a></div><div class="service-price"><strong>{item.price}</strong><small>{item.tag}</small></div></article>)}</div></section>)}</div></section>
+  <section class="catalogue-section"><div class="catalogue-intro"><span class="eyebrow">Complete catalogue</span><h2>Choose the ritual<br /><em>that fits the drive.</em></h2><p>Prices are shown by vehicle category. GST at 18% is extra. Final scope and price are confirmed after vehicle-model and condition checks.</p></div><div class="service-chapters">{serviceGroups.map((group) => <section class="service-group"><div class="service-group-heading"><span class="eyebrow">{group.label}</span><p>{group.detail}</p></div><div class="service-list">{group.items.map((item) => <article class="service-row" data-service-card data-service-index={item.number} id={`treatment-${item.number}`} style={`--card-image: url('${serviceImages[(Number(item.number) - 1) % serviceImages.length]}')`}><div class="service-copy"><span class="eyebrow">{item.eyebrow}</span><h3>{item.title}</h3><p>{item.copy}</p><a href={`/estimate?service=${item.number}`}>Build this into an estimate <span>↗</span></a></div><div class="service-price"><strong>{item.price}</strong><small>{item.tag}</small></div></article>)}</div></section>)}</div></section>
   <section class="matrix-section"><div class="matrix-heading"><div><span class="eyebrow">Resident pricing guide</span><h2>Full treatment matrix</h2></div><span>GST 18% extra · prices in INR</span></div><span class="table-scroll-hint">Swipe sideways to compare vehicle categories <span aria-hidden="true">→</span></span><div class="table-scroll" role="region" aria-label="Full treatment pricing matrix" tabindex="0"><table><thead><tr><th># / Service</th>{vehicleCategories.map((category) => <th>{category}</th>)}</tr></thead><tbody>{allTreatments.map((item) => <tr><td><span>{item.number}</span><strong>{item.title}</strong><small>{item.tag}</small></td>{item.prices.map((price) => <td>{price}</td>)}</tr>)}</tbody></table></div><p class="matrix-note">The Premium-tier sun-film price is reproduced as supplied in the PDF (₹1,500) and should be confirmed with the Crest team before booking.</p></section>
 </SiteLayout>
 <style>
@@ -70,4 +70,231 @@ const serviceGroups = [
   @media (max-width: 880px) { .page-hero { grid-template-columns: 1fr; gap: 40px; } .catalogue-intro { display: block; } .catalogue-intro p { margin-top: 22px; } }
   @media (max-width: 1080px) { .table-scroll-hint { display: block; } .table-scroll::after { opacity: 1; } }
   @media (max-width: 620px) { .page-hero, .catalogue-section, .matrix-section { padding: 80px 20px; } .page-hero { min-height: auto; padding-top: 88px; } .page-hero-image { min-height: 330px; } .service-row { grid-template-columns: 35px 1fr; padding: 22px; } .service-price { grid-column: 2; display: block; text-align: left; } .service-price strong { display: block; margin-bottom: 5px; } .matrix-heading { display: block; } .matrix-heading > span { display: block; margin-top: 14px; } .matrix-heading h2 { font-size: 31px; } }
+</style>
+
+<style is:global>
+  /* Service cards: a calm, technical interaction layer with scroll and pointer depth. */
+  body main .service-list { perspective: 1200px; }
+  body main .service-row[data-service-card] {
+    position: relative !important;
+    isolation: isolate !important;
+    overflow: hidden !important;
+    opacity: 0;
+    transform: translate3d(0, 28px, 0) scale(.985);
+    transform-origin: 50% 100%;
+    transition: opacity .72s cubic-bezier(.22,1,.36,1) var(--service-delay, 0ms), transform .72s cubic-bezier(.22,1,.36,1) var(--service-delay, 0ms), border-color .28s ease, box-shadow .34s ease, background .28s ease !important;
+    will-change: opacity, transform;
+  }
+  body main .service-row[data-service-card].is-service-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  body main .service-row[data-service-card]::before {
+    display: block !important;
+    content: '' !important;
+    position: absolute !important;
+    z-index: 0 !important;
+    inset: 0 !important;
+    pointer-events: none !important;
+    opacity: .22 !important;
+    background: radial-gradient(circle at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(228,155,87,.3), transparent 22%), linear-gradient(110deg, rgba(142,185,161,.12), transparent 48%) !important;
+    transform: translate3d(calc(var(--pointer-shift-x, 0) * 1px), calc(var(--pointer-shift-y, 0) * 1px), 0) !important;
+    transition: opacity .32s ease, transform .25s ease !important;
+  }
+  body main .service-row[data-service-card]::after {
+    content: '↗' !important;
+    position: absolute !important;
+    z-index: 2 !important;
+    top: 24px !important;
+    right: 26px !important;
+    color: #a76535 !important;
+    font-size: 20px !important;
+    opacity: .38 !important;
+    transform: translate3d(-6px, 6px, 0) rotate(-8deg) !important;
+    transition: opacity .25s ease, transform .35s cubic-bezier(.22,1,.36,1), color .25s ease !important;
+  }
+  body main .service-row[data-service-card] > * { position: relative; z-index: 1; }
+  body main .service-row[data-service-card] .service-copy h3 {
+    transition: color .25s ease, transform .35s cubic-bezier(.22,1,.36,1), letter-spacing .35s ease !important;
+  }
+  body main .service-row[data-service-card] .service-copy p,
+  body main .service-row[data-service-card] .service-copy a,
+  body main .service-row[data-service-card] .service-price {
+    transition: color .25s ease, opacity .35s ease, transform .35s cubic-bezier(.22,1,.36,1) !important;
+  }
+  body main .service-row[data-service-card]:hover,
+  body main .service-row[data-service-card]:focus-within {
+    border-color: #8eb9a1 !important;
+    box-shadow: 0 26px 48px rgba(45,71,80,.14), 0 0 0 1px rgba(228,155,87,.18) !important;
+    transform: translate3d(calc(var(--tilt-x, 0) * 1px), calc(-5px + var(--tilt-y, 0) * 1px), 0) scale(1.012) !important;
+  }
+  body main .service-row[data-service-card]:hover::before,
+  body main .service-row[data-service-card]:focus-within::before { opacity: 1 !important; }
+  body main .service-row[data-service-card]:hover::after,
+  body main .service-row[data-service-card]:focus-within::after {
+    color: #123d66 !important;
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) rotate(0) !important;
+  }
+  body main .service-row[data-service-card]:hover .service-copy h3,
+  body main .service-row[data-service-card]:focus-within .service-copy h3 {
+    color: #123d66 !important;
+    letter-spacing: -.055em !important;
+    transform: translateX(3px) !important;
+  }
+  body main .service-row[data-service-card]:hover .service-copy p,
+  body main .service-row[data-service-card]:focus-within .service-copy p { transform: translateX(3px) !important; }
+  body main .service-row[data-service-card]:hover .service-copy a,
+  body main .service-row[data-service-card]:focus-within .service-copy a { transform: translateX(5px) !important; }
+  body main .service-row[data-service-card] .service-copy a span { display: inline-block; transition: transform .25s cubic-bezier(.22,1,.36,1); }
+  body main .service-row[data-service-card]:hover .service-copy a span,
+  body main .service-row[data-service-card]:focus-within .service-copy a span { transform: translate(4px, -2px); }
+  body main .service-row[data-service-card] .service-price strong { transition: color .25s ease, transform .3s ease; }
+  body main .service-row[data-service-card]:hover .service-price strong,
+  body main .service-row[data-service-card]:focus-within .service-price strong { color: #a76535 !important; transform: translateY(-2px); }
+  body main .service-row[data-service-card] .eyebrow { transition: color .25s ease, letter-spacing .3s ease; }
+  body main .service-row[data-service-card]:hover .eyebrow,
+  body main .service-row[data-service-card]:focus-within .eyebrow { color: #a76535 !important; letter-spacing: .12em !important; }
+  body main .service-row[data-service-card] .service-copy a:focus-visible { outline-offset: 8px !important; }
+  @media (prefers-reduced-motion: reduce) {
+    body main .service-row[data-service-card],
+    body main .service-row[data-service-card].is-service-visible {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: border-color .2s ease, background .2s ease, box-shadow .2s ease !important;
+    }
+    body main .service-row[data-service-card]::before,
+    body main .service-row[data-service-card]::after,
+    body main .service-row[data-service-card] * { transition: none !important; }
+  }
+  @media (max-width: 620px) {
+    body main .service-row[data-service-card]:hover,
+    body main .service-row[data-service-card]:focus-within { transform: translateY(-3px) scale(1.005) !important; }
+    body main .service-row[data-service-card]::after { top: 20px !important; right: 22px !important; }
+  }
+</style>
+<script is:inline data-astro-rerun>
+  // @ts-nocheck
+  (() => {
+    window.__crestServiceMotionCleanup?.();
+    const controller = new AbortController();
+    const cards = [...document.querySelectorAll('[data-service-card]')];
+    if (!cards.length) return;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    cards.forEach((card, index) => {
+      card.style.setProperty('--service-delay', `${Math.min(index, 7) * 65}ms`);
+      card.style.setProperty('--pointer-x', '50%');
+      card.style.setProperty('--pointer-y', '50%');
+      card.style.setProperty('--pointer-shift-x', '0');
+      card.style.setProperty('--pointer-shift-y', '0');
+      card.style.setProperty('--tilt-x', '0');
+      card.style.setProperty('--tilt-y', '0');
+    });
+    const reveal = () => cards.forEach((card) => card.classList.add('is-service-visible'));
+    if (reducedMotion || !('IntersectionObserver' in window)) reveal();
+    else {
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-service-visible');
+        observer.unobserve(entry.target);
+      }), { threshold: .18, rootMargin: '0px 0px -10% 0px' });
+      cards.forEach((card) => observer.observe(card));
+      window.__crestServiceObserver = observer;
+    }
+    if (!isTouch && !reducedMotion) cards.forEach((card) => {
+      const onMove = (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
+        const y = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
+        const px = (x / rect.width) * 100;
+        const py = (y / rect.height) * 100;
+        card.style.setProperty('--pointer-x', `${px}%`);
+        card.style.setProperty('--pointer-y', `${py}%`);
+        card.style.setProperty('--pointer-shift-x', `${((px - 50) / 12).toFixed(2)}`);
+        card.style.setProperty('--pointer-shift-y', `${((py - 50) / 12).toFixed(2)}`);
+        card.style.setProperty('--tilt-x', `${((px - 50) / 28).toFixed(2)}`);
+        card.style.setProperty('--tilt-y', `${((py - 50) / 35).toFixed(2)}`);
+      };
+      const reset = () => {
+        card.style.setProperty('--pointer-x', '50%');
+        card.style.setProperty('--pointer-y', '50%');
+        card.style.setProperty('--pointer-shift-x', '0');
+        card.style.setProperty('--pointer-shift-y', '0');
+        card.style.setProperty('--tilt-x', '0');
+        card.style.setProperty('--tilt-y', '0');
+      };
+      card.addEventListener('pointermove', onMove, { signal: controller.signal });
+      card.addEventListener('pointerleave', reset, { signal: controller.signal });
+      card.addEventListener('focusout', reset, { signal: controller.signal });
+    });
+    window.__crestServiceMotionCleanup = () => { controller.abort(); window.__crestServiceObserver?.disconnect(); };
+  })();
+</script>
+
+<style is:global>
+  /* Service pricing is a decision point, not a decorative label. Keep it readable and collision-free. */
+  body main .service-row {
+    grid-template-columns: minmax(0, 1fr) minmax(170px, 210px) !important;
+  }
+  body main .service-row::after { display: none !important; }
+  body main .service-row .service-price {
+    position: relative !important;
+    z-index: 3 !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    min-width: 170px !important;
+    min-height: 72px !important;
+    padding: 12px 8px 12px 22px !important;
+    border-left: 1px solid #cbdcd6 !important;
+    background: linear-gradient(90deg, rgba(239,243,241,0), rgba(239,243,241,.92) 24%, rgba(255,255,255,.92)) !important;
+    text-align: right !important;
+  }
+  body main .service-row .service-price strong {
+    display: block !important;
+    color: #123d66 !important;
+    font-size: clamp(18px, 1.5vw, 25px) !important;
+    font-weight: 700 !important;
+    letter-spacing: -.035em !important;
+    line-height: 1.08 !important;
+    text-shadow: none !important;
+    white-space: nowrap !important;
+  }
+  body main .service-row .service-price small {
+    display: block !important;
+    max-width: 170px !important;
+    margin-top: 7px !important;
+    color: #8b542e !important;
+    font-size: 10px !important;
+    font-weight: 700 !important;
+    letter-spacing: .07em !important;
+    line-height: 1.3 !important;
+    text-transform: uppercase !important;
+  }
+  body main .service-row:hover .service-price,
+  body main .service-row:focus-within .service-price { background: linear-gradient(90deg, rgba(239,243,241,.2), rgba(239,243,241,1) 24%, #fff) !important; }
+  @media (max-width: 1199px) {
+    body main .service-row { grid-template-columns: minmax(0, 1fr) minmax(145px, 175px) !important; }
+    body main .service-row .service-price { min-width: 145px !important; padding-left: 15px !important; }
+  }
+  @media (max-width: 620px) {
+    body main .service-row { grid-template-columns: minmax(0, 1fr) !important; }
+    body main .service-row .service-price {
+      grid-column: 1 !important;
+      grid-row: auto !important;
+      align-items: flex-start !important;
+      min-width: 0 !important;
+      min-height: 0 !important;
+      padding: 12px 0 0 !important;
+      border-top: 1px solid #cbdcd6 !important;
+      border-left: 0 !important;
+      background: transparent !important;
+      text-align: left !important;
+    }
+    body main .service-row .service-price small { max-width: none !important; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    body main .service-row .service-price { transition: none !important; }
+  }
 </style>
