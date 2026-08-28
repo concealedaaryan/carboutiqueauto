@@ -2177,6 +2177,9 @@ const legalLinks = [
   /* Final header readability contract: the control zone must never wash out on cream. */
   body .site-header,
   body .site-header.is-scrolled {
+    position: sticky !important;
+    z-index: 1000 !important;
+    isolation: isolate !important;
     background: #f8f8f4 !important;
     border-bottom-color: #d9e0dc !important;
     box-shadow: 0 8px 24px rgba(18,61,102,.06) !important;
@@ -2210,9 +2213,11 @@ const legalLinks = [
   }
   body .site-header .menu-toggle span { background: #123d66 !important; }
   body .site-header .mobile-menu {
-    background-color: #f8f8f4 !important;
+    background: #f4eadb !important;
+    background-color: #f4eadb !important;
     background-image: none !important;
     backdrop-filter: none !important;
+    isolation: isolate !important;
     transition: transform .25s var(--ease), visibility .25s !important;
     opacity: 0;
   }
@@ -2221,16 +2226,23 @@ const legalLinks = [
       position: fixed !important;
       top: 76px !important;
       right: 0 !important;
-      bottom: 0 !important;
+      bottom: auto !important;
       left: 0 !important;
-      z-index: 60 !important;
+      height: calc(100dvh - 76px) !important;
+      min-height: calc(100dvh - 76px) !important;
+      max-height: none !important;
+      z-index: 9999 !important;
       display: flex !important;
       visibility: hidden !important;
       flex-direction: column !important;
-      background: #f8f8f4 !important;
+      background: #f4eadb !important;
+      background-color: #f4eadb !important;
+      background-image: none !important;
       opacity: 0 !important;
       transform: translateY(-10px);
       box-shadow: 0 18px 40px rgba(18,61,102,.14) !important;
+      color: #123d66 !important;
+      overflow-y: auto !important;
     }
     body .site-header .mobile-menu.is-open {
       visibility: visible !important;
@@ -2241,6 +2253,8 @@ const legalLinks = [
   @media (max-width: 620px) {
     body .site-header .mobile-menu {
       top: 72px !important;
+      height: calc(100dvh - 72px) !important;
+      min-height: calc(100dvh - 72px) !important;
     }
   }
   @media (max-width: 960px) {
