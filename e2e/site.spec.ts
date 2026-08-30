@@ -26,6 +26,34 @@ test.describe('Crest Automotive multi-page navigation', () => {
     });
   }
 
+  test('inner-page openings stay compact and header-safe at desktop and mobile widths', async ({ page }) => {
+    for (const viewport of [{ width: 1440, height: 900, maxOffset: 280 }, { width: 390, height: 844, maxOffset: 210 }]) {
+      await page.setViewportSize({ width: viewport.width, height: viewport.height });
+      await page.emulateMedia({ reducedMotion: 'reduce' });
+      for (const route of publicRoutes) {
+        await page.goto(route);
+        const opening = await page.locator('main h1').first().evaluate((h1) => {
+          const rect = (selector) => document.querySelector(selector)?.getBoundingClientRect() ?? null;
+          const header = rect('.site-header');
+          const heading = h1.getBoundingClientRect();
+          return {
+            headerBottom: header?.bottom ?? 0,
+            headingTop: heading.top,
+            bodyWidth: document.body.scrollWidth,
+            viewportWidth: document.documentElement.clientWidth,
+            mainCount: document.querySelectorAll('main').length,
+            h1Count: document.querySelectorAll('main h1').length,
+          };
+        });
+        expect(opening.mainCount, `${route} should have one main landmark`).toBe(1);
+        expect(opening.h1Count, `${route} should have one main heading`).toBe(1);
+        expect(opening.bodyWidth, `${route} should not overflow horizontally`).toBeLessThanOrEqual(opening.viewportWidth);
+        expect(opening.headingTop, `${route} h1 should be inside the initial viewport`).toBeLessThan(viewport.height);
+        expect(opening.headingTop - opening.headerBottom, `${route} h1 should start near the header`).toBeLessThanOrEqual(viewport.maxOffset);
+      }
+    }
+  });
+
   test('desktop navigation reaches services from homepage', async ({ page }) => {
     await page.goto('/');
     await page.locator('.desktop-nav').getByRole('link', { name: 'Services', exact: true }).click();
