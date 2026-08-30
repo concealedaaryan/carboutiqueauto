@@ -2991,3 +2991,28 @@ const legalLinks = [
     }
   }
 </style>
+
+<style is:global>
+  /* Individual service cards use their inline Drive asset, with a text-safe overlay that still lets the work show through. */
+  body main .service-row {
+    background-image: var(--card-image) !important;
+    background-position: center;
+    background-size: cover;
+  }
+  body main .service-row::before {
+    background:
+      linear-gradient(90deg, rgba(8,24,39,.86) 0%, rgba(8,24,39,.70) 58%, rgba(8,24,39,.48) 100%),
+      linear-gradient(180deg, rgba(8,24,39,.20), rgba(8,24,39,.88)) !important;
+  }
+  body main .service-row .service-copy h3,
+  body main .service-row .service-copy p,
+  body main .service-row .service-copy a,
+  body main .service-row .service-copy .eyebrow,
+  body main .service-row .service-price strong,
+  body main .service-row .service-price small { text-shadow: 0 2px 12px rgba(0,0,0,.42); }
+  @media (max-width: 620px) {
+    body main .service-row::before {
+      background: linear-gradient(180deg, rgba(8,24,39,.70), rgba(8,24,39,.92)) !important;
+    }
+  }
+</style>
