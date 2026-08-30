@@ -6,6 +6,8 @@ import StickyBookingBar from '../components/StickyBookingBar.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import IntroLoader from '../components/IntroLoader.astro';
 import { ClientRouter } from 'astro:transitions';
+import SpeedInsightsComponent from '@vercel/speed-insights/astro';
+const SpeedInsights = SpeedInsightsComponent as any;
 const { title, description = 'Premium, waterless automotive care for DLF Gurugram.', currentPath = '/', pageLabel = '', robots = 'index,follow,max-image-preview:large', includeBusinessSchema = true } = Astro.props;
 const siteUrl = (import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || '').replace(/\/$/, '');
 const canonicalPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
@@ -81,6 +83,7 @@ const legalLinks = [
     <ClientRouter />
   </head>
   <body>
+    <SpeedInsights />
     {currentPath === '/' && <IntroLoader />}
     <PageTransition />
     <div class="connected-scroll-thread" aria-hidden="true"><span></span></div>
