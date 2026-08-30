@@ -3016,3 +3016,13 @@ const legalLinks = [
     }
   }
 </style>
+
+<style is:global>
+  /* Preserve the complete source frame inside each fixed service card; the card dimensions stay unchanged. */
+  body main .service-row {
+    background-size: contain !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #081827;
+  }
+</style>
