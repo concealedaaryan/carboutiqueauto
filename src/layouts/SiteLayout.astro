@@ -14,7 +14,7 @@ const { title, description = 'Premium, waterless automotive care for DLF Gurugra
 const siteUrl = (import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || '').replace(/\/$/, '');
 const canonicalPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
 const canonicalUrl = siteUrl ? `${siteUrl}${canonicalPath}` : undefined;
-const socialImage = siteUrl ? `${siteUrl}/images/generated/crest-hero-studio.jpg` : '/images/generated/crest-hero-studio.jpg';
+const socialImage = siteUrl ? `${siteUrl}/images/drive/black-luxury-sedan.jpeg` : '/images/drive/black-luxury-sedan.jpeg';
 const pageTitle = title.includes('Crest Automotive Care') ? title : `${title} | Crest Automotive Care`;
 const businessId = siteUrl ? `${siteUrl}/#business` : undefined;
 const websiteId = siteUrl ? `${siteUrl}/#website` : undefined;
@@ -296,15 +296,15 @@ const legalLinks = [
     pointer-events: none;
     background: linear-gradient(90deg, rgba(14,14,16,.96) 0%, rgba(14,14,16,.82) 50%, rgba(14,14,16,.42) 100%);
   }
-  .protection-hero { background-image: url('/images/generated/crest-ppf-precision.jpg'); }
-  .services-hero { background-image: url('/images/generated/crest-detailing-process.jpg'); }
-  .packages-hero { background-image: url('/images/generated/crest-studio-wide.jpg'); }
-  .why-hero { background-image: url('/images/generated/crest-detailing-process.jpg'); }
-  .location-hero { background-image: url('/images/generated/crest-studio-wide.jpg'); }
-  .contact-hero { background-image: url('/images/generated/crest-studio-wide.jpg'); }
-  .estimate-hero { background-image: url('/images/generated/crest-ppf-precision.jpg'); }
-  .ppf-section { background-image: linear-gradient(90deg, rgba(14,14,16,.96), rgba(27,27,29,.78)), url('/images/generated/crest-ppf-precision.jpg'); background-position:center; background-size:cover; }
-  .addons-section { background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.82)), url('/images/generated/crest-ceramic-beading.jpg'); background-position:center; background-size:cover; }
+  .protection-hero { background-image: url('/images/drive/applying-ppf.jpeg'); }
+  .services-hero { background-image: url('/images/drive/hand-wiping-hood.jpeg'); }
+  .packages-hero { background-image: url('/images/drive/black-sports-car.jpeg'); }
+  .why-hero { background-image: url('/images/drive/hand-wiping-hood.jpeg'); }
+  .location-hero { background-image: url('/images/drive/black-sports-car.jpeg'); }
+  .contact-hero { background-image: url('/images/drive/black-sports-car.jpeg'); }
+  .estimate-hero { background-image: url('/images/drive/applying-ppf.jpeg'); }
+  .ppf-section { background-image: linear-gradient(90deg, rgba(14,14,16,.96), rgba(27,27,29,.78)), url('/images/drive/applying-ppf.jpeg'); background-position:center; background-size:cover; }
+  .addons-section { background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.82)), url('/images/drive/ceramic-application.jpeg'); background-position:center; background-size:cover; }
 </style>
 
 <style is:global>
@@ -322,9 +322,9 @@ const legalLinks = [
 <style is:global>
   .page-hero, .package-hero, .faq-hero { position:relative; isolation:isolate; background-position:center; background-size:cover; }
   .page-hero::before, .package-hero::before, .faq-hero::before { content:''; position:absolute; z-index:-1; inset:0; pointer-events:none; background:linear-gradient(90deg,rgba(14,14,16,.96),rgba(14,14,16,.78) 54%,rgba(14,14,16,.4)); }
-  .page-hero { background-image:url('/images/generated/crest-detailing-process.jpg'); }
-  .package-hero { background-image:url('/images/generated/crest-studio-wide.jpg'); }
-  .faq-hero { background-image:url('/images/generated/crest-ceramic-beading.jpg'); }
+  .page-hero { background-image:url('/images/drive/hand-wiping-hood.jpeg'); }
+  .package-hero { background-image:url('/images/drive/black-sports-car.jpeg'); }
+  .faq-hero { background-image:url('/images/drive/ceramic-application.jpeg'); }
   .page-hero-image, .package-hero-card, .hero-image, .why-image { background-blend-mode:normal; }
 </style>
 
@@ -354,39 +354,39 @@ const legalLinks = [
     background-repeat: no-repeat;
   }
   main .home-paths {
-    background-image: linear-gradient(90deg, rgba(14,14,16,.96), rgba(14,14,16,.76)), url('/images/generated/crest-studio-wide.jpg') !important;
+    background-image: linear-gradient(90deg, rgba(14,14,16,.96), rgba(14,14,16,.76)), url('/images/drive/black-sports-car.jpeg') !important;
   }
   main .image-proof-band {
-    background-image: linear-gradient(90deg, rgba(14,14,16,.90), rgba(14,14,16,.72)), url('/images/generated/crest-ceramic-beading.jpg') !important;
+    background-image: linear-gradient(90deg, rgba(14,14,16,.90), rgba(14,14,16,.72)), url('/images/drive/ceramic-application.jpeg') !important;
   }
   main .catalogue-section,
   main .reason-section,
   main .faq-section {
-    background-image: linear-gradient(90deg, rgba(14,14,16,.96), rgba(27,27,29,.80)), url('/images/generated/crest-detailing-process.jpg') !important;
+    background-image: linear-gradient(90deg, rgba(14,14,16,.96), rgba(27,27,29,.80)), url('/images/drive/hand-wiping-hood.jpeg') !important;
   }
   main .matrix-section,
   main .stats-section,
   main .contact-bottom,
   main .location-studio,
   main .why-cta {
-    background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.78)), url('/images/generated/crest-studio-wide.jpg') !important;
+    background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.78)), url('/images/drive/black-sports-car.jpeg') !important;
   }
   main .package-grid-section,
   main .locations-section {
-    background-image: linear-gradient(90deg, rgba(14,14,16,.95), rgba(27,27,29,.80)), url('/images/generated/crest-studio-wide.jpg') !important;
+    background-image: linear-gradient(90deg, rgba(14,14,16,.95), rgba(27,27,29,.80)), url('/images/drive/black-sports-car.jpeg') !important;
   }
   main .coating-section,
   main .estimate-disclaimer,
   main .location-cta {
-    background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.78)), url('/images/generated/crest-ceramic-beading.jpg') !important;
+    background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.78)), url('/images/drive/ceramic-application.jpeg') !important;
   }
   main .ppf-section,
   main .calculator-section {
-    background-image: linear-gradient(90deg, rgba(14,14,16,.95), rgba(27,27,29,.76)), url('/images/generated/crest-ppf-precision.jpg') !important;
+    background-image: linear-gradient(90deg, rgba(14,14,16,.95), rgba(27,27,29,.76)), url('/images/drive/applying-ppf.jpeg') !important;
   }
   main .addons-section,
   main .faq-cta {
-    background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.80)), url('/images/generated/crest-ceramic-beading.jpg') !important;
+    background-image: linear-gradient(90deg, rgba(14,14,16,.94), rgba(27,27,29,.80)), url('/images/drive/ceramic-application.jpeg') !important;
   }
   main .home-paths .choice-card,
   main .coating-card,
@@ -426,15 +426,15 @@ const legalLinks = [
   main .service-row > *,
   main .package-card > * { position: relative; z-index: 1; }
   main .service-row:nth-child(5n + 1),
-  main .package-card:nth-child(5n + 1) { background-image: url('/images/generated/crest-detailing-process.jpg'); }
+  main .package-card:nth-child(5n + 1) { background-image: url('/images/drive/hand-wiping-hood.jpeg'); }
   main .service-row:nth-child(5n + 2),
-  main .package-card:nth-child(5n + 2) { background-image: url('/images/generated/crest-hero-studio.jpg'); }
+  main .package-card:nth-child(5n + 2) { background-image: url('/images/drive/black-luxury-sedan.jpeg'); }
   main .service-row:nth-child(5n + 3),
-  main .package-card:nth-child(5n + 3) { background-image: url('/images/generated/crest-ppf-precision.jpg'); }
+  main .package-card:nth-child(5n + 3) { background-image: url('/images/drive/applying-ppf.jpeg'); }
   main .service-row:nth-child(5n + 4),
-  main .package-card:nth-child(5n + 4) { background-image: url('/images/generated/crest-ceramic-beading.jpg'); }
+  main .package-card:nth-child(5n + 4) { background-image: url('/images/drive/ceramic-application.jpeg'); }
   main .service-row:nth-child(5n),
-  main .package-card:nth-child(5n) { background-image: url('/images/generated/crest-studio-wide.jpg'); }
+  main .package-card:nth-child(5n) { background-image: url('/images/drive/black-sports-car.jpeg'); }
   main .service-row:hover,
   main .package-card:hover,
   main .package-card.featured {
@@ -519,12 +519,12 @@ const legalLinks = [
   main .coating-card > *,
   main .addon-card > *,
   main .location-grid article > * { position: relative; z-index: 1; }
-  main .popular-card:nth-child(1), main .coating-card:nth-child(1), main .location-grid article:nth-child(1) { background-image: url('/images/generated/crest-detailing-process.jpg'); }
-  main .popular-card:nth-child(2), main .coating-card:nth-child(2), main .location-grid article:nth-child(2) { background-image: url('/images/generated/crest-hero-studio.jpg'); }
-  main .popular-card:nth-child(3), main .coating-card:nth-child(3), main .location-grid article:nth-child(3) { background-image: url('/images/generated/crest-ceramic-beading.jpg'); }
-  main .coating-card:nth-child(4), main .location-grid article:nth-child(4) { background-image: url('/images/generated/crest-ppf-precision.jpg'); }
-  main .addon-card:nth-child(1) { background-image: url('/images/generated/crest-ppf-precision.jpg'); }
-  main .addon-card:nth-child(2) { background-image: url('/images/generated/crest-ceramic-beading.jpg'); }
+  main .popular-card:nth-child(1), main .coating-card:nth-child(1), main .location-grid article:nth-child(1) { background-image: url('/images/drive/hand-wiping-hood.jpeg'); }
+  main .popular-card:nth-child(2), main .coating-card:nth-child(2), main .location-grid article:nth-child(2) { background-image: url('/images/drive/black-luxury-sedan.jpeg'); }
+  main .popular-card:nth-child(3), main .coating-card:nth-child(3), main .location-grid article:nth-child(3) { background-image: url('/images/drive/ceramic-application.jpeg'); }
+  main .coating-card:nth-child(4), main .location-grid article:nth-child(4) { background-image: url('/images/drive/applying-ppf.jpeg'); }
+  main .addon-card:nth-child(1) { background-image: url('/images/drive/applying-ppf.jpeg'); }
+  main .addon-card:nth-child(2) { background-image: url('/images/drive/ceramic-application.jpeg'); }
   main .popular-card:hover::before,
   main .coating-card:hover::before,
   main .addon-card:hover::before,
@@ -581,10 +581,10 @@ const legalLinks = [
     background-repeat: no-repeat;
   }
   main .membership-story-image {
-    background-image: linear-gradient(90deg, rgba(14,14,16,.18), rgba(14,14,16,.70)), url('/images/generated/crest-studio-wide.jpg');
+    background-image: linear-gradient(90deg, rgba(14,14,16,.18), rgba(14,14,16,.70)), url('/images/drive/black-sports-car.jpeg');
   }
   main .protection-story-image {
-    background-image: linear-gradient(90deg, rgba(14,14,16,.18), rgba(14,14,16,.70)), url('/images/generated/crest-ppf-precision.jpg');
+    background-image: linear-gradient(90deg, rgba(14,14,16,.18), rgba(14,14,16,.70)), url('/images/drive/applying-ppf.jpeg');
   }
   main .membership-story-copy,
   main .protection-story-copy {
@@ -2631,17 +2631,17 @@ const legalLinks = [
   body .page-title-bar span { color: #8b542e !important; }
 
   body main .page-hero-image {
-    background-image: linear-gradient(180deg, rgba(8,24,39,.08), rgba(8,24,39,.88)), url('/images/generated/crest-detailing-process.jpg') !important;
+    background-image: linear-gradient(180deg, rgba(8,24,39,.08), rgba(8,24,39,.88)), url('/images/drive/hand-wiping-hood.jpeg') !important;
     background-color: #123d66 !important;
     color: #fff !important;
   }
   body main .package-hero-card {
-    background-image: linear-gradient(180deg, rgba(8,24,39,.08), rgba(8,24,39,.88)), url('/images/generated/crest-ceramic-beading.jpg') !important;
+    background-image: linear-gradient(180deg, rgba(8,24,39,.08), rgba(8,24,39,.88)), url('/images/drive/ceramic-application.jpeg') !important;
     background-color: #123d66 !important;
     color: #fff !important;
   }
   body main .hero-image.rodim-hero-image {
-    background-image: linear-gradient(180deg, rgba(8,24,39,.08), rgba(8,24,39,.88)), url('/images/generated/crest-ppf-precision.jpg') !important;
+    background-image: linear-gradient(180deg, rgba(8,24,39,.08), rgba(8,24,39,.88)), url('/images/drive/applying-ppf.jpeg') !important;
     background-color: #123d66 !important;
   }
   body main .page-hero-image span,

@@ -7,7 +7,7 @@ const { title, eyebrow = 'Legal & policies', intro = '', updated = '22 August 20
 const siteUrl = (import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || '').replace(/\/$/, '');
 const canonicalPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
 const canonicalUrl = siteUrl ? `${siteUrl}${canonicalPath}` : undefined;
-const socialImage = siteUrl ? `${siteUrl}/images/generated/crest-hero-studio.jpg` : '/images/generated/crest-hero-studio.jpg';
+const socialImage = siteUrl ? `${siteUrl}/images/drive/black-luxury-sedan.jpeg` : '/images/drive/black-luxury-sedan.jpeg';
 const pageTitle = title.includes('Crest Automotive Care') ? title : `${title} | Crest Automotive Care`;
 const websiteUrl = siteUrl || Astro.url.origin;
 const policyJsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', '@id': canonicalUrl ? `${canonicalUrl}#webpage` : undefined, name: title, description: intro || `${title} | Crest Automotive Care`, url: canonicalUrl || Astro.url.href, isPartOf: { '@type': 'WebSite', name: 'Crest Automotive Care', url: websiteUrl } };

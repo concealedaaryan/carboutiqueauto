@@ -4,9 +4,9 @@ import HeroCarousel from '../components/HeroCarousel.astro';
 import { ppfOptions } from '../data/catalog';
 
 const heroSlides = [
-  { src: '/images/generated/crest-hero-studio.jpg', eyebrow: 'Crest Automotive Care · Rodim PPF studio', caption: 'Protection for the cars that matter', description: 'A graphite luxury sedan prepared for Rodim paint protection film inside Crest Automotive Care.' },
-  { src: '/images/generated/crest-ppf-precision.jpg', eyebrow: 'Rodim PPF · Precision installation', caption: 'Clean alignment · controlled finish', description: 'A precision Rodim PPF installation detail showing careful film alignment on a dark vehicle.' },
-  { src: '/images/generated/crest-studio-wide.jpg', eyebrow: 'Inside DLF The Camellias', caption: 'Private in-house care in Gurgaon', description: 'A premium private automotive studio prepared for Crest detailing and Rodim PPF care.' },
+  { src: '/images/drive/black-luxury-sedan.jpeg', eyebrow: 'Crest Automotive Care · Rodim PPF studio', caption: 'Protection for the cars that matter', description: 'A graphite luxury sedan prepared for Rodim paint protection film inside Crest Automotive Care.' },
+  { src: '/images/drive/applying-ppf.jpeg', eyebrow: 'Rodim PPF · Precision installation', caption: 'Clean alignment · controlled finish', description: 'A precision Rodim PPF installation detail showing careful film alignment on a dark vehicle.' },
+  { src: '/images/drive/black-sports-car.jpeg', eyebrow: 'Inside DLF The Camellias', caption: 'Private in-house care in Gurgaon', description: 'A premium private automotive studio prepared for Crest detailing and Rodim PPF care.' },
 ];
 
 const ppfVariants = ppfOptions.filter((film) => film.officialProduct).map((film) => ({ name: film.name, description: film.positioning, officialUrl: film.officialUrl }));
@@ -46,7 +46,7 @@ const faqItems = [
   </section>
 
   <section id="what-is-ppf" class="education-section station-prep" data-station-anchor="03" data-station="03" data-station-name="Preparation bay">
-    <div class="education-image reveal"><img src="/images/generated/crest-ppf-precision.jpg" alt="Precision Rodim PPF installation on a dark luxury vehicle" loading="lazy" /></div>
+    <div class="education-image reveal"><img src="/images/drive/water-droplets.jpeg" alt="Water droplets beading on a protected car surface" loading="lazy" /></div>
     <div class="education-copy reveal reveal-delay-1"><span class="eyebrow">What is Rodim PPF?</span><h2>A physical layer<br /><em>between paint and road</em></h2><p>Paint protection film is a clear or finish-changing film applied over painted panels. It is designed to take the first contact from stone chips, light scratches, road debris and environmental wear so the original paint can stay cleaner and easier to preserve.</p><div class="fact-grid"><div><strong>Impact first</strong><span>Helps protect priority painted surfaces.</span></div><div><strong>Finish choice</strong><span>Compare gloss, matte and darker visual options.</span></div><div><strong>System thinking</strong><span>Pair film with preparation, coating and aftercare.</span></div></div></div>
   </section>
 
