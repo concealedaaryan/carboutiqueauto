@@ -3,13 +3,13 @@ from pathlib import Path
 ROOT = Path('/home/ubuntu/repo-audit-cargoutiqueauto')
 rodim_table = '''| Film | Warranty | Small / Medium / Large | Coverage |
 |---|---|---|---|
-| BASF Rodim TPU (German) R4 Pro | 15 years | ₹2,90,000 / ₹3,15,000 / ₹3,30,000 | Cracking & yellowing |
-| BASF Rodim TPU (German) R3 Pro | 10 years | ₹1,60,000 / ₹1,80,000 / ₹2,00,000 | Cracking & yellowing |
-| BASF Rodim TPU PPF (German) R + Black Shield | 7 years | ₹1,50,000 / ₹1,65,000 / ₹1,85,000 | Cracking & yellowing |
-| BASF Rodim TPU PPF (German) R2 Matt | 8 years | ₹1,45,000 / ₹1,60,000 / ₹1,75,000 | Cracking & yellowing |
-| BASF Rodim TPU PPF (German) R2 | 8 years | ₹1,35,000 / ₹1,45,000 / ₹1,60,000 | Cracking & yellowing |
-| BASF Rodim TPU PPF (German) R1 | 7 years | ₹1,10,000 / ₹1,25,000 / ₹1,30,000 | Cracking & yellowing |
-| BASF Rodim TPU (German) R Star | 5 years | ₹85,000 / ₹1,00,000 / ₹1,20,000 | Cracking & yellowing |'''
+| Rodim R3 Pro | Not stated on current official page | ₹2,90,000 / ₹3,15,000 / ₹3,30,000 | Cracking & yellowing |
+| Rodim R3 Pro | 10 years | ₹1,60,000 / ₹1,80,000 / ₹2,00,000 | Cracking & yellowing |
+| Rodim R2 Black | 7 years | ₹1,50,000 / ₹1,65,000 / ₹1,85,000 | Cracking & yellowing |
+| Rodim R2 Matt Finish | 8 years | ₹1,45,000 / ₹1,60,000 / ₹1,75,000 | Cracking & yellowing |
+| Rodim R2 | 8 years | ₹1,35,000 / ₹1,45,000 / ₹1,60,000 | Cracking & yellowing |
+| Rodim R1 | 7 years | ₹1,10,000 / ₹1,25,000 / ₹1,30,000 | Cracking & yellowing |
+| Rodim R Star | 5 years | ₹85,000 / ₹1,00,000 / ₹1,20,000 | Cracking & yellowing |'''
 
 for filename in ['api/crest-system-prompt.js', 'groq-system-prompt.md']:
     path = ROOT / filename

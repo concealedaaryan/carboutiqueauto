@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-const publicRoutes = ['/services', '/packages', '/protection', '/estimate', '/why-crest', '/locations', '/faq', '/contact'];
-const navLabels = ['Services', 'Packages', 'Protection', 'Estimate', 'Locations', 'Contact'];
+const publicRoutes = ['/services', '/packages', '/protection', '/rodim', '/estimate', '/why-crest', '/locations', '/faq', '/contact'];
+const navLabels = ['Services', 'Packages', 'Protection', 'Rodim PPF', 'Estimate', 'Locations', 'Contact'];
 
 test.describe('Crest Automotive multi-page navigation', () => {
   test('homepage is concise and links to dedicated detail pages', async ({ page }) => {
@@ -34,6 +34,16 @@ test.describe('Crest Automotive multi-page navigation', () => {
     await expect(page.locator('.service-row')).toHaveCount(16);
   });
 
+  test('Rodim page presents verified product links and no removed legacy film offering', async ({ page }) => {
+    await page.goto('/rodim');
+    await expect(page).toHaveTitle(/Rodim PPF Information & Consultation/);
+    await expect(page.getByRole('heading', { name: /Protection with a point of view/i })).toBeVisible();
+    await expect(page.getByText(/legacy film/i)).toHaveCount(0);
+    await expect(page.locator('a[href="https://rodim.in/rodim-r1/"]')).toHaveAttribute('target', '_blank');
+    await expect(page.locator('a[href="https://rodim.in/rodim-r2/"]')).toHaveAttribute('rel', /noopener/);
+    await expect(page.getByRole('link', { name: /View warranty terms on Rodim.in/i })).toHaveAttribute('href', 'https://rodim.in/product-warranty-service-description/');
+  });
+
   test('mobile navigation opens and closes', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/');
@@ -61,17 +71,24 @@ test.describe('Crest Automotive booking calculator', () => {
     await page.goto('/estimate?service=13');
     await page.locator('#calc-category').selectOption({ label: 'Super luxury (GLE)' });
     await page.locator('#calc-ppf').check();
-    await page.locator('#calc-ppf-film').selectOption({ label: 'BASF Rodim TPU (German) R4 Pro · 15 years' });
+    await page.locator('#calc-ppf-film').selectOption({ label: 'Rodim R2 Black' });
     await page.locator('#calc-ppf-category').selectOption({ label: 'Super luxury (GLE)' });
     await page.locator('#calc-leather').check();
     await page.locator('#calc-exterior-ceramic').check();
     await page.locator('#calc-interior-ceramic').check();
     await expect(page.locator('#calc-base')).toHaveText('₹42,000');
-    await expect(page.locator('#calc-addons-total')).toHaveText('₹3,61,500');
-    await expect(page.locator('#calc-gst')).toHaveText('₹72,630');
-    await expect(page.locator('#calc-total')).toHaveText('₹4,76,130');
+    await expect(page.locator('#calc-addons-total')).toHaveText('₹2,16,500');
+    await expect(page.locator('#calc-gst')).toHaveText('₹46,530');
+    await expect(page.locator('#calc-total')).toHaveText('₹3,05,030');
     await expect(page.locator('#calc-breakdown')).toContainText('Premium graphene coating');
     await expect(page.locator('#calc-breakdown')).toContainText('PPF · Super luxury (GLE)');
+  });
+
+  test('ignores a stale PPF query token and starts on a current Rodim film', async ({ page }) => {
+    await page.goto('/estimate?service=13&ppf=legacy-film');
+    await page.locator('#calc-category').selectOption({ label: 'Luxury' });
+    await page.locator('#calc-ppf').check();
+    await expect(page.locator('#calc-ppf-film')).toHaveValue('Rodim R1');
   });
 
   test('requires a core treatment before enabling add-ons', async ({ page }) => {

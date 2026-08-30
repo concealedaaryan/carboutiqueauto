@@ -11,7 +11,7 @@ await page.route('**/api/chat', async (route) => {
   requests.push(body.messages || []);
   responseNumber += 1;
   const reply = responseNumber === 1
-    ? '## Rodim PPF\n\n**R4 Pro** is a strong option.<br>Would you like help choosing the coverage size?'
+    ? '## Rodim PPF\n\n**Rodim R3 Pro** is a strong option.<br>Would you like help choosing the coverage size?'
     : 'For your car, I would compare the film warranty and coverage size before confirming the final estimate.';
   await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ reply }) });
 });

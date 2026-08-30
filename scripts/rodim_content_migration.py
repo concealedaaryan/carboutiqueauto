@@ -7,13 +7,13 @@ text = catalog.read_text()
 old_start = text.index('export const ppfOptions = [')
 old_end = text.index('\n];', old_start) + 3
 new = '''export const ppfOptions = [
-  { name: 'BASF Rodim TPU (German) R4 Pro', warranty: '15 years', small: '₹2,90,000', medium: '₹3,15,000', large: '₹3,30,000', coverage: 'Cracking & yellowing' },
-  { name: 'BASF Rodim TPU (German) R3 Pro', warranty: '10 years', small: '₹1,60,000', medium: '₹1,80,000', large: '₹2,00,000', coverage: 'Cracking & yellowing' },
-  { name: 'BASF Rodim TPU PPF (German) R + Black Shield', warranty: '7 years', small: '₹1,50,000', medium: '₹1,65,000', large: '₹1,85,000', coverage: 'Cracking & yellowing' },
-  { name: 'BASF Rodim TPU PPF (German) R2 Matt', warranty: '8 years', small: '₹1,45,000', medium: '₹1,60,000', large: '₹1,75,000', coverage: 'Cracking & yellowing' },
-  { name: 'BASF Rodim TPU PPF (German) R2', warranty: '8 years', small: '₹1,35,000', medium: '₹1,45,000', large: '₹1,60,000', coverage: 'Cracking & yellowing' },
-  { name: 'BASF Rodim TPU PPF (German) R1', warranty: '7 years', small: '₹1,10,000', medium: '₹1,25,000', large: '₹1,30,000', coverage: 'Cracking & yellowing' },
-  { name: 'BASF Rodim TPU (German) R Star', warranty: '5 years', small: '₹85,000', medium: '₹1,00,000', large: '₹1,20,000', coverage: 'Cracking & yellowing' },
+  { name: 'Rodim R3 Pro', warranty: 'Not stated on current official page', small: '₹2,90,000', medium: '₹3,15,000', large: '₹3,30,000', coverage: 'Cracking & yellowing' },
+  { name: 'Rodim R3 Pro', warranty: '10 years', small: '₹1,60,000', medium: '₹1,80,000', large: '₹2,00,000', coverage: 'Cracking & yellowing' },
+  { name: 'Rodim R2 Black', warranty: '7 years', small: '₹1,50,000', medium: '₹1,65,000', large: '₹1,85,000', coverage: 'Cracking & yellowing' },
+  { name: 'Rodim R2 Matt Finish', warranty: '8 years', small: '₹1,45,000', medium: '₹1,60,000', large: '₹1,75,000', coverage: 'Cracking & yellowing' },
+  { name: 'Rodim R2', warranty: '8 years', small: '₹1,35,000', medium: '₹1,45,000', large: '₹1,60,000', coverage: 'Cracking & yellowing' },
+  { name: 'Rodim R1', warranty: '7 years', small: '₹1,10,000', medium: '₹1,25,000', large: '₹1,30,000', coverage: 'Cracking & yellowing' },
+  { name: 'Rodim R Star', warranty: 'Not stated on current official page', small: '₹85,000', medium: '₹1,00,000', large: '₹1,20,000', coverage: 'Cracking & yellowing' },
 ];'''
 catalog.write_text(text[:old_start] + new + text[old_end:])
 

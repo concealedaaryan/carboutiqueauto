@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 
 const routes = [
-  '/', '/services', '/packages', '/protection', '/estimate', '/locations', '/why-crest', '/faq', '/contact'
+  '/', '/services', '/packages', '/protection', '/rodim', '/estimate', '/locations', '/why-crest', '/faq', '/contact'
 ];
 
 export const GET: APIRoute = ({ site }) => {

@@ -1,6 +1,7 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import HeroCarousel from '../components/HeroCarousel.astro';
+import { ppfOptions } from '../data/catalog';
 
 const heroSlides = [
   { src: '/images/generated/crest-hero-studio.jpg', eyebrow: 'Crest Automotive Care · Rodim PPF studio', caption: 'Protection for the cars that matter', description: 'A graphite luxury sedan prepared for Rodim paint protection film inside Crest Automotive Care.' },
@@ -8,15 +9,7 @@ const heroSlides = [
   { src: '/images/generated/crest-studio-wide.jpg', eyebrow: 'Inside DLF The Camellias', caption: 'Private in-house care in Gurgaon', description: 'A premium private automotive studio prepared for Crest detailing and Rodim PPF care.' },
 ];
 
-const ppfVariants = [
-  { name: 'R4 Pro', description: 'The flagship self-healing option for owners seeking the highest available Rodim tier for a particularly valuable vehicle.' },
-  { name: 'R3 Pro', description: 'A premium choice for luxury and performance cars that need a strong balance of protection, finish and long-term confidence.' },
-  { name: 'R + Black Shield', description: 'For owners who want paint protection with a darker, more dramatic visual character on selected exterior surfaces.' },
-  { name: 'R2 Matt', description: 'For a factory-inspired satin or matte appearance while helping defend the original paint from daily road wear.' },
-  { name: 'R2', description: 'A versatile premium gloss-film route for daily-driven luxury, premium and enthusiast vehicles.' },
-  { name: 'R1', description: 'A considered entry into Rodim protection for owners who want to protect priority panels without stepping into the flagship tiers.' },
-  { name: 'R Star', description: 'A practical starting point for owners comparing coverage, finish and budget before choosing their protection plan.' },
-];
+const ppfVariants = ppfOptions.filter((film) => film.officialProduct).map((film) => ({ name: film.name, description: film.positioning, officialUrl: film.officialUrl }));
 
 const faqItems = [
   { question: 'Is PPF worth it for a luxury or premium car?', answer: 'PPF is most useful when preserving the original paint matters: it can help defend selected painted surfaces from stone chips, light scratches, road grime and everyday wear. The right value depends on the vehicle, driving pattern, coverage plan and installation quality.' },
@@ -28,7 +21,7 @@ const faqItems = [
   { question: 'Can PPF be removed?', answer: 'Professionally installed PPF can generally be removed when replacement or paint work is needed, but the result depends on film age, adhesive condition, paint condition and the removal method. Crest should inspect the vehicle before confirming a removal plan.' },
   { question: 'How long does PPF installation take?', answer: 'Installation time depends on the vehicle, preparation, coverage, film variant, panel complexity and agreed finish. Crest confirms the practical handover window after inspecting the car rather than promising one fixed duration for every vehicle.' },
   { question: 'Should I protect the full body or only selected panels?', answer: 'Full-body coverage offers the broadest protection, while partial coverage can focus investment on areas such as the bumper, bonnet, fenders, mirrors, door edges and loading zones. The best plan depends on how and where the car is driven.' },
-  { question: 'Can PPF be gloss or matte?', answer: 'Yes. Gloss and matte or satin finishes create different visual outcomes. Rodim R2 Matt is the matte-oriented option in the supplied range; Crest should confirm compatibility with the vehicle’s existing paint and the exact finish before booking.' },
+  { question: 'Can PPF be gloss or matte?', answer: 'Yes. Gloss and matte or satin finishes create different visual outcomes. Rodim R2 Matt Finish is the matte-oriented option in the supplied range; Crest should confirm compatibility with the vehicle’s existing paint and the exact finish before booking.' },
   { question: 'How do I maintain PPF after installation?', answer: 'Use clean, paint-safe washing methods, avoid harsh chemicals and abrasive tools, and follow the care instructions supplied with the film. Crest can also advise on suitable coating and aftercare options for the film and the rest of the vehicle.' },
   { question: 'What affects the cost of PPF?', answer: 'The main factors are vehicle size and shape, film variant, coverage area, finish, paint correction or preparation required, removal of existing film, and any additional coating or aftercare. Crest confirms the final scope after reviewing the car.' },
 ];
@@ -39,7 +32,7 @@ const faqItems = [
       <span class="eyebrow studio-kicker"><span class="typing-text" data-typing-text="Crest Automotive Care · Rodim PPF" aria-hidden="true"></span><span class="sr-only">Crest Automotive Care · Rodim PPF</span></span>
       <h1>Protect the paint<br /><em>Keep the presence</em></h1>
       <p>Rodim paint protection film, installed with precision across Crest Automotive Care studios in DLF Crest, DLF The Magnolias and DLF The Camellias, Gurgaon. Built for owners who expect more from the finish on a luxury, premium or enthusiast vehicle.</p>
-      <div class="hero-actions"><a class="button button-gold" href="/contact">Discuss your car <span>↗</span></a><a class="text-action" href="#rodim-range">Explore the Rodim range <span>→</span></a></div>
+      <div class="hero-actions"><a class="button button-gold" href="/contact">Discuss your car <span>↗</span></a><a class="text-action" href="/rodim">Explore the Rodim range <span>→</span></a></div>
       <div class="hero-trust"><strong>Studios across DLF Crest · The Magnolias · The Camellias</strong><span>In-house care for all three DLF communities · Gurgaon</span></div>
     </div>
     <div class="hero-media reveal reveal-delay-1"><HeroCarousel slides={heroSlides} label="Crest Automotive Care and Rodim PPF studio images" /></div>
@@ -58,8 +51,8 @@ const faqItems = [
   </section>
 
   <section id="rodim-range" class="range-section station-lab" data-station-anchor="04" data-station="04" data-station-name="Protection lab">
-    <div class="section-intro reveal"><span class="eyebrow">The Rodim range</span><h2>Seven ways to choose<br /><em>your shield</em></h2><p>Every vehicle, finish and driving pattern is different. Crest will confirm the right variant, coverage and current commercial terms after reviewing the car.</p></div>
-    <div class="variant-grid">{ppfVariants.map((variant, index) => <article class="variant-card reveal"><span class="variant-number">0{index + 1}</span><h3>{variant.name}</h3><p>{variant.description}</p><a href="/contact">Ask about this variant <span>↗</span></a></article>)}</div>
+    <div class="section-intro reveal"><span class="eyebrow">The Rodim range</span><h2>Five ways to choose<br /><em>your shield</em></h2><p>Every vehicle, finish and driving pattern is different. Crest will confirm the right variant, coverage and current commercial terms after reviewing the car.</p></div>
+    <div class="variant-grid">{ppfVariants.map((variant, index) => <article class="variant-card reveal"><span class="variant-number">0{index + 1}</span><h3>{variant.name}</h3><p>{variant.description}</p><a href={variant.officialUrl} target="_blank" rel="noopener noreferrer">View {variant.name} on Rodim.in <span>↗</span></a></article>)}</div>
   </section>
 
   <section id="station-05" class="basf-section station-correction" data-station="05" data-station-name="Correction bay">
