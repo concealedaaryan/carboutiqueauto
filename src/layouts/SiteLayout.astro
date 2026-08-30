@@ -3026,3 +3026,17 @@ const legalLinks = [
     background-color: #081827;
   }
 </style>
+
+<style is:global>
+  /* Stronger multi-layer shadows keep every service-card text layer crisp over detailed photography. */
+  body main .service-row .service-copy h3,
+  body main .service-row .service-copy p,
+  body main .service-row .service-copy a,
+  body main .service-row .service-copy .eyebrow,
+  body main .service-row .service-price strong,
+  body main .service-row .service-price small {
+    text-shadow: 0 2px 3px rgba(0,0,0,.95), 0 5px 16px rgba(0,0,0,.78) !important;
+  }
+  body main .service-row .service-copy h3,
+  body main .service-row .service-price strong { text-shadow: 0 2px 3px rgba(0,0,0,1), 0 6px 20px rgba(0,0,0,.9) !important; }
+</style>
