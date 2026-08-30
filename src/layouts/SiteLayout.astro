@@ -2912,3 +2912,87 @@ const legalLinks = [
     opacity: 1 !important;
   }
 </style>
+
+<style is:global>
+  /* Shared page rhythm: give every inner route a calm title-to-content transition and generous reading space. */
+  body main .page-title-bar { padding-top: 88px !important; }
+  body .breadcrumbs { padding-top: 22px !important; padding-bottom: 30px !important; }
+  body main .page-hero,
+  body main .package-hero,
+  body main .faq-hero,
+  body main .protection-hero,
+  body main .services-hero,
+  body main .packages-hero,
+  body main .why-hero,
+  body main .location-hero,
+  body main .contact-hero,
+  body main .estimate-hero {
+    min-height: 500px !important;
+    padding: 104px clamp(40px, 6vw, 96px) 112px !important;
+  }
+  body main .section-intro,
+  body main .section-heading,
+  body main .matrix-heading,
+  body main .ppf-heading,
+  body main .intro {
+    gap: clamp(64px, 9vw, 132px) !important;
+    margin-bottom: 62px !important;
+  }
+  body main .package-grid,
+  body main .coating-grid,
+  body main .addons-grid,
+  body main .choice-grid,
+  body main .reason-grid,
+  body main .location-grid,
+  body main .process-grid,
+  body main .service-list,
+  body main .service-groups { gap: 18px !important; }
+  body main .package-grid-section,
+  body main .coating-section,
+  body main .ppf-section,
+  body main .addons-section,
+  body main .matrix-section,
+  body main .faq-section,
+  body main .locations-section,
+  body main .reason-section,
+  body main .stats-section,
+  body main .calculator-section,
+  body main .contact-bottom,
+  body main .why-cta,
+  body main .location-cta {
+    padding-top: 132px !important;
+    padding-bottom: 132px !important;
+  }
+  @media (max-width: 620px) {
+    body main .page-title-bar { padding-top: 72px !important; }
+    body .breadcrumbs { padding-top: 18px !important; padding-bottom: 24px !important; }
+    body main .page-hero,
+    body main .package-hero,
+    body main .faq-hero,
+    body main .protection-hero,
+    body main .services-hero,
+    body main .packages-hero,
+    body main .why-hero,
+    body main .location-hero,
+    body main .contact-hero,
+    body main .estimate-hero { min-height: 420px !important; padding: 78px 24px 84px !important; }
+    body main .section-intro,
+    body main .section-heading,
+    body main .matrix-heading,
+    body main .ppf-heading,
+    body main .intro { gap: 28px !important; margin-bottom: 42px !important; }
+    body main .package-grid-section,
+    body main .coating-section,
+    body main .ppf-section,
+    body main .addons-section,
+    body main .matrix-section,
+    body main .faq-section,
+    body main .locations-section,
+    body main .reason-section,
+    body main .stats-section,
+    body main .calculator-section,
+    body main .contact-bottom,
+    body main .why-cta,
+    body main .location-cta { padding-top: 84px !important; padding-bottom: 84px !important; }
+  }
+</style>
