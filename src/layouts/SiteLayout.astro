@@ -2996,3 +2996,36 @@ const legalLinks = [
     body main .location-cta { padding-top: 84px !important; padding-bottom: 84px !important; }
   }
 </style>
+
+<style is:global>
+  /* Keep inner routes aligned with the homepage: compact header transition, spacious sections below. */
+  body main .page-title-bar { padding-top: 34px !important; }
+  body .breadcrumbs { padding-top: 12px !important; padding-bottom: 18px !important; }
+  body main .page-hero,
+  body main .package-hero,
+  body main .faq-hero,
+  body main .protection-hero,
+  body main .services-hero,
+  body main .packages-hero,
+  body main .why-hero,
+  body main .location-hero,
+  body main .contact-hero,
+  body main .estimate-hero {
+    min-height: 470px !important;
+    padding-top: 64px !important;
+  }
+  @media (max-width: 620px) {
+    body main .page-title-bar { padding-top: 30px !important; }
+    body .breadcrumbs { padding-top: 10px !important; padding-bottom: 14px !important; }
+    body main .page-hero,
+    body main .package-hero,
+    body main .faq-hero,
+    body main .protection-hero,
+    body main .services-hero,
+    body main .packages-hero,
+    body main .why-hero,
+    body main .location-hero,
+    body main .contact-hero,
+    body main .estimate-hero { min-height: 390px !important; padding-top: 52px !important; }
+  }
+</style>
