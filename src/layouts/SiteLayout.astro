@@ -3064,3 +3064,175 @@ const legalLinks = [
     body main .service-row .service-price { top: 16px; right: 18px; }
   }
 </style>
+
+<style is="global">
+  /* Final readability contract for photo-backed and dark surfaces. Keep light-surface cards on their existing ink palette. */
+  body main .service-row .service-copy h3,
+  body main .service-row .service-copy p,
+  body main .service-row .service-copy a,
+  body main .service-row .service-copy .eyebrow,
+  body main .service-row .service-price strong,
+  body main .service-row .service-price small,
+  body main .service-row[data-service-card]:hover .service-copy h3,
+  body main .service-row[data-service-card]:focus-within .service-copy h3,
+  body main .service-row:hover a:not(.button),
+  body main .service-row:focus-within a:not(.button) {
+    color: #f8fbff !important;
+  }
+  body main .service-row .service-copy .eyebrow,
+  body main .service-row .service-price small { color: #f0b275 !important; }
+  body main .service-row .service-copy a:hover,
+  body main .service-row .service-copy a:focus-visible { color: #f0b275 !important; }
+  body main .service-row .service-copy p { color: #e5edf5 !important; }
+
+  /* Dark photographic split sections use a directional ink wash and white reading hierarchy. */
+  body main .cars-section,
+  body main .reason-section {
+    color: #f8fbff;
+  }
+  body main .cars-section::before,
+  body main .reason-section::before {
+    background: linear-gradient(90deg, rgba(8,24,39,.94) 0%, rgba(8,24,39,.82) 58%, rgba(8,24,39,.68) 100%) !important;
+  }
+  body main .cars-section h2,
+  body main .reason-section h2,
+  body main .cars-section h3,
+  body main .reason-section h3,
+  body main .cars-section strong,
+  body main .reason-section strong { color: #fff !important; }
+  body main .cars-section em,
+  body main .reason-section em { color: #f0b275 !important; -webkit-text-fill-color: #f0b275 !important; }
+  body main .cars-section p,
+  body main .reason-section p,
+  body main .cars-section span,
+  body main .reason-section span { color: #e5edf5 !important; }
+  body main .cars-section .eyebrow,
+  body main .reason-section .eyebrow,
+  body main .reason-section article > span { color: #f0b275 !important; }
+
+  /* Shared dark cards must not inherit the light-card hover palette. */
+  body main .variant-card:hover a,
+  body main .variant-card:focus-within a,
+  body main .process-card:hover h3,
+  body main .process-card:focus-within h3,
+  body main .process-card:hover > span,
+  body main .process-card:focus-within > span {
+    color: #fff !important;
+  }
+  body main .variant-card:hover a,
+  body main .variant-card:focus-within a,
+  body main .process-card:hover > span,
+  body main .process-card:focus-within > span { color: #f0b275 !important; }
+
+  /* Rodim’s blue hero and CTA retain white primary copy and a restrained gold emphasis. */
+  body main .rodim-page .rodim-hero h1,
+  body main .rodim-page .rodim-hero h2,
+  body main .rodim-page .rodim-hero h3,
+  body main .rodim-page .rodim-hero p,
+  body main .rodim-page .rodim-hero a:not(.button),
+  body main .rodim-page .rodim-hero span,
+  body main .rodim-page .rodim-cta h2,
+  body main .rodim-page .rodim-cta p { color: #fff !important; }
+  body main .rodim-page .rodim-hero em,
+  body main .rodim-page .rodim-cta em { color: #f0b275 !important; -webkit-text-fill-color: #f0b275 !important; }
+  body main .rodim-page .rodim-hero .eyebrow,
+  body main .rodim-page .rodim-cta .eyebrow { color: #f0b275 !important; }
+
+  /* Photo captions remain above their wash and keep controls keyboard-accessible. */
+  body main .image-card .image-copy,
+  body main .page-hero-image > *,
+  body main .package-hero-card > *,
+  body main .hero-image > * { position: relative; z-index: 1; }
+  body main .image-card .image-copy a,
+  body main .page-hero-image a,
+  body main .package-hero-card a,
+  body main .hero-image a { color: #fff !important; }
+  body main .image-card .image-copy a:hover,
+  body main .image-card .image-copy a:focus-visible,
+  body main .page-hero-image a:hover,
+  body main .page-hero-image a:focus-visible,
+  body main .package-hero-card a:hover,
+  body main .package-hero-card a:focus-visible,
+  body main .hero-image a:hover,
+  body main .hero-image a:focus-visible { color: #f0b275 !important; }
+
+  @media (max-width: 620px) {
+    body main .cars-section::before,
+    body main .reason-section::before {
+      background: linear-gradient(180deg, rgba(8,24,39,.78), rgba(8,24,39,.95)) !important;
+    }
+    body main .service-row .service-copy { background: rgba(8,24,39,.80) !important; }
+  }
+</style>
+
+<style is="global">
+  /* Phones and other coarse pointers should not retain desktop hover states after a tap. */
+  @media (hover: none) and (pointer: coarse) {
+    body main .service-row:hover:not(:focus-visible),
+    body main .package-card:hover:not(:focus-visible),
+    body main .coating-card:hover:not(:focus-visible),
+    body main .addon-card:hover:not(:focus-visible),
+    body main .location-grid article:hover:not(:focus-visible),
+    body main .reason-grid article:hover:not(:focus-visible),
+    body main [data-local-surface]:hover:not(:focus-visible) {
+      transform: none !important;
+      box-shadow: none !important;
+      border-color: var(--line) !important;
+    }
+
+    body main .service-row:hover:not(:focus-visible) {
+      background-image: var(--card-image) !important;
+      background-color: #081827 !important;
+    }
+    body main .service-row:hover:not(:focus-visible) .service-price {
+      background: linear-gradient(90deg, rgba(239,243,241,0), rgba(239,243,241,.92) 24%, rgba(255,255,255,.92)) !important;
+    }
+
+    body main .service-row:hover:not(:focus-visible) a:not(.button),
+    body main .package-card:hover:not(:focus-visible) a:not(.button),
+    body main .coating-card:hover:not(:focus-visible) a:not(.button),
+    body main .addon-card:hover:not(:focus-visible) a:not(.button),
+    body main .location-grid article:hover:not(:focus-visible) a:not(.button),
+    body main .contact-card:hover:not(:focus-visible) a:not(.button),
+    body main .variant-card:hover:not(:focus-visible) a,
+    body main .process-card:hover:not(:focus-visible) h3,
+    body main .process-card:hover:not(:focus-visible) > span {
+      color: inherit !important;
+    }
+  }
+</style>
+
+<style is="global">
+  @media (hover: none) and (pointer: coarse) {
+    body main .service-row[data-service-card]:hover:not(:focus-visible) {
+      border-color: var(--line) !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+    body main .service-row[data-service-card]:hover:not(:focus-visible)::before {
+      opacity: .92 !important;
+    }
+    body main .service-row[data-service-card]:hover:not(:focus-visible)::after {
+      opacity: 0 !important;
+      transform: none !important;
+    }
+    body main .service-row[data-service-card]:hover:not(:focus-visible) .service-copy h3,
+    body main .service-row[data-service-card]:hover:not(:focus-visible) .service-copy p,
+    body main .service-row[data-service-card]:hover:not(:focus-visible) .service-copy a,
+    body main .service-row[data-service-card]:hover:not(:focus-visible) .service-price strong,
+    body main .service-row[data-service-card]:hover:not(:focus-visible) .eyebrow {
+      transform: none !important;
+      letter-spacing: normal !important;
+    }
+    body main .service-row[data-service-card]:hover:not(:focus-visible) .service-copy h3,
+    body main .service-row[data-service-card]:hover:not(:focus-visible) .service-price strong {
+      color: #f8fbff !important;
+    }
+    body main .service-row[data-service-card]:hover:not(:focus-visible) .eyebrow {
+      color: #f0b275 !important;
+    }
+    body main .service-row[data-service-card]:hover:not(:focus-visible) .service-copy a span {
+      transform: none !important;
+    }
+  }
+</style>
