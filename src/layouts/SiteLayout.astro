@@ -3065,7 +3065,7 @@ const legalLinks = [
   }
 </style>
 
-<style is="global">
+<style is:global>
   /* Final readability contract for photo-backed and dark surfaces. Keep light-surface cards on their existing ink palette. */
   body main .service-row .service-copy h3,
   body main .service-row .service-copy p,
@@ -3165,7 +3165,7 @@ const legalLinks = [
   }
 </style>
 
-<style is="global">
+<style is:global>
   /* Phones and other coarse pointers should not retain desktop hover states after a tap. */
   @media (hover: none) and (pointer: coarse) {
     body main .service-row:hover:not(:focus-visible),
@@ -3202,7 +3202,7 @@ const legalLinks = [
   }
 </style>
 
-<style is="global">
+<style is:global>
   @media (hover: none) and (pointer: coarse) {
     body main .service-row[data-service-card]:hover:not(:focus-visible) {
       border-color: var(--line) !important;
@@ -3232,6 +3232,28 @@ const legalLinks = [
       color: #f0b275 !important;
     }
     body main .service-row[data-service-card]:hover:not(:focus-visible) .service-copy a span {
+      transform: none !important;
+    }
+  }
+</style>
+
+<style is:global>
+  /* Service pricing sits over the same photographic card on phones; keep its ink surface dark and its value light. */
+  body main article.service-row[data-service-card] .service-price {
+    background: rgba(8,24,39,.80) !important;
+    border-color: rgba(255,255,255,.14) !important;
+    border-top-color: rgba(255,255,255,.14) !important;
+  }
+  body main article.service-row[data-service-card] .service-price strong {
+    color: #f8fbff !important;
+    text-shadow: 0 2px 3px rgba(0,0,0,.95) !important;
+  }
+  body main article.service-row[data-service-card] .service-price small {
+    color: #f0b275 !important;
+  }
+  @media (hover: none) and (pointer: coarse) {
+    body main article.service-row[data-service-card]:hover:not(:focus-visible) .service-price strong {
+      color: #f8fbff !important;
       transform: none !important;
     }
   }
