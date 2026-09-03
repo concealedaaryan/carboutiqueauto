@@ -3306,6 +3306,32 @@ const legalLinks = [
 </style>
 
 <style is:global>
+  /* Final light-surface correction for the Cars We Have Protected section. */
+  body main .cars-section {
+    background: #f4eadb !important;
+    color: #123d66 !important;
+  }
+  body main .cars-section::before { display: none !important; }
+  body main .cars-section h2,
+  body main .cars-section h3,
+  body main .cars-section strong,
+  body main .cars-section .cars-list span { color: #123d66 !important; }
+  body main .cars-section em { color: #a35f32 !important; -webkit-text-fill-color: #a35f32 !important; }
+  body main .cars-section p { color: #31465a !important; }
+  body main .cars-section .eyebrow { color: #8b542e !important; }
+  body main .cars-section .text-action,
+  body main .cars-section .text-action span { color: #123d66 !important; }
+  body main .cars-section .text-action:hover,
+  body main .cars-section .text-action:focus-visible { color: #8b542e !important; }
+  body main .cars-section .cars-list { border-top-color: rgba(18,61,102,.28) !important; }
+  body main .cars-section .cars-list span { border-bottom-color: rgba(18,61,102,.28) !important; }
+  @media (max-width: 620px) {
+    body main .cars-section { grid-template-columns: minmax(0, 1fr) !important; }
+    body main .cars-section .cars-list { min-width: 0 !important; }
+  }
+</style>
+
+<style is:global>
   /* Service pricing sits over the same photographic card on phones; keep its ink surface dark and its value light. */
   body main article.service-row[data-service-card] .service-price {
     background: rgba(8,24,39,.80) !important;
