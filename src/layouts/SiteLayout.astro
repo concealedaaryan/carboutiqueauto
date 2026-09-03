@@ -3140,10 +3140,10 @@ const legalLinks = [
   body main .rodim-page .rodim-cta .eyebrow { color: #f0b275 !important; }
 
   /* Photo captions remain above their wash and keep controls keyboard-accessible. */
-  body main .image-card .image-copy,
   body main .page-hero-image > *,
   body main .package-hero-card > *,
   body main .hero-image > * { position: relative; z-index: 1; }
+  body main .image-card .image-copy { position: absolute; z-index: 1; }
   body main .image-card .image-copy a,
   body main .page-hero-image a,
   body main .package-hero-card a,
@@ -3239,6 +3239,14 @@ const legalLinks = [
 </style>
 
 <style is:global>
+  /* Site-wide responsive media contract: keep every layout track inside the viewport and never stretch source imagery. */
+  html { overflow-x: clip; }
+  body { min-width: 0; overflow-x: clip; }
+  main, main section, main article, main .hero-shell, main .hero-copy, main .hero-media, main .section-heading, main .location-studio, main .service-row, main .service-copy, main .service-price { min-width: 0; }
+  body main img { display: block; max-width: 100%; height: auto; }
+  body main .image-card,
+  body main .education-image { inline-size: 100%; max-inline-size: 100%; }
+
   /* Every photographic surface preserves source proportions: img elements fill a declared frame, while CSS backgrounds crop without distortion. */
   body main img {
     max-width: 100%;
