@@ -95,19 +95,19 @@ test.describe('Crest Automotive booking calculator', () => {
     await expect(page.locator('#calc-total')).toHaveText('₹44,840');
   });
 
-  test('adds leather, PPF, and ceramic add-ons using exact category prices', async ({ page }) => {
+  test('adds leather, R Star PPF, and ceramic add-ons using exact category prices', async ({ page }) => {
     await page.goto('/estimate?service=13');
     await page.locator('#calc-category').selectOption({ label: 'Super luxury (GLE)' });
     await page.locator('#calc-ppf').check();
-    await page.locator('#calc-ppf-film').selectOption({ label: 'Rodim R2 Black' });
+    await page.locator('#calc-ppf-film').selectOption({ value: 'Rodim R Star' });
     await page.locator('#calc-ppf-category').selectOption({ label: 'Super luxury (GLE)' });
     await page.locator('#calc-leather').check();
     await page.locator('#calc-exterior-ceramic').check();
     await page.locator('#calc-interior-ceramic').check();
     await expect(page.locator('#calc-base')).toHaveText('₹42,000');
-    await expect(page.locator('#calc-addons-total')).toHaveText('₹2,16,500');
-    await expect(page.locator('#calc-gst')).toHaveText('₹46,530');
-    await expect(page.locator('#calc-total')).toHaveText('₹3,05,030');
+    await expect(page.locator('#calc-addons-total')).toHaveText('₹1,51,500');
+    await expect(page.locator('#calc-gst')).toHaveText('₹34,830');
+    await expect(page.locator('#calc-total')).toHaveText('₹2,28,330');
     await expect(page.locator('#calc-breakdown')).toContainText('Premium graphene coating');
     await expect(page.locator('#calc-breakdown')).toContainText('PPF · Super luxury (GLE)');
   });
@@ -116,7 +116,7 @@ test.describe('Crest Automotive booking calculator', () => {
     await page.goto('/estimate?service=13&ppf=legacy-film');
     await page.locator('#calc-category').selectOption({ label: 'Luxury' });
     await page.locator('#calc-ppf').check();
-    await expect(page.locator('#calc-ppf-film')).toHaveValue('Rodim R1');
+    await expect(page.locator('#calc-ppf-film')).toHaveValue('Rodim R Star');
   });
 
   test('requires a core treatment before enabling add-ons', async ({ page }) => {
