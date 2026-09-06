@@ -372,3 +372,26 @@ const photos = [
     body main .gallery-filter { flex: 0 0 auto; }
   }
 </style>
+
+<style is:global>
+  @media (min-width: 901px) {
+    body main .gallery-hero-media {
+      height: 620px !important;
+      display: grid !important;
+      grid-template-rows: minmax(0, 1fr) auto !important;
+      align-self: center !important;
+    }
+    body main .gallery-hero-media video {
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 0 !important;
+      aspect-ratio: auto !important;
+      object-fit: contain !important;
+      object-position: center !important;
+    }
+    body main .gallery-hero-media .media-caption {
+      min-height: 58px;
+      box-sizing: border-box;
+    }
+  }
+</style>
