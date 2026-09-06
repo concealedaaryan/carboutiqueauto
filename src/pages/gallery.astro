@@ -31,13 +31,13 @@ const photos = [
         <source src="/images/gallery/crest-detailing-session.mp4" type="video/mp4" />
         Your browser does not support the video element.
       </video>
-      <div class="media-caption"><span>Supplied Crest detailing session · video</span><button class="media-open" type="button" data-lightbox-video="/images/gallery/crest-detailing-session.mp4" data-lightbox-poster="/images/gallery/crest-detailing-session-poster.jpg" data-lightbox-title="Supplied Crest detailing session">Open full-screen viewer</button></div>
+      <div class="media-caption"><button class="media-open" type="button" data-lightbox-video="/images/gallery/crest-detailing-session.mp4" data-lightbox-poster="/images/gallery/crest-detailing-session-poster.jpg" data-lightbox-title="Supplied Crest detailing session">Open full-screen viewer</button></div>
     </div>
   </section>
 
   <section class="gallery-intro">
     <div><span class="eyebrow">From the supplied Crest archive</span><h2>Studio light.<br /><em>Road-ready finish.</em></h2></div>
-    <p>These images were supplied for Crest Automotive Care and are presented as a visual gallery of the vehicle, the studio environment and the handover sequence.</p>
+
   </section>
 
   <section id="gallery-grid" class="gallery-gallery-section" aria-label="Crest Automotive Care photo gallery">
@@ -409,4 +409,8 @@ const photos = [
       height: 560px !important;
     }
   }
+</style>
+
+<style is:global>
+  body main .instagram-gallery h2 { color: #fff !important; }
 </style>
