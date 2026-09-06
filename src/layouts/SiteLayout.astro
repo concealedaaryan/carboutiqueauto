@@ -39,6 +39,7 @@ const navLinks = [
   ['/rodim', 'Rodim PPF'],
   ['/estimate', 'Estimate'],
   ['/locations', 'Locations'],
+  ['/gallery', 'Gallery'],
   ['/contact', 'Contact'],
 ];
 const legalLinks = [
@@ -106,7 +107,7 @@ const legalLinks = [
     <Chatbot />
     <BackToTop />
     <StickyBookingBar />
-    <footer class="site-footer"><div class="footer-main"><div class="footer-brand-block"><a class="brand footer-brand" href="/" aria-label="Crest Automotive Care home"><span class="brand-wordmark">CREST</span><span class="brand-submark">AUTOMOTIVE CARE</span></a><p>Exclusive in-house luxury automotive care for the DLF community.</p></div><div class="footer-links"><div><small>Explore</small>{navLinks.slice(0, 4).map(([href, label]) => <a href={href}>{label}</a>)}<a href="/why-crest">Why Crest</a><a href="/faq">FAQ</a></div><div><small>Find us</small><a href="/locations">DLF The Camellias</a><a href="/locations">DLF Crest</a><a href="/locations">DLF The Magnolias</a></div><div><small>Connect</small><a href="tel:+919871610952">+91 98716 10952</a><a href="https://wa.me/919871610952" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook ↗</a></div></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Crest Automotive Care. All rights reserved.</span><span class="footer-legal">{legalLinks.map(([href, label]) => <a href={href}>{label}</a>)}</span><a href="#top">Back to top ↑</a></div></footer>
+    <footer class="site-footer"><div class="footer-main"><div class="footer-brand-block"><a class="brand footer-brand" href="/" aria-label="Crest Automotive Care home"><span class="brand-wordmark">CREST</span><span class="brand-submark">AUTOMOTIVE CARE</span></a><p>Exclusive in-house luxury automotive care for the DLF community.</p></div><div class="footer-links"><div><small>Explore</small>{navLinks.slice(0, 5).map(([href, label]) => <a href={href}>{label}</a>)}<a href="/why-crest">Why Crest</a><a href="/faq">FAQ</a></div><div><small>Find us</small><a href="/locations">DLF The Camellias</a><a href="/locations">DLF Crest</a><a href="/locations">DLF The Magnolias</a></div><div><small>Connect</small><a href="tel:+919871610952">+91 98716 10952</a><a href="https://wa.me/919871610952" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook ↗</a></div></div></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Crest Automotive Care. All rights reserved.</span><span class="footer-legal">{legalLinks.map(([href, label]) => <a href={href}>{label}</a>)}</span><a href="#top">Back to top ↑</a></div></footer>
   </body>
 </html>
 
