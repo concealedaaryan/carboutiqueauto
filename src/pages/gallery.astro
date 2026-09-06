@@ -43,11 +43,11 @@ const photos = [
   <section id="gallery-grid" class="gallery-gallery-section" aria-label="Crest Automotive Care photo gallery">
     <div class="gallery-toolbar">
       <div><span class="eyebrow">Browse the archive</span><p class="gallery-count" data-gallery-count>{photos.length} photographs</p></div>
-      <div class="gallery-filters" role="group" aria-label="Filter gallery photographs">
-        <button type="button" class="gallery-filter is-active" data-gallery-filter="all" aria-pressed="true">All work</button>
-        <button type="button" class="gallery-filter" data-gallery-filter="studio" aria-pressed="false">Studio</button>
-        <button type="button" class="gallery-filter" data-gallery-filter="road" aria-pressed="false">On the road</button>
-        <button type="button" class="gallery-filter" data-gallery-filter="detail" aria-pressed="false">Details</button>
+      <div class="gallery-filters" role="tablist" aria-label="Filter gallery photographs">
+        <button type="button" role="tab" class="gallery-filter is-active" data-gallery-filter="all" aria-selected="true" aria-controls="gallery-grid">All work <span>13</span></button>
+        <button type="button" role="tab" class="gallery-filter" data-gallery-filter="studio" aria-selected="false" aria-controls="gallery-grid">Studio <span>3</span></button>
+        <button type="button" role="tab" class="gallery-filter" data-gallery-filter="road" aria-selected="false" aria-controls="gallery-grid">On the road <span>5</span></button>
+        <button type="button" role="tab" class="gallery-filter" data-gallery-filter="detail" aria-selected="false" aria-controls="gallery-grid">Details <span>5</span></button>
       </div>
     </div>
     <div class="gallery-grid">
@@ -186,7 +186,7 @@ const photos = [
 
     const setFilter = (filter) => {
       document.querySelectorAll('[data-gallery-item]').forEach((item) => { item.hidden = filter !== 'all' && item.dataset.galleryItem !== filter; });
-      filterButtons.forEach((button) => { const isActive = button.dataset.galleryFilter === filter; button.classList.toggle('is-active', isActive); button.setAttribute('aria-pressed', String(isActive)); });
+      filterButtons.forEach((button) => { const isActive = button.dataset.galleryFilter === filter; button.classList.toggle('is-active', isActive); button.setAttribute('aria-selected', String(isActive)); });
       const count = galleryItems().length;
       if (countOutput) countOutput.textContent = `${count} photograph${count === 1 ? '' : 's'}`;
       if (activeType === 'image' && root.classList.contains('is-open')) { activeIndex = Math.min(activeIndex, Math.max(0, count - 1)); renderImage(); }
@@ -201,6 +201,7 @@ const photos = [
       image.src = trigger.dataset.lightboxImage || '';
       image.alt = trigger.dataset.lightboxTitle || 'Crest Automotive Care gallery image';
       stage.append(image);
+      requestAnimationFrame(() => image.classList.add('is-ready'));
       activeType = 'image';
       titleOutput.textContent = trigger.dataset.lightboxTitle || 'Gallery viewer';
       captionOutput.textContent = trigger.dataset.lightboxCaption || '';
@@ -221,6 +222,7 @@ const photos = [
       source.type = 'video/mp4';
       video.append(source);
       stage.append(video);
+      requestAnimationFrame(() => video.classList.add('is-ready'));
       activeType = 'video';
       titleOutput.textContent = button.dataset.lightboxTitle || 'Crest detailing session';
       captionOutput.textContent = 'Supplied Crest detailing session · video';
@@ -253,4 +255,120 @@ const photos = [
 
 <style is:global>
   body.gallery-lightbox-open { overflow: hidden; }
+</style>
+
+<style is:global>
+  /* Editorial gallery correction: equal columns, full portrait frames, no fractional grid spans. */
+  body main .gallery-gallery-section .gallery-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    align-items: start !important;
+    gap: 18px !important;
+  }
+  body main .gallery-gallery-section .gallery-card,
+  body main .gallery-gallery-section .gallery-card-featured {
+    grid-column: auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    aspect-ratio: 9 / 14 !important;
+  }
+  body main .gallery-gallery-section .gallery-card img,
+  body main .gallery-gallery-section .gallery-card-featured img {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    object-fit: cover !important;
+  }
+  body main .gallery-hero-media {
+    width: min(100%, 430px) !important;
+    justify-self: end !important;
+  }
+  body main .gallery-hero-media video {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: auto !important;
+    object-fit: contain !important;
+    background: #030a11 !important;
+  }
+  @media (max-width: 900px) {
+    body main .gallery-hero-media { justify-self: start !important; }
+  }
+  @media (max-width: 620px) {
+    body main .gallery-gallery-section .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px !important; }
+    body main .gallery-gallery-section .gallery-card,
+    body main .gallery-gallery-section .gallery-card-featured { aspect-ratio: 9 / 14 !important; }
+    body main .gallery-hero-media { width: 100% !important; }
+  }
+</style>
+
+<style is:global>
+  body main .gallery-filters {
+    position: relative;
+    align-items: center;
+    gap: 6px;
+    padding: 5px;
+    border: 1px solid rgba(18,61,102,.16);
+    border-radius: 999px;
+    background: rgba(255,255,255,.58);
+    box-shadow: inset 0 1px rgba(255,255,255,.75), 0 8px 24px rgba(18,61,102,.08);
+  }
+  body main .gallery-filter {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 38px;
+    padding: 8px 13px;
+    border-color: transparent;
+    color: #234e6d;
+    background: transparent;
+    transform: translateY(0);
+  }
+  body main .gallery-filter span {
+    display: inline-grid;
+    place-items: center;
+    min-width: 19px;
+    height: 19px;
+    padding-inline: 4px;
+    border-radius: 999px;
+    color: #6b8191;
+    background: rgba(18,61,102,.08);
+    font-size: 10px;
+    transition: color .25s ease, background .25s ease, transform .25s ease;
+  }
+  body main .gallery-filter:hover { color: #123d66; background: rgba(255,255,255,.66); transform: translateY(-1px); }
+  body main .gallery-filter.is-active,
+  body main .gallery-filter[aria-selected="true"] { color: #081827; background: #f0b275; box-shadow: 0 5px 14px rgba(139,84,46,.18); }
+  body main .gallery-filter.is-active span,
+  body main .gallery-filter[aria-selected="true"] span { color: #f0b275; background: #123d66; transform: scale(1.06); }
+  body main .gallery-filter:focus-visible { border-color: #123d66; outline: 2px solid #fff; outline-offset: 2px; }
+  body main .gallery-lightbox { transition: opacity .34s ease, visibility .34s ease; }
+  body main .lightbox-backdrop { transition: opacity .34s ease, backdrop-filter .34s ease; }
+  body main .lightbox-dialog { opacity: 0; transform: translateY(18px) scale(.97); transition: opacity .34s cubic-bezier(.23,1,.32,1), transform .34s cubic-bezier(.23,1,.32,1); }
+  body main .gallery-lightbox.is-open .lightbox-dialog { opacity: 1; transform: translateY(0) scale(1); }
+  body main .lightbox-stage img,
+  body main .lightbox-stage video { opacity: 0; transform: scale(.985); transition: opacity .28s ease, transform .38s cubic-bezier(.23,1,.32,1); }
+  body main .lightbox-stage img.is-ready,
+  body main .lightbox-stage video.is-ready { opacity: 1; transform: scale(1); }
+  body main .lightbox-caption,
+  body main .lightbox-navigation { transition: opacity .25s ease .08s, transform .25s ease .08s; }
+  body main .lightbox-dialog:not(:has(.gallery-lightbox.is-open)) .lightbox-caption { opacity: .8; }
+  @media (prefers-reduced-motion: reduce) {
+    body main .gallery-filter,
+    body main .gallery-filter span,
+    body main .gallery-lightbox,
+    body main .lightbox-backdrop,
+    body main .lightbox-dialog,
+    body main .lightbox-stage img,
+    body main .lightbox-stage video,
+    body main .lightbox-caption,
+    body main .lightbox-navigation { transition: none !important; }
+    body main .lightbox-stage img,
+    body main .lightbox-stage video { opacity: 1 !important; transform: none !important; }
+  }
+  @media (max-width: 720px) {
+    body main .gallery-filters { width: 100%; overflow-x: auto; justify-content: flex-start; border-radius: 18px; }
+    body main .gallery-filter { flex: 0 0 auto; }
+  }
 </style>
