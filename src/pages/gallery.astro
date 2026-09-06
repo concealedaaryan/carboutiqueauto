@@ -395,3 +395,18 @@ const photos = [
     }
   }
 </style>
+
+<style is:global>
+  @media (min-width: 901px) {
+    body main .gallery-hero {
+      box-sizing: border-box !important;
+      min-height: 700px !important;
+      padding-top: 80px !important;
+      padding-bottom: 80px !important;
+    }
+    body main .gallery-hero-media {
+      width: min(100%, 360px) !important;
+      height: 560px !important;
+    }
+  }
+</style>
