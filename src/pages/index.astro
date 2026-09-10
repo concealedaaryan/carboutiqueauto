@@ -47,6 +47,8 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   .garage-liquid-card .garage-button,
   .garage-liquid-card .garage-button:hover { color: #05080c !important; -webkit-text-fill-color: #05080c !important; background: #fff !important; border-color: #fff !important; text-shadow: none !important; }
   .garage-liquid-card .garage-kicker { font-weight: 800 !important; letter-spacing: .16em !important; }
+  :global(.garage-carousel-image) { display:none !important; }
+  :global(.garage-carousel-video) { background:#05080c !important; }
   @media (max-width:760px) {
     :global(body.garage-home .studio-rail) { display:none !important; }
     :global(html), :global(body), :global(body.garage-home main) { overflow-x:visible !important; overflow-y:visible !important; }
@@ -57,7 +59,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
     .garage-carousel-step { position:relative !important; z-index:10 !important; display:flex !important; align-items:flex-end !important; width:100% !important; min-height:100vh !important; min-height:100svh !important; height:100vh !important; height:100svh !important; padding:0 16px 30px !important; box-sizing:border-box !important; pointer-events:none; }
     .garage-liquid-card { pointer-events:auto; width:100% !important; max-width:none !important; margin:0 !important; }
     .garage-carousel-image,.garage-carousel-video { width:100% !important; height:100% !important; object-fit:contain !important; object-position:50% 50% !important; background:#08131c !important; }
-    .garage-carousel-image { opacity:.92 !important; }
+    .garage-carousel-image { display:none !important; }
     .garage-carousel-video { opacity:.86 !important; visibility:visible !important; }
     .garage-carousel-shade { background:linear-gradient(90deg,rgba(0,0,0,.58),rgba(0,0,0,.08) 72%,rgba(0,0,0,.34)),linear-gradient(0deg,rgba(0,0,0,.66),transparent 58%,rgba(0,0,0,.26)) !important; }
     .garage-liquid-card { background:transparent !important; border-color:rgba(255,255,255,.78) !important; backdrop-filter:none !important; }
