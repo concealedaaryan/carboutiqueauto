@@ -11,7 +11,9 @@ pnpm install
 pnpm dev
 ```
 
-On Windows, double-click `start.bat`. It checks for pnpm, installs the locked dependencies when Astro is not yet installed, and starts the development server at `http://localhost:4321/`.
+On Windows, double-click `start.bat`. It checks for Node.js/npm and Python 3, runs `npm install`, creates `backend\.venv`, installs `requirements.txt`, and opens the Astro frontend and FastAPI backend in separate terminal windows. The frontend runs at `http://localhost:4321/`; the backend health endpoint runs at `http://127.0.0.1:8000/api/health`.
+
+The bundled backend is intentionally lightweight and ready for future booking, contact, or data integrations. It currently exposes `/api/health` and `/api/config`; the public static site remains fully usable without it.
 
 The repository includes `.gitignore` rules for `node_modules`, Astro/build output, `.env` secrets, Vercel metadata, logs, and Playwright reports. The safe `.env.example` template remains trackable.
 
@@ -28,7 +30,7 @@ If the local environment blocks package-manager lifecycle scripts, run `./node_m
 
 ## Site architecture
 
-The homepage is intentionally concise. It includes the brand introduction, proof metrics, three popular-service highlights, a brief Crest-difference section, exploration cards, and a contact CTA. Detailed content now lives on dedicated routes: `/services` contains all 16 treatments and the full treatment matrix; `/packages` contains all monthly plans and their vehicle-category prices; `/protection` contains ceramic, graphene, Rodim PPF, warranties, coverage and add-ons; `/estimate` contains the live calculator; `/why-crest` contains the full reasons-to-choose-us content; `/locations` contains the three DLF communities and Google Maps; `/faq` contains the complete FAQ; and `/contact` contains the enquiry form and contact details.
+The homepage is a scroll-driven 3D garage experience built with Three.js and GSAP. It moves through the entrance, Rodim PPF wall, ceramic coating wall, wash bay, and reception, using the supplied Google Flow image and video assets. Clickable walls and service cards open the relevant service films. Detailed content remains on dedicated routes: `/services` contains all 16 treatments and the full treatment matrix; `/packages` contains all monthly plans and their vehicle-category prices; `/protection` contains ceramic, graphene, Rodim PPF, warranties, coverage and add-ons; `/estimate` contains the live calculator; `/why-crest` contains the full reasons-to-choose-us content; `/locations` contains the three DLF communities and Google Maps; `/faq` contains the complete FAQ; and `/contact` contains the enquiry form and contact details.
 
 ## Images and shared layouts
 

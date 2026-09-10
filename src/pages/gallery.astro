@@ -65,7 +65,7 @@ const photos = [
       <div class="lightbox-toolbar"><span id="lightbox-title" data-lightbox-title-output>Gallery viewer</span><button class="lightbox-close" type="button" data-lightbox-close aria-label="Close gallery viewer">×</button></div>
       <div class="lightbox-stage" data-lightbox-stage></div>
       <div class="lightbox-caption" data-lightbox-caption-output></div>
-      <div class="lightbox-navigation"><button type="button" data-lightbox-prev aria-label="Previous gallery item">← Previous</button><span data-lightbox-position>1 / 1</span><button type="button" data-lightbox-next aria-label="Next gallery item">Next →</button></div>
+      <div class="lightbox-navigation"><button type="button" data-lightbox-prev aria-label="Previous gallery item">← Previous</button><span data-lightbox-position aria-live="polite">1 / 1</span><button type="button" data-lightbox-next aria-label="Next gallery item">Next →</button></div>
     </div>
   </div>
 
@@ -176,10 +176,11 @@ const photos = [
     const prevButton = root?.querySelector('[data-lightbox-prev]');
     const nextButton = root?.querySelector('[data-lightbox-next]');
     const closeButtons = root ? [...root.querySelectorAll('[data-lightbox-close]')] : [];
+    const dialog = root?.querySelector('.lightbox-dialog');
     const filterButtons = [...document.querySelectorAll('[data-gallery-filter]')];
     const countOutput = document.querySelector('[data-gallery-count]');
     const galleryItems = () => [...document.querySelectorAll('[data-gallery-item]:not([hidden]) .gallery-trigger')];
-    if (!root || !stage || !titleOutput || !captionOutput || !positionOutput || !prevButton || !nextButton) return;
+    if (!root || !stage || !titleOutput || !captionOutput || !positionOutput || !prevButton || !nextButton || !dialog) return;
     let activeIndex = 0;
     let activeType = 'image';
     let lastFocused = null;
@@ -248,7 +249,19 @@ const photos = [
     closeButtons.forEach((button) => button.addEventListener('click', close));
     prevButton.addEventListener('click', () => step(-1));
     nextButton.addEventListener('click', () => step(1));
-    document.addEventListener('keydown', (event) => { if (!root.classList.contains('is-open')) return; if (event.key === 'Escape') close(); if (event.key === 'ArrowLeft') step(-1); if (event.key === 'ArrowRight') step(1); });
+    document.addEventListener('keydown', (event) => {
+      if (!root.classList.contains('is-open')) return;
+      if (event.key === 'Escape') { event.preventDefault(); close(); return; }
+      if (event.key === 'ArrowLeft') { event.preventDefault(); step(-1); return; }
+      if (event.key === 'ArrowRight') { event.preventDefault(); step(1); return; }
+      if (event.key !== 'Tab') return;
+      const focusable = [...dialog.querySelectorAll('button:not([disabled]), video[controls]')];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    });
     setFilter('all');
   })();
 </script>

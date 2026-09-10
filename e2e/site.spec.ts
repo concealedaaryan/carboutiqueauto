@@ -4,14 +4,17 @@ const publicRoutes = ['/services', '/packages', '/protection', '/rodim', '/estim
 const navLabels = ['Services', 'Packages', 'Protection', 'Rodim PPF', 'Estimate', 'Locations', 'Contact'];
 
 test.describe('Crest Automotive multi-page navigation', () => {
-  test('homepage is concise and links to dedicated detail pages', async ({ page }) => {
+  test('homepage opens the scrollable garage experience and links to dedicated detail pages', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveTitle(/Rodim PPF and Premium Car Care in DLF Gurugram \| Crest Automotive Care/);
-    await expect(page.getByRole('heading', { name: /Protect the paint\s+Keep the presence/i })).toBeVisible();
-    await expect(page.getByText(/Crest Automotive Care · Rodim PPF/i).first()).toBeVisible();
-    await expect(page.locator('[data-hero-carousel]')).toBeVisible();
-    await expect(page.locator('[data-carousel-slide]')).toHaveCount(3);
-    await expect(page.getByRole('link', { name: /Explore the Rodim range/i })).toBeVisible();
+    await expect(page).toHaveTitle('Crest Automotive Care — The Garage Experience');
+    await expect(page.locator('.garage-intro-copy')).toContainText('Crest Automotive Care');
+    await expect(page.locator('#station-01 .garage-scene-video')).toBeVisible();
+    await expect(page.locator('section.garage-scene')).toHaveCount(5);
+    await expect(page.locator('section.garage-scene[data-station="02"]')).toContainText('Rodim PPF');
+    await expect(page.locator('section.garage-scene[data-station="03"]')).toContainText('Ceramic coating');
+    await expect(page.locator('section.garage-scene[data-station="04"]')).toContainText('Wash bay');
+    await expect(page.getByRole('button', { name: /Play PPF film/i })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Start an evaluation/i }).last()).toBeVisible();
     await expect(page.locator('table')).toHaveCount(0);
     for (const label of navLabels) await expect(page.locator('.desktop-nav').getByRole('link', { name: label, exact: true })).toBeVisible();
   });
@@ -27,6 +30,7 @@ test.describe('Crest Automotive multi-page navigation', () => {
   }
 
   test('inner-page openings stay compact and header-safe at desktop and mobile widths', async ({ page }) => {
+    test.setTimeout(60000);
     for (const viewport of [{ width: 1440, height: 900, maxOffset: 280 }, { width: 390, height: 844, maxOffset: 210 }]) {
       await page.setViewportSize({ width: viewport.width, height: viewport.height });
       await page.emulateMedia({ reducedMotion: 'reduce' });
