@@ -7,13 +7,13 @@ test.describe('Crest Automotive multi-page navigation', () => {
   test('homepage opens the scrollable garage experience and links to dedicated detail pages', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveTitle('Crest Automotive Care — The Garage Experience');
-    await expect(page.locator('.garage-intro-copy')).toContainText('Crest Automotive Care');
-    await expect(page.locator('#station-01 .garage-scene-video')).toBeVisible();
-    await expect(page.locator('section.garage-scene')).toHaveCount(5);
-    await expect(page.locator('section.garage-scene[data-station="02"]')).toContainText('Rodim PPF');
-    await expect(page.locator('section.garage-scene[data-station="03"]')).toContainText('Ceramic coating');
-    await expect(page.locator('section.garage-scene[data-station="04"]')).toContainText('Wash bay');
-    await expect(page.getByRole('button', { name: /Play PPF film/i })).toBeVisible();
+    await expect(page.locator('.garage-intro-card')).toContainText('Walk into');
+    await expect(page.locator('.garage-carousel-image')).toBeVisible();
+    await expect(page.locator('section.garage-carousel-step')).toHaveCount(5);
+    await expect(page.locator('section.garage-carousel-step[data-station="02"]')).toHaveAttribute('data-station-name', 'Rodim PPF wall');
+    await expect(page.locator('section.garage-carousel-step[data-station="03"]')).toHaveAttribute('data-station-name', 'Ceramic coating wall');
+    await expect(page.locator('section.garage-carousel-step[data-station="04"]')).toHaveAttribute('data-station-name', 'Wash services wall');
+    await expect(page.getByRole('button', { name: /Play PPF application/i })).toBeVisible();
     await expect(page.getByRole('link', { name: /Start an evaluation/i }).last()).toBeVisible();
     await expect(page.locator('table')).toHaveCount(0);
     for (const label of navLabels) await expect(page.locator('.desktop-nav').getByRole('link', { name: label, exact: true })).toBeVisible();

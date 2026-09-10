@@ -3353,3 +3353,32 @@ const legalLinks = [
     }
   }
 </style>
+
+<style is="global">
+  /* Mobile baseline for every inner route; the homepage keeps its own scene system. */
+  @media (max-width: 760px) {
+    body:not(.route-home), body:not(.route-home) main { max-width: 100%; overflow-x: hidden; }
+    body:not(.route-home) img, body:not(.route-home) video, body:not(.route-home) iframe { max-width: 100%; }
+    body:not(.route-home) input, body:not(.route-home) select, body:not(.route-home) textarea, body:not(.route-home) button, body:not(.route-home) .button { max-width: 100%; }
+    body:not(.route-home) .button, body:not(.route-home) button, body:not(.route-home) a.button { min-height: 44px; }
+    body:not(.route-home) h1 { font-size: clamp(38px, 10vw, 58px); line-height: 1.02; overflow-wrap: anywhere; }
+    body:not(.route-home) h2 { font-size: clamp(30px, 8vw, 46px); line-height: 1.06; overflow-wrap: anywhere; }
+    body:not(.route-home) h3 { overflow-wrap: anywhere; }
+    body:not(.route-home) .page-hero, body:not(.route-home) .package-hero, body:not(.route-home) .faq-hero, body:not(.route-home) .estimate-hero, body:not(.route-home) .estimate-disclaimer, body:not(.route-home) .contact-hero, body:not(.route-home) .location-hero { grid-template-columns: minmax(0,1fr) !important; gap: 30px !important; min-height: auto !important; padding: 88px 20px 64px !important; }
+    body:not(.route-home) .page-hero > *, body:not(.route-home) .package-hero > *, body:not(.route-home) .faq-hero > *, body:not(.route-home) .estimate-hero > *, body:not(.route-home) .estimate-disclaimer > * { min-width: 0 !important; width: 100% !important; }
+    body:not(.route-home) .package-grid, body:not(.route-home) .service-list, body:not(.route-home) .reason-grid, body:not(.route-home) .location-grid, body:not(.route-home) .faq-grid, body:not(.route-home) .choice-grid { grid-template-columns: minmax(0,1fr) !important; }
+    body:not(.route-home) .catalogue-intro, body:not(.route-home) .section-intro, body:not(.route-home) .matrix-heading { display: block !important; }
+    body:not(.route-home) .catalogue-intro > *, body:not(.route-home) .section-intro > *, body:not(.route-home) .matrix-heading > * { max-width: 100% !important; margin-top: 16px; }
+    body:not(.route-home) .page-hero-image, body:not(.route-home) .package-hero-card, body:not(.route-home) .faq-visual, body:not(.route-home) .hero-image, body:not(.route-home) .why-image { min-height: 280px !important; height: auto !important; aspect-ratio: 4 / 3; background-size: cover !important; background-position: center !important; }
+    body:not(.route-home) .table-scroll { width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    body:not(.route-home) .matrix-heading > span { display: block; margin-top: 12px; }
+    body:not(.route-home) .service-row { grid-template-columns: minmax(0,1fr) !important; gap: 14px !important; }
+    body:not(.route-home) .service-price { grid-column: auto !important; align-items: start !important; text-align: left !important; }
+    body:not(.route-home) .site-footer .footer-main, body:not(.route-home) .site-footer .footer-links { grid-template-columns: minmax(0,1fr) !important; gap: 26px !important; }
+  }
+  @media (max-width: 420px) {
+    body:not(.route-home) .page-hero, body:not(.route-home) .package-hero, body:not(.route-home) .faq-hero, body:not(.route-home) .estimate-hero, body:not(.route-home) .estimate-disclaimer { padding-inline: 16px !important; }
+    body:not(.route-home) .page-hero-image, body:not(.route-home) .package-hero-card, body:not(.route-home) .faq-visual { min-height: 240px !important; }
+    body:not(.route-home) .service-row, body:not(.route-home) .package-card { padding: 18px !important; }
+  }
+</style>
