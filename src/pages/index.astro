@@ -19,6 +19,7 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 
 <script>
   // @ts-nocheck
+  document.body.classList.add('garage-home');
   const carousel = document.querySelector('[data-garage-carousel]'); const steps = [...document.querySelectorAll('.garage-carousel-step')]; const frameImage = document.querySelector('[data-carousel-image]'); const frameVideo = document.querySelector('[data-carousel-video]'); const locationText = document.querySelector('[data-carousel-location]'); const countText = document.querySelector('[data-carousel-count]'); const progress = document.querySelector('[data-carousel-progress]'); const modal = document.querySelector('[data-garage-modal]'); const modalVideo = modal?.querySelector('[data-modal-video]'); const modalTitle = modal?.querySelector('[data-modal-title]'); let active = null; let activeIndex = 0; let advanceTimer = 0; let lastFocused = null;
   const films = { ppf: ['/garage-assets/ppf-appliacatio-video-mp4.mp4', 'PPF application'], ceramic: ['/garage-assets/ceramic-coating-video-mp4.mp4', 'Ceramic coating'], wash: ['/garage-assets/car-foam-wash-video-mp4.mp4', 'Foam wash'] };
   frameVideo.muted = true; frameVideo.defaultMuted = true; frameVideo.setAttribute('muted', ''); frameVideo.setAttribute('playsinline', ''); frameVideo.setAttribute('webkit-playsinline', '');
@@ -47,12 +48,14 @@ import SiteLayout from '../layouts/SiteLayout.astro';
   .garage-liquid-card .garage-button:hover { color: #05080c !important; -webkit-text-fill-color: #05080c !important; background: #fff !important; border-color: #fff !important; text-shadow: none !important; }
   .garage-liquid-card .garage-kicker { font-weight: 800 !important; letter-spacing: .16em !important; }
   @media (max-width:760px) {
-    .garage-carousel { position:relative !important; min-height:500svh; overflow:clip; background:#05080c !important; }
-    .garage-carousel-frame { position:sticky !important; top:72px !important; z-index:0 !important; width:100% !important; height:calc(100svh - 72px) !important; min-height:0 !important; margin:0 !important; background:#08131c !important; }
-    .garage-carousel-steps { position:relative !important; z-index:2 !important; margin-top:calc(-100svh + 72px) !important; }
-    .garage-carousel-step { position:relative !important; display:flex !important; align-items:flex-end !important; width:100% !important; min-height:100svh !important; height:100svh !important; padding:0 16px 30px !important; box-sizing:border-box !important; pointer-events:none; }
+    :global(html), :global(body), :global(body.garage-home main) { overflow-x:visible !important; overflow-y:visible !important; }
+    :global(body.garage-home main) { position:relative !important; }
+    .garage-carousel { position:relative !important; display:block !important; min-height:500svh !important; height:auto !important; overflow:visible !important; background:#05080c !important; -webkit-overflow-scrolling:touch !important; }
+    .garage-carousel-frame { position:sticky !important; top:0 !important; z-index:0 !important; display:block !important; width:100% !important; height:100vh !important; height:100svh !important; min-height:0 !important; margin:0 !important; overflow:hidden !important; background:#08131c !important; }
+    .garage-carousel-steps { position:relative !important; z-index:10 !important; display:block !important; margin-top:-100vh !important; margin-top:-100svh !important; overflow:visible !important; -webkit-overflow-scrolling:touch !important; }
+    .garage-carousel-step { position:relative !important; z-index:10 !important; display:flex !important; align-items:flex-end !important; width:100% !important; min-height:100vh !important; min-height:100svh !important; height:100vh !important; height:100svh !important; padding:0 16px 30px !important; box-sizing:border-box !important; pointer-events:none; }
     .garage-liquid-card { pointer-events:auto; width:100% !important; max-width:none !important; margin:0 !important; }
-    .garage-carousel-image,.garage-carousel-video { width:100% !important; height:100% !important; object-fit:cover !important; object-position:50% 50% !important; }
+    .garage-carousel-image,.garage-carousel-video { width:100% !important; height:100% !important; object-fit:contain !important; object-position:50% 50% !important; background:#08131c !important; }
     .garage-carousel-image { opacity:.92 !important; }
     .garage-carousel-video { opacity:.86 !important; visibility:visible !important; }
     .garage-carousel-shade { background:linear-gradient(90deg,rgba(0,0,0,.58),rgba(0,0,0,.08) 72%,rgba(0,0,0,.34)),linear-gradient(0deg,rgba(0,0,0,.66),transparent 58%,rgba(0,0,0,.26)) !important; }
