@@ -8,9 +8,11 @@ const siteUrl = (import.meta.env.PUBLIC_SITE_URL || Astro.site?.toString() || ''
 const canonicalPath = Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '');
 const canonicalUrl = siteUrl ? `${siteUrl}${canonicalPath}` : undefined;
 const socialImage = siteUrl ? `${siteUrl}/images/drive/black-luxury-sedan.jpeg` : '/images/drive/black-luxury-sedan.jpeg';
-const pageTitle = title.includes('Crest Automotive Care') ? title : `${title} | Crest Automotive Care`;
+const legalEntity = 'Crest Automotive Solutions LLP';
+const tradingName = 'Crest Automotive Care';
+const pageTitle = title.includes(tradingName) ? title : `${title} | ${tradingName}`;
 const websiteUrl = siteUrl || Astro.url.origin;
-const policyJsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', '@id': canonicalUrl ? `${canonicalUrl}#webpage` : undefined, name: title, description: intro || `${title} | Crest Automotive Care`, url: canonicalUrl || Astro.url.href, isPartOf: { '@type': 'WebSite', name: 'Crest Automotive Care', url: websiteUrl } };
+const policyJsonLd = { '@context': 'https://schema.org', '@type': 'WebPage', '@id': canonicalUrl ? `${canonicalUrl}#webpage` : undefined, name: title, description: intro || `${title} | ${tradingName}`, url: canonicalUrl || Astro.url.href, isPartOf: { '@type': 'WebSite', name: tradingName, url: websiteUrl }, publisher: { '@type': 'Organization', name: legalEntity, alternateName: tradingName, email: 'ruchirm01@gmail.com' } };
 const legalLinks = [
   ['/terms-of-service', 'Terms of service'],
   ['/privacy-policy', 'Privacy policy'],
@@ -28,7 +30,7 @@ const legalLinks = [
     <meta name="viewport" content="width=device-width" />
     <meta name="theme-color" content="#f8f8f4" />
     <meta name="description" content={intro || `${title} | Crest Automotive Care`} />
-    <meta name="author" content="Crest Automotive Care" />
+    <meta name="author" content="Crest Automotive Solutions LLP" />
     <meta property="og:locale" content="en_IN" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
     <meta name="robots" content={robots} />
@@ -58,15 +60,15 @@ const legalLinks = [
       <a class="header-cta" href="/estimate">Start an evaluation <span>↗</span></a>
     </header>
     <main class="legal-main">
-      <div class="legal-hero"><div><span class="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{intro}</p></div><div class="legal-meta"><span>Effective / reviewed</span><strong>{updated}</strong><small>Working draft — review with qualified counsel before publishing.</small></div></div>
+      <div class="legal-hero"><div><span class="eyebrow">{eyebrow}</span><h1>{title}</h1><p>{intro}</p></div><div class="legal-meta"><span>Effective / reviewed</span><strong>{updated}</strong><small>Policy owner: {legalEntity}, trading as {tradingName}.</small></div></div>
       <div class="legal-layout">
         <aside class="legal-sidebar" aria-label="Legal pages"><span>On this site</span>{legalLinks.map(([href, label]) => <a class={currentPage === href ? 'is-current' : ''} href={href}>{label}</a>)}</aside>
-        <article class="legal-content"><div class="legal-notice"><strong>Important</strong><p>This page is a practical website-policy draft for Crest Automotive Care. It is not formal legal advice. Replace bracketed business details and have a qualified attorney review it before relying on it.</p></div><slot /></article>
+        <article class="legal-content"><div class="legal-notice"><strong>Policy owner</strong><p>{legalEntity}, trading as {tradingName}. Questions about this policy can be sent to <a href="mailto:ruchirm01@gmail.com">ruchirm01@gmail.com</a>.</p></div><slot /></article>
       </div>
     </main>
     <Chatbot />
     <BackToTop />
-    <footer class="legal-footer"><div class="footer-brand-row"><a class="brand" href="/" aria-label="Crest Automotive Care home"><span class="brand-wordmark">CREST</span><span class="brand-submark">AUTOMOTIVE CARE</span></a><p>Premium, waterless automotive care for DLF Gurugram.</p><div class="social-links"><a href="https://wa.me/919871610952" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></div></div><div class="footer-legal-row">{legalLinks.map(([href, label]) => <a href={href}>{label}</a>)}<a href="/#contact">Contact Crest</a></div><div class="footer-bottom"><span>© {new Date().getFullYear()} Crest Automotive Care. All rights reserved.</span><a href="/">Back to main site ↑</a></div></footer>
+    <footer class="legal-footer"><div class="footer-brand-row"><a class="brand" href="/" aria-label="Crest Automotive Care home"><span class="brand-wordmark">CREST</span><span class="brand-submark">AUTOMOTIVE CARE</span></a><p>Premium, waterless automotive care for DLF Gurugram.</p><div class="social-links"><a href="https://wa.me/919871610952" target="_blank" rel="noopener noreferrer">WhatsApp</a><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></div></div><div class="footer-legal-row">{legalLinks.map(([href, label]) => <a href={href}>{label}</a>)}<a href="/#contact">Contact Crest</a></div><div class="footer-bottom"><span>© {new Date().getFullYear()} {legalEntity}, trading as {tradingName}. All rights reserved.</span><span>Policy contact: <a href="mailto:ruchirm01@gmail.com">ruchirm01@gmail.com</a></span><a href="/">Back to main site ↑</a></div></footer>
   </body>
 </html>
 <style>
