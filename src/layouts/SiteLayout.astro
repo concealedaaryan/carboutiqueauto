@@ -34,7 +34,6 @@ const localBusinessJsonLd = {
 const webSiteJsonLd = { '@context': 'https://schema.org', '@type': 'WebSite', '@id': websiteId, name: 'Crest Automotive Care', url: siteUrl || Astro.url.origin, description, publisher: { '@id': businessId } };
 const navLinks = [
   ['/services', 'Services'],
-  ['/packages', 'Packages'],
   ['/protection', 'Protection'],
   ['/rodim', 'Rodim PPF'],
   ['/estimate', 'Estimate'],
@@ -86,7 +85,7 @@ const legalLinks = [
  : null}
     <ClientRouter />
   </head>
-  <body>
+  <body class={currentPath === '/gallery' ? 'route-gallery' : ''}>
     <SpeedInsights />
     <Analytics />
     {currentPath === '/' && <IntroLoader />}
@@ -2189,11 +2188,15 @@ const legalLinks = [
     position: sticky !important;
     z-index: 1000 !important;
     isolation: isolate !important;
-    background: #f8f8f4 !important;
-    border-bottom-color: #d9e0dc !important;
-    box-shadow: 0 8px 24px rgba(18,61,102,.06) !important;
+    background: rgba(248,248,244,.78) !important;
+    border: 1px solid rgba(255,255,255,.82) !important;
+    border-bottom-color: rgba(255,255,255,.9) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(135%) !important;
+    backdrop-filter: blur(18px) saturate(135%) !important;
+    box-shadow: 0 8px 24px rgba(18,61,102,.08) !important;
   }
   body .site-header .desktop-nav {
+    gap: clamp(10px, 1.25vw, 18px) !important;
     border-color: #c9d8d2 !important;
     background: #eaf1ed !important;
     box-shadow: inset 0 1px rgba(255,255,255,.8) !important;
@@ -2581,7 +2584,7 @@ const legalLinks = [
   body .site-footer {
     color: #f8f8f4 !important;
     border-top: 1px solid rgba(255,255,255,.2) !important;
-    background: linear-gradient(135deg, #0c2d4a 0%, #123d66 58%, #174f70 100%) !important;
+    background: #0c2d4a !important;
   }
   body .site-footer .footer-brand .brand-wordmark,
   body .site-footer .footer-brand .brand-submark { color: #f8f8f4 !important; }

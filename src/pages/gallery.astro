@@ -83,8 +83,9 @@ const photos = [
 
 <style>
   .gallery-hero, .gallery-intro, .gallery-grid, .instagram-gallery { max-width: var(--max); margin: 0 auto; padding-inline: 24px; }
-  .gallery-hero { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(40px, 7vw, 100px); align-items: center; min-height: 700px; padding-top: 150px; padding-bottom: 105px; }
-  .gallery-hero::before { content: ''; position: absolute; z-index: -1; inset: 84px 0 auto; height: 670px; background: radial-gradient(circle at 78% 40%, rgba(59,130,246,.18), transparent 32%), linear-gradient(118deg, #131315 18%, #0b2038 100%); }
+  .gallery-hero { position: relative; isolation: isolate; display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(40px, 7vw, 100px); align-items: center; min-height: 700px; padding-top: 150px; padding-bottom: 105px; }
+  .gallery-hero::before { content: ''; position: absolute; z-index: 0; inset: 84px 0 auto; height: 670px; background: radial-gradient(circle at 78% 40%, rgba(59,130,246,.18), transparent 32%), linear-gradient(118deg, #131315 18%, #0b2038 100%); }
+  .gallery-hero-copy, .gallery-hero-media { position: relative; z-index: 1; }
   .gallery-hero h1 { margin: 20px 0 24px; font-size: clamp(48px, 6vw, 84px); line-height: .98; }
   .gallery-hero h1 em, .gallery-intro h2 em, .instagram-gallery h2 em { color: var(--gold-soft); font-style: normal; }
   .gallery-hero-copy > p { max-width: 510px; color: var(--muted); font-size: 17px; line-height: 1.7; }
@@ -297,6 +298,8 @@ const photos = [
     justify-self: end !important;
   }
   body main .gallery-hero-media video {
+    position: relative !important;
+    top: 10px !important;
     width: 100% !important;
     height: auto !important;
     aspect-ratio: auto !important;
@@ -400,7 +403,7 @@ const photos = [
       min-height: 0 !important;
       aspect-ratio: auto !important;
       object-fit: contain !important;
-      object-position: center !important;
+      object-position: 50% 100% !important;
     }
     body main .gallery-hero-media .media-caption {
       min-height: 58px;
@@ -426,4 +429,24 @@ const photos = [
 
 <style is:global>
   body main .instagram-gallery h2 { color: #fff !important; }
+</style>
+
+<style is:global>
+  /* Gallery alone opts out of the shared connected-scroll wash and section motion. */
+  body.route-gallery .connected-scroll-thread,
+  body.route-gallery.connected-scroll::before { display: none !important; }
+  body.route-gallery main > section.connected-section,
+  body.route-gallery main > section.connected-section.is-scroll-active,
+  body.route-gallery main > section.connected-section.is-scroll-entering,
+  body.route-gallery main > section.connected-section.is-scroll-exiting {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+    will-change: auto !important;
+    box-shadow: none !important;
+  }
+  body.route-gallery main > section.connected-section::after { display: none !important; content: none !important; }
+  body.route-gallery main > section.connected-section.is-scroll-entering::before { box-shadow: none !important; }
+  body.route-gallery main .crest-text-reveal,
+  body.route-gallery main .crest-text-reveal em { opacity: 1 !important; transform: none !important; transition: none !important; }
 </style>

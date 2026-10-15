@@ -3,11 +3,14 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import { coatingPackages, ppfOptions, protectionAddOns } from '../data/catalog';
 ---
 <SiteLayout title="Rodim PPF and Ceramic Coatings in DLF Gurugram" description="Compare Rodim PPF, ceramic coating, graphene and surface-protection options from Crest Automotive Care in DLF Gurugram." currentPath="/protection" pageNumber="03" pageLabel="Surface protection">
+  <div class="protection-page">
+  <div class="protection-video-layer" aria-hidden="true"><video id="protection-background-video" autoplay muted loop playsinline preload="metadata" src="/garage-assets/ppf-wall-mp4.mp4"></video></div>
   <section class="protection-hero"><div><span class="eyebrow">Crest Automotive Care · Rodim PPF</span><h1>More gloss.<br /><em>More protection.</em></h1><p>Crest helps you compare Rodim paint protection films and plan an installation around your vehicle, paint condition and intended coverage.</p><a class="button button-gold" href="/estimate">Build a Rodim PPF estimate <span>↗</span></a></div><div class="hero-image rodim-hero-image"><span>RODIM PPF · SURFACE DEFENSE</span><small>Precision film installation / Crest private bay</small></div></section>
   <section class="protection-story"><div class="protection-story-image" aria-hidden="true"></div><div class="protection-story-copy"><span class="eyebrow">The Rodim approach</span><h2>Film first.<br /><em>Finish second.</em></h2><p>Rodim PPF works best as a considered system: prepare the surface, install the right film, then maintain the finish with coatings and careful aftercare.</p><div class="protection-beats"><div><strong>Prepare</strong><span>Paint condition and coverage come first.</span></div><div><strong>Protect</strong><span>Rodim PPF takes the road impact.</span></div><div><strong>Maintain</strong><span>Coatings keep the finish easier to live with.</span></div></div></div></section>
   <section class="coating-section" id="ceramic"><div class="intro"><span class="eyebrow">Ceramic & graphene</span><h2>Surface confidence,<br /><em>layer by layer.</em></h2><p>Choose from nano ceramic, premium ceramic or premium graphene treatments. The exact process depends on paint condition, prior repairs, model and agreed scope.</p></div><div class="coating-grid">{coatingPackages.map((pkg, index) => <article class={`coating-card ${index === 2 ? 'featured' : ''}`}><h3>{pkg.name}</h3><p>{index === 0 ? 'Entry protection for a cleaner, glossier daily finish.' : index === 1 ? 'Correction-led premium ceramic with glass, trim and interior care.' : 'Graphene protection with correction, glass and alloy protection.'}</p><strong>{pkg.prices[0]}<small>from</small></strong><em>{pkg.warranty}</em><a href={`/estimate?service=${index === 0 ? '11' : index === 1 ? '12' : '13'}`}>Estimate this coating <span>↗</span></a></article>)}</div></section>
   <section class="ppf-section"><div class="ppf-heading"><div><span class="eyebrow">Rodim paint protection film</span><h2>Choose your Rodim shield.</h2></div><p>Rodim thermoplastic paint protection film, described by Crest as manufactured using BASF technology, helps defend against scratches, swirl marks, road debris and environmental wear. Compare the available Rodim film variants with the Crest team, then confirm the right film and coverage for your vehicle. Verify the BASF relationship against current supplier documentation before publication.</p></div><div class="ppf-list" aria-label="Rodim paint protection film variants">{ppfOptions.filter((film) => film.officialProduct).map((film, index) => <article class="ppf-list-item"><span>{String(index + 1).padStart(2, '0')}</span><strong>{film.name}</strong><div><a href={film.officialUrl} target="_blank" rel="noopener noreferrer">View {film.name} on Rodim.in <span aria-hidden="true">↗</span></a><a href="/contact">Ask Crest about this film <span aria-hidden="true">↗</span></a></div></article>)}</div></section>
   <section class="addons-section"><div class="intro"><span class="eyebrow">Protection add-ons</span><h2>Complete the<br /><em>system.</em></h2><p>Complete the Rodim system with ceramic coverage for PPF, glass, alloys, lights, grills, interiors and leather panels.</p></div><div class="addons-grid">{protectionAddOns.map((addon) => <article class="addon-card"><span>Protection add-on</span><h3>{addon.name}</h3><strong>{addon.total}<small>incl. GST</small></strong><div><span>Application</span><b>{addon.application}</b><span>GST</span><b>{addon.gst}</b><span>Warranty</span><b>{addon.warranty}</b></div><a href="/contact">Talk to Crest <span>↗</span></a></article>)}</div></section>
+  </div>
 </SiteLayout>
 <style>
   .protection-hero, .coating-section, .ppf-section, .addons-section { max-width: var(--max); margin: 0 auto; padding: 110px 24px; }
@@ -60,3 +63,25 @@ import { coatingPackages, ppfOptions, protectionAddOns } from '../data/catalog';
   @media (max-width: 880px) { .protection-hero { grid-template-columns: 1fr; gap: 42px; } .intro, .ppf-heading { display: block; } .intro p, .ppf-heading p { margin-top: 20px; } .coating-grid { grid-template-columns: 1fr; } .coating-card { min-height: 270px; } }
   @media (max-width: 620px) { .protection-hero, .coating-section, .ppf-section, .addons-section { padding: 80px 20px; } .protection-hero { min-height: auto; padding-top: 88px; } .hero-image { min-height: 330px; } .addons-grid { grid-template-columns: 1fr; } .ppf-list-item { grid-template-columns: 34px 1fr; gap: 12px; } .ppf-list-item a { grid-column: 2; } }
 </style>
+<style>
+  .protection-page { position: relative; isolation: isolate; }
+  .protection-video-layer { position: fixed; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; background: #123d66; }
+  .protection-video-layer video { display: block; width: 100%; height: 100%; object-fit: cover; opacity: .22; }
+  .protection-page .coating-section, .protection-page .addons-section { background: transparent; }
+  .protection-page .coating-card, .protection-page .addon-card { border-color: rgba(255,255,255,.34); background: rgba(255,255,255,.10); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+  .protection-page .coating-card:hover, .protection-page .addon-card:hover { border-color: rgba(255,255,255,.86); background: rgba(255,255,255,.20); }
+</style>
+<script is:inline data-astro-rerun>
+  (() => {
+    window.__protectionVideoLockCleanup?.();
+    const controller = new AbortController();
+    const video = document.querySelector('#protection-background-video');
+    if (!video) return;
+    const lock = () => { video.muted = true; video.defaultMuted = true; video.volume = 0; video.controls = false; video.setAttribute('muted', ''); video.setAttribute('playsinline', ''); video.removeAttribute('controls'); };
+    ['play', 'playing', 'loadedmetadata', 'canplay', 'volumechange', 'durationchange'].forEach((event) => video.addEventListener(event, lock, { signal: controller.signal }));
+    document.addEventListener('astro:page-load', lock, { signal: controller.signal });
+    window.__protectionVideoLockCleanup = () => controller.abort();
+    lock();
+    video.play().catch(() => {});
+  })();
+</script>
