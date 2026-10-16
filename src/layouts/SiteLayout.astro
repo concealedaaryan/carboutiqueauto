@@ -137,8 +137,8 @@ const legalLinks = [
   main th { background:#1f1f21 !important; }
   main td { background:#1b1b1d; border-color:rgba(198,198,205,.12) !important; }
   main th:first-child,main td:first-child { background:#1f1f21 !important; }
-  .site-footer { background:linear-gradient(150deg,#1b1b1d,#0e0e10); }
-  .footer-links a,.footer-bottom,.footer-main>p { color:#c6c6cd !important; }
+  .site-footer { background:#0e0e10 !important; color:#fff !important; opacity:1 !important; backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+  .footer-links a,.footer-bottom,.footer-main>p { color:#fff !important; }
   .mobile-menu { background:rgba(14,14,16,.98) !important; }
   @media (max-width:620px) { main h1 { font-size:32px !important; line-height:1.2; } main h2 { font-size:32px !important; line-height:1.2; } }
 </style>
@@ -159,7 +159,7 @@ const legalLinks = [
   .brand strong, .brand small { display: block; letter-spacing: .16em; line-height: 1; }
   .brand strong { color: var(--white); font-size: 14px; font-weight: 800; }
   .brand small { margin-top: 5px; color: var(--muted); font-size: 7px; }
-  .desktop-nav { display: flex; align-items: center; gap: clamp(12px, 1.5vw, 24px); margin-left: auto; }
+  .desktop-nav { display: flex; align-items: center; gap: clamp(10px, 1.25vw, 20px); margin-left: auto; }
   .desktop-nav a, .header-call { position: relative; color: var(--white) !important; opacity: 1; font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; transition: color .2s ease; }
   .desktop-nav a::after { content: ''; position: absolute; right: 0; bottom: -9px; left: 0; height: 1px; background: var(--gold); transform: scaleX(0); transform-origin: right; transition: transform .25s var(--ease); }
   .desktop-nav a:hover, .desktop-nav a.is-current, .header-call:hover { color: var(--gold-soft); }
@@ -177,7 +177,7 @@ const legalLinks = [
   .menu-toggle, .mobile-menu { display: none; }
   .page-title-bar { position: relative; z-index: 1; display: flex; gap: 12px; align-items: center; max-width: var(--max); margin: 0 auto; padding: 124px 24px 0; color: var(--gold); font-size: 10px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
   .page-title-line { width: 38px; height: 1px; background: var(--gold); }
-  .site-footer { position: relative; z-index: 1; padding: 65px max(24px, calc((100vw - var(--max)) / 2)) 25px; border-top: 1px solid var(--line); background: linear-gradient(150deg, #1b1b1d, #0e0e10); }
+  .site-footer { position: relative; z-index: 1; padding: 65px max(24px, calc((100vw - var(--max)) / 2)) 25px; border-top: 1px solid var(--line); background: #0e0e10 !important; color: #fff; opacity: 1; backdrop-filter: none; -webkit-backdrop-filter: none; }
   .footer-main { display: grid; grid-template-columns: 1fr 1fr 2fr; gap: 35px; padding-bottom: 45px; }
   .footer-main > p { max-width: 190px; margin: 0; color: var(--muted); font-size: 12px; }
   .footer-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
@@ -3384,4 +3384,27 @@ const legalLinks = [
     body:not(.route-home) .page-hero-image, body:not(.route-home) .package-hero-card, body:not(.route-home) .faq-visual { min-height: 240px !important; }
     body:not(.route-home) .service-row, body:not(.route-home) .package-card { padding: 18px !important; }
   }
+</style>
+
+<style is:global>
+  /* Shared chrome finish: supplied navy footer with a light glass header. */
+  .site-footer,
+  body .site-footer { background: #0c2d4a !important; color: #fff !important; opacity: 1 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .site-footer .footer-links a,
+  .site-footer .footer-bottom,
+  .site-footer .footer-bottom a,
+  .site-footer .footer-main p { color: #fff !important; }
+  .site-header,
+  .site-header.is-scrolled,
+  body .site-header,
+  body .site-header.is-scrolled { background: rgba(255,255,255,.76) !important; border-bottom: 1px solid rgba(255,255,255,.72) !important; color: #0c2d4a !important; backdrop-filter: blur(22px) saturate(145%) !important; -webkit-backdrop-filter: blur(22px) saturate(145%) !important; }
+  .site-header .desktop-nav a,
+  .site-header .header-call,
+  .site-header .brand-wordmark,
+  .site-header .brand-submark { color: #0c2d4a !important; }
+  .site-header .desktop-nav a:hover,
+  .site-header .desktop-nav a.is-current,
+  .site-header .header-call:hover { color: #123d66 !important; }
+  .site-header .phone-dot { background: #123d66 !important; box-shadow: 0 0 0 4px rgba(18,61,102,.14) !important; }
+  .site-header .menu-toggle span { background: #0c2d4a !important; }
 </style>
