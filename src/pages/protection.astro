@@ -62,7 +62,7 @@ import { coatingPackages, ppfOptions, protectionAddOns } from '../data/catalog';
   body:has(.protection-pinned-video), body:has(.protection-pinned-video) main { background: transparent !important; color: #fff !important; }
   body:has(.protection-pinned-video) .site-header, body:has(.protection-pinned-video) .site-header.is-scrolled { background: rgba(255,255,255,.76) !important; color: #0c2d4a !important; border-bottom-color: rgba(255,255,255,.72) !important; backdrop-filter: blur(22px) saturate(145%) !important; -webkit-backdrop-filter: blur(22px) saturate(145%) !important; }
   body:has(.protection-pinned-video) .site-footer { background: #0c2d4a !important; color: #fff !important; opacity: 1 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-  .protection-pinned-video { position: fixed; inset: 0; z-index: -2; width: 100vw; height: 100svh; object-fit: cover; pointer-events: none; background: #05080c; }
+  .protection-pinned-video { position: fixed; inset: 0; z-index: 0; width: 100vw; height: 100svh; object-fit: cover; pointer-events: none; background: #05080c; }
   .protection-hero, .protection-story, .coating-section, .ppf-section, .addons-section { position: relative; z-index: 1; background: transparent !important; color: #fff !important; }
   .protection-hero { min-height: 100svh !important; padding-top: 140px !important; padding-bottom: 100px !important; }
   .protection-hero > div, .protection-story-copy, .intro, .coating-card, .ppf-heading, .ppf-list, .ppf-list-item, .addon-card {
@@ -100,7 +100,7 @@ import { coatingPackages, ppfOptions, protectionAddOns } from '../data/catalog';
 </style>
 <script>
   const protectionVideo = document.querySelector('.protection-pinned-video');
-  if (protectionVideo instanceof HTMLVideoElement) { protectionVideo.muted = true; protectionVideo.defaultMuted = true; protectionVideo.volume = 0; protectionVideo.setAttribute('muted', ''); protectionVideo.addEventListener('volumechange', () => { protectionVideo.muted = true; protectionVideo.volume = 0; }); }
+  if (protectionVideo instanceof HTMLVideoElement) { protectionVideo.muted = true; protectionVideo.defaultMuted = true; protectionVideo.volume = 0; protectionVideo.setAttribute('muted', ''); protectionVideo.addEventListener('volumechange', () => { protectionVideo.muted = true; protectionVideo.volume = 0; }); void protectionVideo.play().catch(() => {}); }
   const protectionCards = document.querySelectorAll('.protection-hero > div, .protection-story-copy, .coating-section .intro, .coating-card, .ppf-heading, .ppf-list-item, .addons-section .intro, .addon-card');
   protectionCards.forEach((card) => card.classList.add('protection-float-in'));
   const protectionObserver = new IntersectionObserver((entries) => entries.forEach((entry) => entry.target.classList.toggle('is-visible', entry.isIntersecting)), { rootMargin: '0px 0px -12% 0px', threshold: .08 });

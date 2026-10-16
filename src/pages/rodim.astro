@@ -54,8 +54,8 @@ const officialFilms = ppfOptions.filter((film) => film.officialProduct);
   body:has(.rodim-page) .site-header.is-scrolled { background: rgba(255,255,255,.76) !important; color: #0c2d4a !important; border-bottom-color: rgba(255,255,255,.72) !important; backdrop-filter: blur(22px) saturate(145%) !important; -webkit-backdrop-filter: blur(22px) saturate(145%) !important; }
   body:has(.rodim-page) .site-footer { background: #0c2d4a !important; color: #fff !important; opacity: 1 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
   .rodim-page { position: relative; isolation: isolate; min-height: 100vh; overflow: clip; color: #fff !important; }
-  .rodim-pinned-video { position: fixed; inset: 0; z-index: -2; width: 100vw; height: 100svh; object-fit: cover; pointer-events: none; background: #05080c; }
-  .rodim-page::after { content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(180deg, rgba(2,5,9,.34), rgba(2,5,9,.14) 42%, rgba(2,5,9,.5)); }
+  .rodim-pinned-video { position: fixed; inset: 0; z-index: 0; width: 100vw; height: 100svh; object-fit: cover; pointer-events: none; background: #05080c; }
+  .rodim-page::after { content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; background: linear-gradient(180deg, rgba(2,5,9,.34), rgba(2,5,9,.14) 42%, rgba(2,5,9,.5)); }
   .rodim-page section { position: relative; z-index: 1; background: transparent !important; color: #fff !important; }
   .rodim-hero { min-height: 100svh !important; padding-top: clamp(130px, 16vh, 190px) !important; padding-bottom: 100px !important; align-items: center !important; }
   .rodim-hero-copy, .rodim-hero-panel, .rodim-intro > div, .rodim-intro > p, .choice-grid article, .section-heading > div, .section-heading > p, .film-card, .warranty-section > div, .rodim-cta > div {
@@ -113,6 +113,7 @@ const officialFilms = ppfOptions.filter((film) => film.officialProduct);
     rodimVideo.volume = 0;
     rodimVideo.setAttribute('muted', 'muted');
     rodimVideo.removeAttribute('controls');
+    void rodimVideo.play().catch(() => {});
   };
   lockRodimMute();
   document.addEventListener('astro:page-load', lockRodimMute);
